@@ -1,0 +1,773 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass beamer
+\begin_preamble
+\usepackage{animate}
+
+% hack to get natbib working with beamer
+\renewcommand{\newblock}{}
+
+% list modifications
+\setlength{\leftmargini}{0em}
+\setlength{\leftmarginii}{1em}
+
+% make $\times$, $+$, $-$ and $=$ use less space
+\newcommand{\tims}{\negthinspace \times \negthinspace}
+\newcommand{\eq}{\negthinspace = \negthinspace}
+\newcommand{\plus}{\negthinspace + \negthinspace}
+\newcommand{\minus}{\text{-}}
+\newcommand{\smallcdot}{\negthinspace \cdot \negthinspace}
+
+\newcommand{\nicefrac}[2]{\ensuremath ^{#1}\!\!/\!_{#2}}
+\usepackage { fancybox}
+\end_preamble
+\options serif
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package none
+\inputencoding auto
+\fontencoding default
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 10
+\spacing single
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks false
+\pdf_backref section
+\pdf_pdfusetitle true
+\papersize default
+\use_geometry true
+\use_amsmath 2
+\use_esint 1
+\use_mhchem 0
+\use_mathdots 0
+\cite_engine natbib_authoryear
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip 0bp
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout BeginFrame
+R-adaptive mesh generation
+\end_layout
+
+\begin_layout Itemize
+How to create a mesh which is equidistributed with respect to a monitor
+ function.
+ ie
+\begin_inset Formula 
+\[
+A_{i}m_{i}=\text{const}
+\]
+
+\end_inset
+
+ for each cell 
+\begin_inset Formula $i$
+\end_inset
+
+ with area 
+\begin_inset Formula $A_{i}$
+\end_inset
+
+ for mesh monitor function 
+\begin_inset Formula $m_{i}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Itemize
+Define a map from old mesh point, 
+\begin_inset Formula $\bm{\xi}_{i}$
+\end_inset
+
+, to new mesh points, 
+\begin_inset Formula $\bm{x}_{i}$
+\end_inset
+
+ which is the gradient of a potential
+\begin_inset Formula 
+\[
+\bm{x}=\bm{\xi}+\nabla\phi
+\]
+
+\end_inset
+
+This leads to an 
+\series bold
+
+\begin_inset Quotes eld
+\end_inset
+
+optimally transported mesh
+\begin_inset Quotes erd
+\end_inset
+
+
+\series default
+, free of tangling
+\end_layout
+
+\begin_layout Itemize
+The Jacobian of the mesh transform is the change in area of the cells:
+\begin_inset Formula 
+\[
+|\nabla\bm{x}|=A_{i}/A_{\xi}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+The mesh is found by solving a Monge-Amp
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+'e
+\end_layout
+
+\end_inset
+
+re equation for 
+\begin_inset Formula $\phi$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+|\nabla\left(\bm{\xi}+\nabla\phi\right)|m\left(x\right)=\text{const}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Numerical solution techniques ...
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Spatial Discretisation on the Sphere
+\end_layout
+
+\begin_layout Itemize
+Finite Volume Discretisaion on an arbitrary mesh (details in publication
+ in prep)
+\end_layout
+
+\begin_layout Itemize
+Exponential maps, to map from one point on a sphere to another point on
+ a sphere:
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula 
+\[
+\mathbf{x}=\bm{\xi}+\exp_{\xi}\nabla\phi
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Geometric interpretation of the Hessian, for cell 
+\begin_inset Formula $i$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+|I+H_{i}\left(\phi\right)|=\frac{A_{i}}{A_{\xi}}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $A_{i}$
+\end_inset
+
+ is the area of cell 
+\begin_inset Formula $i$
+\end_inset
+
+ after the map and 
+\begin_inset Formula $A_{\xi}$
+\end_inset
+
+ is the area before the map.
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Iterative Solution
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+|\nabla\left(\bm{\xi}+\nabla\phi\right)|m\left(x\right)=\text{const}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Use a linearisation of the Hessian term:
+\begin_inset Formula 
+\[
+|\nabla\left(\bm{\xi}+\nabla\phi\right)|=|I+H\left(\phi\right)|=1+\nabla^{2}\phi+O\left(\phi^{2}\right)
+\]
+
+\end_inset
+
+and create fixed-point iterations (Poincar
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+'e
+\end_layout
+
+\end_inset
+
+ iterations):
+\begin_inset Formula 
+\[
+1+\nabla^{2}\phi^{\left(n+1\right)}=1+\nabla^{2}\phi^{\left(n\right)}-|I+H\left(\phi^{\left(n\right)}\right)|+\frac{\text{const}^{\left(n\right)}}{m\left(x^{\left(n\right)}\right)}
+\]
+
+\end_inset
+
+which can be easily solved to find 
+\begin_inset Formula $\phi^{\left(n+1\right)}$
+\end_inset
+
+.
+ This works well if the non-linear terms are small.
+ To maintain stability for large non-linear terms, solve:
+\begin_inset Formula 
+\[
+\alpha\nabla^{2}\phi^{\left(n+1\right)}=\alpha\nabla^{2}\phi^{\left(n\right)}-|I+H\left(\phi^{\left(n\right)}\right)|+\frac{\text{const}^{\left(n\right)}}{m\left(x^{\left(n\right)}\right)}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\alpha>1$
+\end_inset
+
+.
+ (Ie increase the size of the linear term that can be solved implicitly.
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+An Optimally Transported Mesh
+\end_layout
+
+\begin_layout Standard
+Given the monitor function on the sphere: (latitude-longitude, cylindrical
+ projection)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename graphics/monitor.eps
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+An Optimally Transported Mesh
+\end_layout
+
+\begin_layout Standard
+The optimally transported mesh is calculated iteratively:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+animategraphics[width=
+\backslash
+linewidth,controls,every=2,poster=first]{3}{graphics/meshMovie/mesh}{0}{100}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This is a linear algorithm - cost proportional to number of points.
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Frameless
+position "c"
+hor_pos "c"
+has_inner_box 1
+inner_pos "c"
+use_parbox 0
+use_makebox 0
+width "20col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+Discrete Hessian
+\end_layout
+
+\end_inset
+
+
+\begin_inset Box Frameless
+position "c"
+hor_pos "c"
+has_inner_box 1
+inner_pos "c"
+use_parbox 0
+use_makebox 0
+width "78col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename graphics/discreteHessianMesh.eps
+	width 100line%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Frameless
+position "c"
+hor_pos "c"
+has_inner_box 1
+inner_pos "c"
+use_parbox 0
+use_makebox 0
+width "20col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+Geometric Hessian
+\end_layout
+
+\end_inset
+
+
+\begin_inset Box Frameless
+position "c"
+hor_pos "c"
+has_inner_box 1
+inner_pos "c"
+use_parbox 0
+use_makebox 0
+width "78col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename graphics/geometricHessianMesh.eps
+	width 100line%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Convergence to the Monitor Function
+\end_layout
+
+\begin_layout Standard
+Plots of cell area versus distance to the centre of the refined region 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Discrete Hessian
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Geometric Hessian
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename graphics/discreteHessianArea.eps
+	width 49line%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename graphics/geometricHessianArea.eps
+	width 49line%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Mesh Spacing
+\end_layout
+
+\begin_layout Standard
+Plots of cell centre to cell centre distance versus distance to the centre
+ of the refined region 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Discrete Hessian
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Geometric Hessian
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename graphics/discreteHessianDx.eps
+	width 49line%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename graphics/geometricHessianDx.eps
+	width 49line%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Precipitation as a Monitor Function
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset VSpace -10pt
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\size footnotesize
+\begin_inset Formula 
+\[
+m=\frac{p+p_{\min}}{p_{\max}+p_{min}}\ \text{where}\ p_{\min}=10^{-5}\text{kg}\text{m}^{-2}\text{s}^{-1},\ p_{\max}=8.73\times10^{-4}\text{kg}\text{m}^{-2}\text{s}^{-1}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+animategraphics[width=
+\backslash
+linewidth,controls,poster=first]{100}{graphics/pptMonitorMovie/pptMonitor}{0}{11
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\size small
+\lang british
+Using daily average precipitation rate, 1-12 Oct 2012, from the NOAA-CIRES
+ 20th Century Reanalysis version 2 (Compo et al, 2011, 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://www.esrl.noaa.gov/psd/data/gridded/data.20thC_ReanV2.html
+\end_layout
+
+\end_inset
+
+)
+\begin_inset VSpace vfill
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Conclusions
+\end_layout
+
+\begin_layout Itemize
+Exponential maps used to create optimally transported meshes on the sphere
+\end_layout
+
+\begin_layout Itemize
+New linearisation of the Hessian to create a semi-implicit algorithm
+\end_layout
+
+\begin_layout Itemize
+Geometric version of the Hessian gives accurately equidistribued meshes
+\end_layout
+
+\begin_layout Itemize
+Discrete version of the Hessian gives some extra large and some extra small
+ cells
+\end_layout
+
+\begin_layout Itemize
+Geometric Hessian gives less anisotropy
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\end_body
+\end_document

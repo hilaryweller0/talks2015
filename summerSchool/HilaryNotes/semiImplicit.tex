@@ -1,0 +1,121 @@
+
+\chapter{Semi-implicit time-stepping}
+
+
+\section{Some Single-Rate Time-Stepping Schemes}
+
+\liststepwise{\renewcommand{\arraystretch}{1.2}
+
+Some common time-stepping schemes for solving the ODE: 
+\[
+\frac{dy}{dt}=F(y)
+\]
+(Single rate means that there is just one time scale in the $F(y)$
+term.) 
+
+\begin{tabular}{lc|c|c}
+ &  & Explicit/  & Order of \tabularnewline
+ &  & Implicit  & accuracy \tabularnewline
+Forward Euler  & $y^{(n+1)}=y^{(n)}+\opttext{\Delta tF(y^{(n)})}$ & \opttext{E} & \opttext{1}\tabularnewline
+ &  &  & \tabularnewline
+\hline 
+Backward Euler  & $y^{(n+1)}=y^{(n)}+\opttext{\Delta tF(y^{(n+1)})}$ & \opttext{I} & \opttext{1}\tabularnewline
+ &  &  & \tabularnewline
+\hline 
+Trapezoidal  & $\opttext{\frac{y^{(n+1)}-y^{(n)}}{\Delta t}=\frac{1}{2}\bigl(F(y^{(n)})+F(y^{(n+1)})\bigr)}$ & \opttext{I} & \opttext{2}\tabularnewline
+ &  &  & \tabularnewline
+\hline 
+Forward-backward  & $y^{\prime}=y^{(n)}+\opttext{\Delta tF(y^{(n)})}$ & \opttext{E} & \opttext{1/2}\tabularnewline
+ & $y^{(n+1)}=\opttext{y^{(n)}+\Delta tF(y^{\prime})}$ &  & \tabularnewline
+\hline 
+Leapfrog  & $y^{(n+1)}=\opttext{y^{(n-1)}+2\Delta tF(y^{(n)})}$ & \opttext{E} & \opttext{2}\tabularnewline
+(centred in time) &  &  & \tabularnewline
+\end{tabular}
+
+Explicit time-stepping schemes use values available entirely from
+previous time-steps to define the values at the new time-level ($n+1$).
+Implicit schemes use the values at time level $n+1$ to define the
+values at time level $n+1$. This means that, to find the solution
+at time $n+1$, a matrix equation must be solved which is not necessarily
+expensive.}
+
+\clearpage{}
+
+
+\section{Time-Stepping Schemes for Different Terms}
+
+\ifthenelse{\boolean{@studentversion}}{{\color{red}\bf CLOSE YOUR NOTES}}{}\liststepwise{\renewcommand{\arraystretch}{1.5}
+
+
+\paragraph*{Explicit time-stepping}
+
+\step{-- time-step restrictions (solution diverges if the time-step
+is too big)}\step{
+
+
+\paragraph*{Implicit time-stepping}
+
+}\step{-- no time-step restrictions but inaccurate if the time-step
+is too big}\step{
+
+
+\paragraph*{Which kind of time-stepping do we want for which process and why?}
+
+\begin{tabular}{>{\raggedright}p{0.16\textwidth}|>{\raggedright}p{0.8\textwidth}}
+Advection & \step{Usually explicit because high temporal resolution required
+and fastest wind speed (80m/s) are much shorter than other wave speeds}\tabularnewline
+\hline 
+Non-linear advection & \step{Has to be explicit. Non-linear terms cannot be treated implicitly}\tabularnewline
+\hline 
+Rossby waves and Coriolis & \step{Coriolis leads to slow changes in comparison to the fastest
+wind speeds so is usually treated explicitly but in HadCM3 was treated
+implicitly}\tabularnewline
+\hline 
+Acoustic waves & \step{Wave speed $\approx340m/s$ $\therefore$ essential to treat
+these wave implicitly in the vertical direction since $\Delta z<<\Delta x$.
+Often also implicit in the horizontal (eg Met Office) or split explicit
+(sub-stepping in the horizontal)}\tabularnewline
+\hline 
+Gravity waves & \step{Time-step restriction based on stratification rather than $\Delta x$
+or $\Delta z$. Some gravity wave speeds up to 300m/s. Met-Office
+treat gravity waves implicitly. Many treat them explicitly.}\tabularnewline
+\end{tabular}
+
+}}
+
+\clearpage{}
+
+
+\section{Semi-implicit time-stepping}
+
+\liststepwise{
+
+If we choose to treat advection and Coriolis explicitly and gravity
+wave implicitly when solving the non-linear SWE with rotation, which
+terms are evaluated at which time-level (either $n$ for explicit
+or $n+1$ for implicit):
+\begin{align}
+\frac{\mathbf{u}^{(n+1)}-\mathbf{u}^{(n)}}{\Delta t}+\mathbf{u}^{(\opttext{n\ \ })}\cdot\nabla\mathbf{u}^{(\opttext{n\ \ })} & =-2\Omega\times\mathbf{u}^{(\opttext{n\ \ })}-g\nabla h^{(\opttext{n+1})}\label{eqn:SWEuvtime}\\
+\frac{h^{(n+1)}-h^{(n)}}{\Delta t}+\mathbf{u}^{(\opttext{n\ \ })}\cdot\nabla h^{(\opttext{n\ \ })} & =-h^{(\opttext{n\ \ })}\nabla\cdot\mathbf{u}^{(\opttext{n+1})}.\label{eqn:SWEhtime}
+\end{align}
+In order to work out which terms should be solved implicitly, compare
+eqns (\ref{eqn:SWEuvtime}) and (\ref{eqn:SWEhtime}) with the linearised
+SWE (\ref{eq:linSWEu}-\ref{eq:linSWEh}) and consider the gravity
+wave speed, $\sqrt{gH}$. Which terms control gravity wave propagation?
+
+\step{
+
+Equations (\ref{eqn:SWEuvtime}) and (\ref{eqn:SWEhtime}) are solved
+by rearranging equation \ref{eqn:SWEuvtime} for $u^{(n+1)}$ and
+substituting these into equation \ref{eqn:SWEhtime}. This leads to
+a discretised Helmholtz equation which can be solved for $h^{(n+1)}$.
+\begin{align*}
+\mathbf{u}^{(n+1)} & =\opttext{\mathbf{u}^{(n)}-\Delta t\bigl(\mathbf{u}^{(n)}\cdot\nabla\mathbf{u}^{(n)}+2\Omega\times\mathbf{u}^{(n)}+g\nabla h^{(n+1)}\bigr)}\\
+\implies & \frac{h^{(n+1)}-h^{(n)}}{\Delta t}+\mathbf{u}^{(n)}\cdot\nabla h^{(n)}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \\
+ & =-h^{(n)}\nabla\cdot\biggr(\opttext{\mathbf{u}^{(n)}-\Delta t\bigl(\mathbf{u}^{(n)}\cdot\nabla\mathbf{u}^{(n)}+2\Omega\times\mathbf{u}^{(n)}+g\nabla h^{(n+1)}\bigr)}\ \ \ \ \biggr)
+\end{align*}
+This must be solved implicitly since $h^{(n+1)}$ appears on the RHS
+and LHS.
+
+A similar procedure is used to solve the Navier-Stokes equations in
+semi-implicit models of the global atmosphere.}}

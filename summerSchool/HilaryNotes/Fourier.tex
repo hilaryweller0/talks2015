@@ -1,0 +1,354 @@
+
+\chapter{Fourier Analysis}
+
+\liststepwise{
+
+Fourier analysis and Fourier series are used for:\step{
+\begin{itemize}
+\item Analysing data (eg climate data)\step{
+\item Numerical methods}\step{
+\item Numerical analysis of methods}
+\end{itemize}
+}\step{
+
+
+\section{Fourier Series}
+
+Any periodic, integrable function, $f(x)$ (defined on $[-\pi,\pi]$),
+can be expressed as a Fourier series; an infinite sum of sines and
+cosines: 
+\begin{equation}
+f(x)=\frac{a_{0}}{2}+\sum_{k=1}^{\infty}a_{k}\cos kx+\sum_{k=1}^{\infty}b_{k}\sin kx\label{eqn:FourierSinCos}
+\end{equation}
+
+
+}\step{
+
+\begin{minipage}[t]{0.6\columnwidth}%
+The first three Fourier modes of a noisy function.\\
+ \includegraphics[width=0.8\linewidth]{\lyxdot \lyxdot /\lyxdot \lyxdot /\lyxdot \lyxdot /\lyxdot \lyxdot /teaching/MTMW12/2014/notes/figs/smoothFunc}%
+\end{minipage}}\step{\hfill{}%
+\begin{minipage}[t]{0.38\columnwidth}%
+\begin{itemize}
+\item The $a_{k}$ and $b_{k}$ are the Fourier coefficients and the sines
+and cosines are the Fourier modes. \step{
+\item The more Fourier modes that included, the closer their sum will get
+to the original function. }\end{itemize}
+%
+\end{minipage}
+
+}}\clearpage{}
+
+\begin{minipage}[c]{0.5\columnwidth}%
+\noindent \begin{flushleft}
+The first four Fourier modes of a square wave. The additional oscillations
+are ``\textit{spectral ringing}'' 
+\par\end{flushleft}%
+\end{minipage}\hfill{}%
+\begin{minipage}[c]{0.45\linewidth}%
+\includegraphics[width=1\linewidth]{\lyxdot \lyxdot /\lyxdot \lyxdot /\lyxdot \lyxdot /\lyxdot \lyxdot /teaching/MTMW12/2014/notes/figs/squareWave-Fourier_Series}%
+\end{minipage}\clearpage{}
+
+Equivalently, equation (\ref{eqn:FourierSinCos}) can be expressed
+as an infinite sum of exponentials: 
+\begin{equation}
+f(x)=\frac{a_{0}}{2}+\sum_{k=1}^{\infty}a_{k}\cos kx+\sum_{k=1}^{\infty}b_{k}\sin kx=\sum_{k=-\infty}^{\infty}A_{k}e^{ikx}.\label{eqn:FourierExp}
+\end{equation}
+
+
+
+\subsubsection*{Exercise}
+
+Evaluate the $A_{k}$s in terms of the $a_{k}$s and $b_{k}$s.
+
+\optparagraph{For $k=0$, $A_{0}=a_{0}/2$\\
+For $k\ne0$, substitute $e^{ikx}=\cos kx+i\sin kx$ into eqn (\ref{eqn:FourierExp})
+and consider one value of $k$:\\
+ $a_{k}\cos kx+b_{k}\sin kx=A_{k}\left(\cos kx+i\sin kx\right)+A_{-k}\left(\cos kx-i\sin kx\right)$.\\
+Assume $A_{k}=c+id$ and $A_{-k}=e+if$ where $c,d,e,f\in\mathbb{R}$.
+Substituting in gives\\
+\begin{eqnarray*}
+a_{k}\cos kx+b_{k}\sin kx & = & \left(c+id\right)\left(\cos kx+i\sin kx\right)+\left(e+if\right)\left(\cos kx-i\sin kx\right)\\
+ & = & \left(c+e\right)\cos kx+\left(f-d\right)\sin kx+i\left(\left(d+f\right)\cos kx+\left(c-e\right)\sin kx\right)
+\end{eqnarray*}
+Equating coefficients of $\cos kx\ $, $\sin kx\ $, $i\cos kx\ $
+and $i\sin kx\ $ gives\\
+$a_{k}=c+e\ $, $b_{k}=f-d\ $, $0=d+f\ $, $0=c-e$ $\implies d=-f,\ c=e,\ a_{k}=2c$,
+$b_{k}=-2d$\\
+$\implies A_{k}=\half\left(a_{k}-ib_{k}\right)\ $, $A_{-k}=\half\left(a_{k}+ib_{k}\right)$}
+
+
+\subsubsection*{\clearpage{}Some Animations from Wikipedia}
+
+First 5 Fourier modes of a saw tooth wave
+
+\begin{minipage}[t]{1\columnwidth}%
+\mediaMovie[autostart,loop]
+{\includegraphics[width=\linewidth]{../../../../teaching/MTMW12/2014/notes/anims/Fourier/Periodic_identity_function/anim4.pdf}}
+{animations/teaching_MTMW12_2014_notes_anims_Fourier_Periodic_identity_function.mp4}%
+\end{minipage}
+
+\begin{minipage}[t]{0.47\columnwidth}%
+First 4 Fourier modes of the square waves
+
+\mediaMovie[autostart,loop]{\includegraphics[width=\linewidth]{../../../../teaching/MTMW12/2014/notes/anims/Fourier/Fourier_series_square_wave_circles_animation/anim59.pdf}}
+{animations/teaching_MTMW12_2014_notes_anims_Fourier_Fourier_series_square_wave_circles_animation.mp4}%
+\end{minipage}\hfill{}%
+\begin{minipage}[t]{0.47\columnwidth}%
+First 4 Fourier modes of a saw tooth wave
+
+\mediaMovie[autostart,loop]{\includegraphics[width=\linewidth]{../../../../teaching/MTMW12/2014/notes/anims/Fourier/Fourier_series_sawtooth_wave_circles_animation/anim59.pdf}}
+{animations/teaching_MTMW12_2014_notes_anims_Fourier_Fourier_series_sawtooth_wave_circles_animation.mp4}%
+\end{minipage}\clearpage{}
+
+
+\section{Fourier Transform}
+
+\stepwise*{\step{The Fourier Transform transforms a function $f$
+which is defined over space (or time) into the frequency domain, so
+that it is defined in terms of Fourier coefficients. }\step{ The
+Fourier transform calculates the Fourier coefficients as: 
+\[
+a_{k}=\frac{1}{\pi}\int_{-\pi}^{\pi}f(x)\cos(kx)dx~,~~b_{k}=\frac{1}{\pi}\int_{-\pi}^{\pi}f(x)\sin(kx)dx
+\]
+}\step{
+
+
+\section{Discrete Fourier Transform}
+
+}\step{A discrete Fourier Transform converts a list of $2N+1$ equally
+spaced samples of a real valued, periodic function, $f_{n}$, to the
+list of the first $N+1$ complex valued Fourier coefficients:}\step{
+\[
+A_{k}=\frac{1}{N}\sum_{n=-N}^{N}f_{n}\ e^{-i\pi knx/N}.
+\]
+}\step{The truncated Fourier series:
+\[
+f\left(x\right)\approx\sum_{k=-N}^{N}A_{k}e^{ikx}
+\]
+is an approximation to the function $f$ which fits the sampled points,
+$f_{n}$, exactly. }\step{
+
+On a computer this is done with a \textbf{Fast Fourier Transform}
+(or \texttt{fft}). The inverse Fourier transform (sometimes called
+\texttt{ifft}) transforms the Fourier coefficients back to the $f$
+values (transforming from spectral back to real space):
+
+\begin{tabular}{ccc}
+$f_{0},f_{1},f_{2},\cdots f_{2N}$  & $\xrightarrow{\text{{\tt fft}}}$  & $A_{0},A_{1},\cdots A_{N}$ \tabularnewline
+$A_{0},A_{1},\cdots A_{N}$  & $\xrightarrow{\text{{\tt ifft}}}$  & $f_{0},f_{1},f_{2},\cdots f_{2N}$ \tabularnewline
+\end{tabular}}}
+
+\clearpage{}
+
+
+\section{Differentiation and Interpolation}
+
+If we know the Fourier coefficients, $A_{k}$, of a function $f$
+then we can calculate the gradient of $f$ at any point, $x$: If
+\begin{equation}
+f(x)=\sum_{k=0}^{\infty}a_{k}\cos kx+\sum_{k=0}^{\infty}b_{k}\sin kx=\sum_{k=-\infty}^{\infty}A_{k}e^{ikx}
+\end{equation}
+then\stepwise{ 
+\begin{equation}
+f^{\prime}(x)=\opttext{\sum_{k=0}^{\infty}-ka_{k}\sin kx+\sum_{k=0}^{\infty}kb_{k}\cos kx=\sum_{k=-\infty}^{\infty}i~k~A_{k}e^{ikx}.}\label{eqn:FourierGrad}
+\end{equation}
+and the second derivative: 
+\begin{equation}
+f^{\prime\prime}(x)=\opttext{\sum_{k=0}^{\infty}-k^{2}a_{k}\cos kx-\sum_{k=0}^{\infty}k^{2}b_{k}\sin kx=\sum_{k=-\infty}^{\infty}-k^{2}~A_{k}e^{ikx}.}\label{eqn:FourierGrad2}
+\end{equation}
+\step{These have spectral accuracy; the order of accuracy is as high
+as the number of points. Similarly equation \ref{eqn:FourierSinCos}
+or \ref{eqn:FourierExp} can be used directly to interpolate $f$
+onto an undefined point, $x$. Again, the order of accuracy is spectral.}\step{
+
+
+\section{Spectral Models}
+\begin{itemize}
+\item ECMWF use a spectral model. 
+\item The prognostic variables are transformed between physical and spectral
+space using \texttt{fft}s and \texttt{ifft}s. 
+\item Gradients are calculated very accurately in spectral space
+\end{itemize}
+}}
+
+
+\section{Wave Power and Frequency}
+
+\begin{minipage}[c]{0.55\linewidth}%
+ \setlength{\parskip}{6pt} \setlength{\parindent}{0pt} $\sin kx$
+and $\cos kx$ are waves:
+
+\setlength{\tabcolsep}{4pt} %
+\begin{tabular}{lcl}
+wavenumber  & $k$  & Number of complete waves \tabularnewline
+(or frequency)  &  & that will fit into the interval \tabularnewline
+ &  & $[-\pi,\pi]$\tabularnewline
+wavelength  &  & $\lambda=\frac{2\pi}{k}$ \tabularnewline
+\end{tabular}%
+\end{minipage}%
+\begin{minipage}[c]{0.43\linewidth}%
+ \includegraphics[width=1\linewidth]{\lyxdot \lyxdot /\lyxdot \lyxdot /\lyxdot \lyxdot /\lyxdot \lyxdot /teaching/MTMW12/2014/notes/figs/sineWaves} %
+\end{minipage}
+\begin{itemize}
+\item If a function, $f$, has Fourier coefficients, $a_{k}$ and $b_{k}$,
+then wavenumber $k$ has power $a_{k}^{2}+b_{k}^{2}$.
+\item A plot of wave frequency versus power is referred to as the power
+spectrum. 
+\end{itemize}
+\clearpage{}
+
+
+\section{Recap Questions}
+
+\stepwise{
+\begin{enumerate}
+\item In the Fourier decomposition
+\[
+f(x)=\frac{a_{0}}{2}+\sum_{k=1}^{\infty}a_{k}\cos kx+\sum_{k=1}^{\infty}b_{k}\sin kx
+\]
+what are:
+
+\begin{enumerate}
+\item the Fourier coefficients \hfill{}\opttext{(the $a_k$ and the $b_k$)}
+\item the Fourier modes \hfill{}\opttext{(the sines and cosines)}
+\item the wavenumbers (or frequencies) \hfill{}\opttext{(the $k$s)}
+\item the power of wavenumber $k$ \hfill{}\opttext{($a_k^2+b_k^2$)}
+\end{enumerate}
+\item How would you describe the operation:
+\[
+a_{k}=\frac{1}{\pi}\int_{-\pi}^{\pi}f(x)\cos(kx)dx~,~~b_{k}=\frac{1}{\pi}\int_{-\pi}^{\pi}f(x)\sin(kx)dx
+\]
+\phantom{}\hfill{}\opttext{(a Fourier transform)}
+\item Given a list of $2N+1$ equally spaced samples of a real valued, periodic
+function, $f_{n}$, how would you describe the following operation
+to convert this into a a list of $N+1$ values:
+\[
+A_{k}=\frac{1}{N}\sum_{n=-N}^{N}f_{n}\ e^{-i\pi knx/N}
+\]
+\hfill{}\opttext{(a discrete Fourier transform)}
+\item What is the wavelength of a wave described by $\sin4x$ \hfill{}\opttext{($2\pi/4$)}
+\end{enumerate}
+}
+
+\clearpage{}
+
+
+\section{Analysing Power Spectra}
+
+\liststepwise{
+
+\begin{minipage}[c]{0.7\linewidth}%
+\begin{center}
+\textbf{Daily rainfall at a station in the Middle East for 21 years}\\
+\textbf{ \includegraphics[width=1\linewidth]{\lyxdot \lyxdot /\lyxdot \lyxdot /\lyxdot \lyxdot /\lyxdot \lyxdot /teaching/MTMW12/2014/notes/figs/rainSmoothed} }
+\par\end{center}%
+\end{minipage}\hfill{}%
+\begin{minipage}[c]{0.29\linewidth}%
+\begin{flushleft}
+\textbf{Truncated Fourier filtered rainfall: }
+\par\end{flushleft}
+\begin{itemize}
+\item \begin{flushleft}
+\opttext{very smooth (only low wavenumbers included)}
+\par\end{flushleft}
+\item \opttext{includes negative values -- \textit{``spectral ringing''}}\end{itemize}
+%
+\end{minipage}
+
+\step{%
+\begin{minipage}[c]{0.6\linewidth}%
+\begin{center}
+\textbf{Power Spectrum of Middle East Rainfall \includegraphics[width=1\linewidth]{\lyxdot \lyxdot /\lyxdot \lyxdot /\lyxdot \lyxdot /\lyxdot \lyxdot /teaching/MTMW12/2014/notes/figs/rainPower} }
+\par\end{center}%
+\end{minipage}\hfill{}%
+\begin{minipage}[c]{0.38\linewidth}%
+\textbf{Observations}
+\begin{itemize}
+\item \begin{flushleft}
+\opttext{dominant frequency at one year (annual cycle)}
+\par\end{flushleft}
+\item \begin{flushleft}
+\opttext{power at high frequencies (ie daily variability)}
+\par\end{flushleft}\end{itemize}
+%
+\end{minipage}
+
+number per year = wavenumber$\times$365/total number of days}}\clearpage{}
+
+
+\subsection*{Time Series of the Nino 3 sea surface temperature (SST)}
+
+\liststepwise{The SST in the Nino 3 region of the equatorial Pacific
+is a diagnostic of El Nino
+
+\begin{minipage}[c]{0.7\linewidth}%
+ \includegraphics[width=1\linewidth]{\lyxdot \lyxdot /\lyxdot \lyxdot /\lyxdot \lyxdot /\lyxdot \lyxdot /teaching/MTMW12/2014/notes/figs/n3FourierModes} %
+\end{minipage}\hfill{}%
+\begin{minipage}[c]{0.29\linewidth}%
+\begin{itemize}
+\item \begin{flushleft}
+\opttext{Annual cycle is the Fourier mode at 1 year }
+\par\end{flushleft}
+\item \begin{flushleft}
+\opttext{The ``two years and slower'' filtered data is the sum
+of all the Fourier modes of these frequencies.} 
+\par\end{flushleft}\end{itemize}
+%
+\end{minipage}\step{
+
+\begin{minipage}[c]{0.5\linewidth}%
+\begin{center}
+\textbf{Power Spectrum of Nino 3 SST}\\
+\textbf{\includegraphics[width=1\linewidth]{\lyxdot \lyxdot /\lyxdot \lyxdot /\lyxdot \lyxdot /\lyxdot \lyxdot /teaching/MTMW12/2014/notes/figs/n3Power}}
+\par\end{center}%
+\end{minipage}\hfill{}%
+\begin{minipage}[c]{0.48\linewidth}%
+\begin{itemize}
+\item \begin{flushleft}
+\opttext{Dominant frequency at 1 year (annual cycle)}
+\par\end{flushleft}
+\item \begin{flushleft}
+\opttext{Less power at high frequencies (SST varies slowly)}
+\par\end{flushleft}
+\item \begin{flushleft}
+\opttext{Power at 1-10 years (El Nino every 3-7 years)}
+\par\end{flushleft}\end{itemize}
+%
+\end{minipage}}}
+
+\clearpage{}
+
+
+\subsection*{Time Series of the Quasi-Biennial Oscillation (QBO)}
+
+\liststepwise{The QBO is an oscillation of the equatorial zonal wind
+between easterlies and westerlies in the tropical stratosphere which
+has a mean period of 28 to 29 months:
+
+\includegraphics[width=1\linewidth]{/home/hilary/latex/teaching/MTMW12/2011Notes/practicals/3_Fourier/moreData/qbo}
+
+\step{
+
+\begin{minipage}[c]{0.65\linewidth}%
+\begin{center}
+\textbf{Power Spectrum of QBO}\\
+\includegraphics[width=1\linewidth]{/home/hilary/latex/teaching/MTMW12/2011Notes/practicals/3_Fourier/moreData/qboPower}
+\par\end{center}%
+\end{minipage}\hfill{}%
+\begin{minipage}[c]{0.33\linewidth}%
+\begin{itemize}
+\item \begin{flushleft}
+\opttext{Dominant frequency at close to 2 years}
+\par\end{flushleft}
+\item \begin{flushleft}
+\opttext{Less power at high frequencies}
+\par\end{flushleft}
+\item \begin{flushleft}
+\opttext{Less power at long time-scales}
+\par\end{flushleft}\end{itemize}
+%
+\end{minipage}}
+
+\step{Knowledge of Fourier analysis is necessary for analysing stability
+of numerical methods ...}}

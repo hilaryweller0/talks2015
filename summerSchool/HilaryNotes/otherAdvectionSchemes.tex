@@ -1,0 +1,195 @@
+
+\chapter{Alternative Advection Schemes}
+
+\liststepwise{
+
+Conclusions from practicals and lectures on advection so far:
+\begin{itemize}
+\item \opttext{First-order in space schemes are very diffusive}\opttext{
+\item Second-order in space, linear schemes lead to grid-scale oscillations}\opttext{
+\item Explicit Eulerian schemes have time-step restrictions }\opttext{
+\item Changes in resolution can make errors larger}
+\end{itemize}
+\vfill{}
+
+
+\step{
+
+
+\subsection*{Some possible solutions to these problems}
+\begin{enumerate}
+\item Semi-Lagrangian advection
+\item Artificial diffusion to remove spurious oscillations 
+\item Total variation diminishing (TVD) schemes
+\end{enumerate}
+}}
+
+\clearpage{}
+
+
+\section{Semi-Lagrangian Advection}
+
+\liststepwise{
+
+\textbf{CFL criterion}: The domain of dependence of the numerical
+solution must contain the domain of dependence of the original PDE.
+\begin{itemize}
+\item So to allow long time-steps, construct the numerical domain of dependence
+to contain the physical domain of dependence.\step{
+\item Recall the linear advection equation: ${\textstyle \frac{\partial\phi}{\partial t}+u\frac{\partial\phi}{\partial x}=0}$
+\item and its analytic solution: $\phi(x,t)=\phi(x-ut,0)$}\step{
+
+
+\hfill{}\raisebox{-0.15\linewidth}[0pt][0pt]{\includegraphics[width=0.4\linewidth]{/home/hilary/latex/meetings/2013/SS/HilaryNotes/figs/SL}}
+
+\item Semi-Lagrangian advection is defined from this:\\
+$\phi(x_{j},t_{n+1})=\phi(x_{j}-u\Delta t,t_{n})=\phi(x_{jd},t_{n})$\\
+$x_{jd}=x_{j}-u\Delta t$ is the departure point of point $x_{j}$.}\step{
+\item So interpolate $\phi$ from known points onto $x_{jd}$.}\step{
+\item First find $k$ such that $x_{k}\le x_{jd}\le x_{k+1}$: (Use $\text{int}(x)$
+meaning the integer part of $x$) \\
+$k=\opttext{\text{int}((x_{j}-u\Delta t)/\Delta x)=\text{int}(j-c)}$}\step{
+\item Interpolate from $x_{k-1}$, $x_{k}$, $x_{k+1}$, $x_{k+2}$, ...
+onto $x_{jd}$ \\
+(for example using cubic-Lagrange interpolation)}\step{
+\item The time step is no-longer restricted by the Courant number but for
+stability, a sufficiently small time step must be used so that trajectories
+do not cross. }
+\end{itemize}
+\step{\textbf{Exercise:} Find $\beta=\frac{x_{jd}-x_{k}}{\Delta x}$
+as a function of only $j$, $k$ and $c$ given $x_{j}=j\Delta x$
+and $c=u\Delta t/\Delta x$. }\opttext{$\beta=j-k-c$}\step{
+
+\textbf{Problem}: The advected quantity is not conserved}}
+
+\clearpage{}
+
+
+\section{Artificial Diffusion to Remove Spurious Oscillations}
+
+\liststepwise{
+
+Numerical schemes are designed not to produce spurious oscillations.
+However, once a forecasting model is put together, often spurious
+oscillations are still generated. These can be removed by adding an
+artificial diffusion term to the equations. \step{For example, the
+linear advection equation with diffusion: 
+\begin{equation}
+\frac{\partial\phi}{\partial t}+\vec{u}\dprod\nabla\phi-K\nabla^{2}\phi=0
+\end{equation}
+or in one dimension:} 
+\begin{equation}
+\step{\frac{\partial\phi}{\partial t}+}\opttext{u\frac{\partial\phi}{\partial x}-K\frac{\partial^{2}\phi}{\partial x^{2}}=0}
+\end{equation}
+
+\begin{itemize}
+\item \step{This is dampens spurious oscillations and real features }\step{
+\item It is only (but frequently) used as a last resort.}\step{
+\item More scale-selective filtering can be achieved using $\nabla^{4}$
+rather than $\nabla^{2}$:
+\begin{equation}
+\frac{\partial\phi}{\partial t}+\vec{u}\dprod\nabla\phi+K\nabla^{4}\phi=0
+\end{equation}
+}
+\end{itemize}
+\step{\textbf{Information for Practical: }The following advection-diffusion
+scheme is stable for $c^{2}+4d\le1$ where $d=K\Delta t/\Delta x^{2}$:
+\begin{equation}
+\phi_{j}^{(n+1)}-\phi_{j}^{(n-1)}+c(\phi_{j+1}^{(n)}-\phi_{j-1}^{(n)})-2d(\phi_{j+1}^{(n-1)}-2\phi_{j}^{(n-1)}+\phi_{j-1}^{(n-1)})=0.
+\end{equation}
+}}\clearpage{}
+
+
+\section{Total Variation Diminishing (TVD) schemes}
+
+\liststepwise*{
+\begin{itemize}
+\item \step{Linear, second-order advection schemes produce unbounded, unrealistic,
+grid-scale oscillations. These can be measured by the total variation:
+\[
+TV={\textstyle \sum_{j}|\phi_{j+1}-\phi_{j}|}
+\]
+}\step{\\
+\textbf{Exercise:} Calculate the total variation of these functions:\renewcommand\arraystretch{-0.5}\\
+\begin{tabular}{lll}
+\includegraphics[width=0.3\textwidth]{python/TV/TV1} & \includegraphics[width=0.3\textwidth]{python/TV/TV2} & \includegraphics[width=0.3\textwidth]{python/TV/TV3}\tabularnewline
+\includegraphics[width=0.3\textwidth]{python/TV/TV4} & \includegraphics[width=0.3\textwidth]{python/TV/TV5} & \includegraphics[width=0.3\textwidth]{python/TV/TV6}\tabularnewline
+\end{tabular}\\
+}\opttext{(a) 8, (b) 8, (c) 12, (d) 8, (e) 12, (f) 6}\step{
+\item A total variation diminishing (TVD) scheme has $TV^{(n+1)}\le TV^{(n)}$.
+}
+\end{itemize}
+\step{\textbf{Question:} Why is total variation used rather than
+boundedness to measure the generation of spurious oscillations? ...\opttext{Because spurious oscillations can be generated within the bounds of the original function. Eg see function (e) above.}
+
+}}
+
+\clearpage{}
+
+\liststepwise*{
+\begin{itemize}
+\item \step{First-order upwind is the only \textit{linear} TVD scheme (Godunov's
+theorem). Other TVD schemes are non-linear... }\step{
+\item To define a TVD scheme, start with the discretised linear advection
+equation: 
+\begin{equation}
+\frac{\phi_{j}^{(n+1)}-\phi_{j}^{(n)}}{\Delta t}=-u\frac{\phi_{j+\half}-\phi_{j-\half}}{\Delta x}.
+\end{equation}
+}\step{
+\item Each $\phi_{j\pm\half}$, is calculated as a weighted average of a
+high order flux ($\phi_{H}$) and a low order flux ($\phi_{L}$):
+\[
+\phi_{j+\half}=\Psi_{j+\half}~\phi_{H}+(1-\Psi_{j+\half})~\phi_{L}
+\]
+where $\Psi$ is a limiter function.}\step{
+\item Use as much of $\phi_{H}$ as possible without introducing oscillations
+\item So $\Psi$ should be close to one where the solution is smooth so
+that the solution is close to second-order accurate and $\Psi$ close
+to zero where the solution changes rapidly so as to use the upwind
+flux which guarantees boundedness. }\step{
+\item The scheme is now non-linear since $\Psi$ depends on $\phi$. 
+\item We can use:
+
+
+\begin{tabular}{cll}
+-- & Centred in space as the high-order flux: & $\phi_{H}=\half(\phi_{j}+\phi_{j+1})$\tabularnewline
+-- & First-order upwind as the low-order flux: & $\phi_{H}=\begin{cases}
+\phi_{j} & \text{if }u\ge0\\
+\phi_{j1} & \text{{otherwise}}
+\end{cases}$\tabularnewline
+\end{tabular}
+
+
+}\step{
+
+\item So what should $\Psi$ be?}
+\end{itemize}
+}
+
+\clearpage{}
+
+
+\subsection{Limiter functions}
+
+\liststepwise*{\step{
+
+The limiter function, $\Psi$, is based on the ratio of the upwind
+gradient to the local gradient: 
+\[
+r_{j+\half}=\frac{\phi_{j}-\phi_{j-1}}{\phi_{j+1}-\phi_{j}}
+\]
+for $u>0$.}\step{
+
+
+\subsubsection*{An Example: the Van Leer Limiter}
+
+\[
+\Psi(r)=\left(r+|r|\right)/\left(1+|r|\right)
+\]
+}\step{A lot of algebra will show you that this scheme is TVD.}\step{
+
+There are many other limiter functions that give TVD schemes.
+
+See, eg \url{https://en.wikipedia.org/wiki/Flux_limiter}
+
+}}

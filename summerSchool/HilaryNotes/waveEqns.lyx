@@ -1,0 +1,2620 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass report
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package none
+\inputencoding auto
+\fontencoding default
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 0
+\use_mathdots 0
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip 3pt
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+Modelling Wave Equations
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+liststepwise*{
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Many of the processes in the atmosphere are represented by the shallow water
+ equations (SWE).
+ The assumptions needed to derive the SWE are:
+\end_layout
+
+\begin_layout Itemize
+Horizontal length scale 
+\begin_inset Formula $>>$
+\end_inset
+
+ vertical length scale
+\end_layout
+
+\begin_layout Itemize
+Very small vertical velocities
+\end_layout
+
+\begin_layout Standard
+Depth integrate the Navier-Stokes equations over orography to give the SWE:
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Frameless
+position "c"
+hor_pos "c"
+has_inner_box 1
+inner_pos "c"
+use_parbox 0
+use_makebox 0
+width "54line%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align}
+\frac{D\mathbf{u}}{Dt} & =-2\Omega\times\mathbf{u}-g\nabla(h+h_{0})+\mu_{u}\nabla^{2}\mathbf{u}\label{eqn:SWEuv}\\
+\frac{Dh}{Dt} & +h\nabla\cdot\mathbf{u}=0\label{eqn:SWEh}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "c"
+hor_pos "c"
+has_inner_box 1
+inner_pos "c"
+use_parbox 0
+use_makebox 0
+width "40line%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+ 
+\begin_inset External
+	template XFig
+	filename figs/shallowWater.fig
+	width 100col%
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset FormulaMacro
+\renewcommand{\arraystretch}{1}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align left
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="4">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="0">
+<column alignment="left" valignment="top" width="0">
+<column alignment="left" valignment="top" width="0">
+<column alignment="left" valignment="top" width="0">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\mathbf{u}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Depth intetraged wind vector 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $g$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Acceleration due to gravity
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $t$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Time 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\nabla$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Gradients in the horizontal
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\Omega$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Rotation rate of planet
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $h_{0}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Height of the bottom topography
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $h$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Fluid depth
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\mu_{u}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Diffusion of momentum
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Exercise: 
+\series default
+Considering the meaning of the terms in the momentum equation in section
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:momEqn"
+
+\end_inset
+
+, what are the meaning of the terms of the momentum equation of the SWE?
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Processes Represented by the SWE
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+liststepwise{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Which of these processes are represented by the SWE and which are only represent
+ed by the full NS equations?
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="6" columns="4">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="0">
+<column alignment="left" valignment="top" width="0">
+<column alignment="left" valignment="top" width="0">
+<column alignment="left" valignment="top" width="0pt">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Horizontal advection
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+opttext{SWE}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Acoustic waves
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+opttext{NS}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Vertical advection
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+opttext{NS}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Coriolis
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+opttext{SWE}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Gravity waves
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+opttext{SWE}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Diffusion
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+opttext{SWE}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Rossby waves
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+opttext{SWE}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Heat transport
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+opttext{NS}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Adiabatic expansion
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+opttext{NS}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Atmospheric convection
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+opttext{NS}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Geostrophic balance
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+opttext{SWE}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Geostrophic turbulence
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+opttext{SWE}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\begin_inset VSpace vfill
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Component Form of the SWE
+\end_layout
+
+\begin_layout Standard
+Assuming 
+\begin_inset Formula $\mathbf{u}=(u,v,0)^{T}$
+\end_inset
+
+ and 
+\begin_inset Formula $2\Omega=(0,0,f)^{T}$
+\end_inset
+
+, equations (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eqn:SWEuv"
+
+\end_inset
+
+) and (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eqn:SWEh"
+
+\end_inset
+
+) written in component form are:
+\begin_inset Formula 
+\begin{eqnarray*}
+\frac{\partial u}{\partial t}+u\frac{\partial u}{\partial x}+v\frac{\partial u}{\partial y} & = & \phantom{-}fv-g\frac{\partial(h+h_{0})}{\partial x}+\mu_{u}\left(\frac{\partial^{2}u}{\partial x^{2}}+\frac{\partial^{2}u}{\partial y^{2}}\right)\\
+\frac{\partial v}{\partial t}+u\frac{\partial v}{\partial x}+v\frac{\partial v}{\partial y} & = & -fu-g\frac{\partial(h+h_{0})}{\partial y}+\mu_{u}\left(\frac{\partial^{2}v}{\partial x^{2}}+\frac{\partial^{2}v}{\partial y^{2}}\right)\\
+\frac{\partial h}{\partial t}+u\frac{\partial h}{\partial x}+v\frac{\partial h}{\partial y}+h\left(\frac{\partial u}{\partial x}+\frac{\partial v}{\partial y}\right)=0 & \text{or} & \frac{\partial h}{\partial t}+\frac{\partial hu}{\partial x}+\frac{\partial hv}{\partial y}=0
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Linearised SWE
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+liststepwise*{
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In order to find analytic solutions and to analyse the behaviour of numerical
+ methods, we linearise the SWE.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+ Assume:
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\mathbf{u}=(u,v,0)^{T}$
+\end_inset
+
+ is small
+\end_layout
+
+\begin_layout Itemize
+2
+\begin_inset Formula $\Omega=(0,0,f)^{T}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $h=H+h^{\prime}$
+\end_inset
+
+ where 
+\begin_inset Formula $H$
+\end_inset
+
+ is uniform in space and time and 
+\begin_inset Formula $h^{\prime}$
+\end_inset
+
+ is small
+\end_layout
+
+\begin_layout Itemize
+the product of two small variables is ignored (including if one or both
+ are inside a differential)
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $h_{0}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mu_{u}$
+\end_inset
+
+ are ignored
+\end_layout
+
+\begin_layout Standard
+This gives the following equations for 
+\begin_inset Formula $u,$
+\end_inset
+
+
+\begin_inset Formula $v$
+\end_inset
+
+ and 
+\begin_inset Formula $h^{\prime}$
+\end_inset
+
+ expressed in terms of 
+\begin_inset Formula $f$
+\end_inset
+
+ (rather than 
+\begin_inset Formula $\Omega$
+\end_inset
+
+):
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+opttext{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{eqnarray}
+\frac{\partial u}{\partial t} & = & \phantom{-}fv-g\frac{\partial h^{\prime}}{\partial x}\label{eq:linSWEu}\\
+\frac{\partial v}{\partial t} & = & -fu-g\frac{\partial h^{\prime}}{\partial y}\label{eq:linSWEv}\\
+\frac{\partial h^{\prime}}{\partial t} & = & -H\left(\frac{\partial u}{\partial x}+\frac{\partial v}{\partial y}\right)\label{eq:linSWEh}
+\end{eqnarray}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+liststepwise*{
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Analytic Solultion
+\end_layout
+
+\begin_layout Standard
+Ignoring Coriolis, the linearised SWE have analytic solutions.
+ In 1d these are: 
+\begin_inset Formula 
+\begin{align}
+h^{\prime} & =\hphantom{\pm\sqrt{g/H}\ }\mathbb{H}\ e^{ikx}\ e^{\pm ikt\sqrt{gH}}\label{eq:hwaves}\\
+u & =\pm\sqrt{g/H}\ \mathbb{H}\ e^{ikx}\ e^{\pm ikt\sqrt{gH}}\label{eq:uwaves}
+\end{align}
+
+\end_inset
+
+for any constant 
+\begin_inset Formula $\mathbb{H}$
+\end_inset
+
+.
+ So waves with wavenumber 
+\begin_inset Formula $k$
+\end_inset
+
+ in space oscillate with frequency 
+\begin_inset Formula $k\sqrt{gH}$
+\end_inset
+
+ in time and the gravity speed is ...
+ 
+\begin_inset Formula $\opttext{\sqrt{gH}}$
+\end_inset
+
+ for waves of all wavelengths (the gravity waves are non-dispersive since
+ the wave speed does not depend on the wavelength).
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Unstaggered Forward-Backward (1d A-grid FB)
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:FB_1dA"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As there are two equations that depend on each other, it is quite natural
+ to solve them using forward-backward time-stepping.
+ We will also start by assuming that 
+\begin_inset Formula $h$
+\end_inset
+
+ and 
+\begin_inset Formula $u$
+\end_inset
+
+ are defined at the same spatial positions (this is called co-located, unstagger
+ed or A-grid) and we will use centred spatial discretisation:
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{align}
+\frac{\partial u}{\partial t} & =-g\frac{\partial h}{\partial x}~\rightarrow & \opttext{\frac{u_{j}^{(n+1)}-u_{j}^{(n)}}{\Delta t}}\ \ \  & =\opttext{-g\frac{h_{j+1}^{(n)}-h_{j-1}^{(n)}}{2\Delta x}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \label{eqn:SWEuFBA}\\
+\frac{\partial h}{\partial t} & =-H\frac{\partial u}{\partial x}~\rightarrow & \opttext{\frac{h_{j}^{(n+1)}-h_{j}^{(n)}}{\Delta t}}\ \ \  & =\opttext{-H\frac{u_{j+1}^{(n+1)}-u_{j-1}^{(n+1)}}{2\Delta x}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \label{eqn:SWEhFBA}
+\end{align}
+
+\end_inset
+
+where 
+\begin_inset Formula $x_{j}=j\Delta x$
+\end_inset
+
+, 
+\begin_inset Formula $t^{(n)}=n\Delta t$
+\end_inset
+
+, 
+\begin_inset Formula $h_{j}^{(n)}=h(x_{j},t^{(n)})$
+\end_inset
+
+ and 
+\begin_inset Formula $u_{j}^{(n)}=u(x_{j},t^{(n)})$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Von-Neumann Stability Analysis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+liststepwise*{
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We can find the stability limits and wave frequency as a function of wavenumber
+ for the numerical scheme given in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:FB_1dA"
+
+\end_inset
+
+ (1d A-grid FB) using von-Neumann stability analysis (details beyond the
+ scope of this course but are reproduced on the next slide).
+ The outcomes are that 1d A-grid FB is:
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+Stable for Courant number 
+\begin_inset Formula $|c|\le2$
+\end_inset
+
+ where 
+\begin_inset Formula $c=\sqrt{gH}\Delta t/\Delta x$
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Wave frequency dependent on wavenumber like:
+\begin_inset Formula 
+\[
+\omega=\tan^{-1}\frac{\frac{c}{2}\sin k\Delta x\sqrt{4-c^{2}\sin^{2}k\Delta x}}{1-\frac{c^{2}}{2}\sin^{2}k\Delta x}
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+This is the A-grid dispersion relation:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename figs/A_dispersion.pdf
+	lyxscale 50
+	width 50line%
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Grid-scale gravity waves (
+\begin_inset Formula $k\Delta x/\pi=1$
+\end_inset
+
+) have zero frequency! This is highly unrealistic.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Outline of the von-Neumann Stability Analysis of 1d A-grid FB
+\end_layout
+
+\begin_layout Standard
+To calculate an amplification factor, 
+\begin_inset Formula $A$
+\end_inset
+
+, for each wavenumber, 
+\begin_inset Formula $k$
+\end_inset
+
+, we assume wave-like solutions for 
+\begin_inset Formula $h$
+\end_inset
+
+ and 
+\begin_inset Formula $u$
+\end_inset
+
+: 
+\begin_inset Formula 
+\begin{align}
+h_{j}^{(n)} & =\mathbb{H}~A^{n}~e^{ikj\Delta x}\\
+u_{j}^{(n)} & =\mathbb{U}~A^{n}~e^{ikj\Delta x}
+\end{align}
+
+\end_inset
+
+Substituting these into (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eqn:SWEuFBA"
+
+\end_inset
+
+) and (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eqn:SWEhFBA"
+
+\end_inset
+
+) leads to: 
+\begin_inset Formula 
+\begin{equation}
+A=1-\frac{c^{2}}{2}\sin^{2}k\Delta x\pm\frac{ic}{2}\sin k\Delta x\sqrt{4-c^{2}\sin^{2}k\Delta x}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $c=\frac{\sqrt{gH}\Delta t}{\Delta x}$
+\end_inset
+
+.
+ There are two solutions for 
+\begin_inset Formula $A$
+\end_inset
+
+ but this is correct because there are also two analytic solutions to the
+ equations (because of the 
+\begin_inset Formula $\pm$
+\end_inset
+
+ in the analytic solution).
+ For 
+\begin_inset Formula $|c|\le2$
+\end_inset
+
+ this gives 
+\begin_inset Formula $|A|^{2}=1$
+\end_inset
+
+ so the scheme is stable and undamping for sufficiently small time steps.
+ However for 
+\begin_inset Formula $|c|>2$
+\end_inset
+
+ we have: 
+\begin_inset Formula 
+\[
+|A|^{2}=\biggl(1-\frac{c^{2}}{2}\sin^{2}k\Delta x\pm\frac{c}{2}\sin k\Delta x\sqrt{c^{2}\sin^{2}k\Delta x-4}\biggr)^{2}
+\]
+
+\end_inset
+
+which can be greater than 1 and so the scheme is unstable for 
+\begin_inset Formula $|c|>2$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The argument 
+\begin_inset Formula $A$
+\end_inset
+
+ gives us the wave frequency as a function of wavenumber: 
+\begin_inset Formula 
+\begin{equation}
+\omega=\tan^{-1}\frac{\frac{c}{2}\sin k\Delta x\sqrt{4-c^{2}\sin^{2}k\Delta x}}{1-\frac{c^{2}}{2}\sin^{2}k\Delta x}
+\end{equation}
+
+\end_inset
+
+This can be simplified by assuming that 
+\begin_inset Formula $\frac{c}{2}\sin k\Delta x=\sin\alpha$
+\end_inset
+
+ to give: 
+\begin_inset Formula 
+\begin{equation}
+\omega=\pm2\alpha=\pm2\sin^{-1}\bigl(\frac{c}{2}\sin k\Delta x\bigr)
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Problems with Co-location of 
+\begin_inset Formula $h$
+\end_inset
+
+ and 
+\begin_inset Formula $u$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+stepwise*{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Consider the following initial conditions of the linearised non-rotating
+ SWE:
+\end_layout
+
+\begin_layout Standard
+\begin_inset External
+	template XFig
+	filename figs/AgridMode.fig
+	width 48line%
+
+\end_inset
+
+ 
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset External
+	template XFig
+	filename figs/AgridMode_u.fig
+	width 48line%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Questions:
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+How do you expect the real solution of the linearised SWE to evolve?
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+opttext{High-frequency waves will be generated that propagate in both directions.
+ The solution will oscillate between having non-zero $h^
+\backslash
+prime$ and non-zero $u$.}
+\end_layout
+
+\end_inset
+
+
+\begin_inset VSpace 2cm
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+How will the solution of the 1d A-grid FB scheme evolve?
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+opttext{The solution will not change after initialisation.
+ The grid-scale wave in $h^
+\backslash
+prime$ will remain.
+ No non-zero $u$ will be generated.}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Staggered Forward-Backward (1d C-grid FB)
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:FB_1dC"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+liststepwise{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+So that gradients of 
+\begin_inset Formula $h$
+\end_inset
+
+ can be calculated where 
+\begin_inset Formula $u$
+\end_inset
+
+ is located and gradients of 
+\begin_inset Formula $u$
+\end_inset
+
+ can be calculated where 
+\begin_inset Formula $h$
+\end_inset
+
+ is located, 
+\begin_inset Formula $h$
+\end_inset
+
+ and 
+\begin_inset Formula $u$
+\end_inset
+
+ can be staggered in space:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset space \hspace{}
+\length 3cm
+\end_inset
+
+
+\begin_inset External
+	template XFig
+	filename figs/C-grid.fig
+	scale 75
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Using centered, 2-point spatial differences and forward-backward in time
+ gives: 
+\begin_inset Formula 
+\begin{align}
+\frac{\partial u}{\partial t} & =-g\frac{\partial h}{\partial x}~~\rightarrow & \opttext{\frac{u_{j+\half}^{(n+1)}-u_{j+\half}^{(n)}}{\Delta t}}\ \ \  & =\opttext{-g\frac{h_{j+1}^{(n)}-h_{j}^{(n)}}{\Delta x}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \label{eqn:SWEuFBC}\\
+\frac{\partial h}{\partial t} & =-H\frac{\partial u}{\partial x}~~\rightarrow & \opttext{\frac{h_{j}^{(n+1)}-h_{j}^{(n)}}{\Delta t}}\ \ \  & =\opttext{-H\frac{u_{j+\half}^{(n+1)}-u_{j-\half}^{(n+1)}}{\Delta x}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \label{eqn:SWEhFBC}
+\end{align}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+Von-Neumann stability analysis gives:
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $|A|=\begin{cases}
+1 & \text{for }|c|\le1\\
+>1 & \text{for }|c|>1\text{ for some }k\Delta x
+\end{cases}$
+\end_inset
+
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset Formula $\therefore$
+\end_inset
+
+ neutrally stable for 
+\begin_inset Formula $|c|\le1$
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Dispersion relation:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $\omega=\pm2\alpha=\pm2\sin^{-1}\bigl(c\sin\frac{k\Delta x}{2}\bigr)$
+\end_inset
+
+
+\series bold
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\series default
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+raisebox{-0.1
+\backslash
+linewidth}[0pt][0pt]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename figs/AC_dispersion.pdf
+	width 50line%
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\therefore$
+\end_inset
+
+ the C-grid is dispersive
+\end_layout
+
+\begin_layout Itemize
+grid-scale waves propagate too slowly
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+C-grid widely used in atmosphere and ocean models 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+What about in 2d?
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Arakawa Grids
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+liststepwise{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In two dimensions, there are more possibilities for where the prognostic
+ variables are located:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tabular}{ccc}
+\end_layout
+
+\begin_layout Plain Layout
+
+A-grid & B-grid & C-grid 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+ifthenelse{
+\backslash
+boolean{@onlineversion}}%
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\backslash
+switch{
+\backslash
+resizebox{0.3
+\backslash
+textwidth}{!}{
+\backslash
+input{figs/Arakawa/grid.pdftex_t}}}
+\end_layout
+
+\begin_layout Plain Layout
+
+       {
+\backslash
+resizebox{0.3
+\backslash
+textwidth}{!}{
+\backslash
+input{figs/Arakawa/A.pdf_t}}}}
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\backslash
+ifthenelse{
+\backslash
+boolean{@studentversion}}%
+\end_layout
+
+\begin_layout Plain Layout
+
+    {
+\backslash
+resizebox{0.3
+\backslash
+textwidth}{!}{
+\backslash
+input{figs/Arakawa/grid.pdftex_t}}}
+\end_layout
+
+\begin_layout Plain Layout
+
+    {
+\backslash
+resizebox{0.3
+\backslash
+textwidth}{!}{
+\backslash
+input{figs/Arakawa/A.pdf_t}}}}
+\end_layout
+
+\begin_layout Plain Layout
+
+&
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+ifthenelse{
+\backslash
+boolean{@onlineversion}}%
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\backslash
+switch{
+\backslash
+resizebox{0.3
+\backslash
+textwidth}{!}{
+\backslash
+input{figs/Arakawa/grid.pdftex_t}}}
+\end_layout
+
+\begin_layout Plain Layout
+
+       {
+\backslash
+resizebox{0.3
+\backslash
+textwidth}{!}{
+\backslash
+input{figs/Arakawa/B.pdf_t}}}}
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\backslash
+ifthenelse{
+\backslash
+boolean{@studentversion}}%
+\end_layout
+
+\begin_layout Plain Layout
+
+    {
+\backslash
+resizebox{0.3
+\backslash
+textwidth}{!}{
+\backslash
+input{figs/Arakawa/grid.pdftex_t}}}
+\end_layout
+
+\begin_layout Plain Layout
+
+    {
+\backslash
+resizebox{0.3
+\backslash
+textwidth}{!}{
+\backslash
+input{figs/Arakawa/B.pdf_t}}}}
+\end_layout
+
+\begin_layout Plain Layout
+
+&
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+ifthenelse{
+\backslash
+boolean{@onlineversion}}%
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\backslash
+switch{
+\backslash
+resizebox{0.3
+\backslash
+textwidth}{!}{
+\backslash
+input{figs/Arakawa/grid.pdftex_t}}}
+\end_layout
+
+\begin_layout Plain Layout
+
+       {
+\backslash
+resizebox{0.3
+\backslash
+textwidth}{!}{
+\backslash
+input{figs/Arakawa/C.pdf_t}}}}
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\backslash
+ifthenelse{
+\backslash
+boolean{@studentversion}}%
+\end_layout
+
+\begin_layout Plain Layout
+
+    {
+\backslash
+resizebox{0.3
+\backslash
+textwidth}{!}{
+\backslash
+input{figs/Arakawa/grid.pdftex_t}}}
+\end_layout
+
+\begin_layout Plain Layout
+
+    {
+\backslash
+resizebox{0.3
+\backslash
+textwidth}{!}{
+\backslash
+input{figs/Arakawa/C.pdf_t}}}}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+D-grid & E-grid &  
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+ifthenelse{
+\backslash
+boolean{@onlineversion}}%
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\backslash
+switch{
+\backslash
+resizebox{0.3
+\backslash
+textwidth}{!}{
+\backslash
+input{figs/Arakawa/grid.pdftex_t}}}
+\end_layout
+
+\begin_layout Plain Layout
+
+       {
+\backslash
+resizebox{0.3
+\backslash
+textwidth}{!}{
+\backslash
+input{figs/Arakawa/D.pdf_t}}}}
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\backslash
+ifthenelse{
+\backslash
+boolean{@studentversion}}%
+\end_layout
+
+\begin_layout Plain Layout
+
+    {
+\backslash
+resizebox{0.3
+\backslash
+textwidth}{!}{
+\backslash
+input{figs/Arakawa/grid.pdftex_t}}}
+\end_layout
+
+\begin_layout Plain Layout
+
+    {
+\backslash
+resizebox{0.3
+\backslash
+textwidth}{!}{
+\backslash
+input{figs/Arakawa/D.pdf_t}}}}
+\end_layout
+
+\begin_layout Plain Layout
+
+&
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+ifthenelse{
+\backslash
+boolean{@onlineversion}}%
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\backslash
+switch{
+\backslash
+resizebox{0.3
+\backslash
+textwidth}{!}{
+\backslash
+input{figs/Arakawa/grid.pdftex_t}}}
+\end_layout
+
+\begin_layout Plain Layout
+
+       {
+\backslash
+resizebox{0.3
+\backslash
+textwidth}{!}{
+\backslash
+input{figs/Arakawa/E.pdf_t}}}}
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\backslash
+ifthenelse{
+\backslash
+boolean{@studentversion}}%
+\end_layout
+
+\begin_layout Plain Layout
+
+    {
+\backslash
+resizebox{0.3
+\backslash
+textwidth}{!}{
+\backslash
+input{figs/Arakawa/grid.pdftex_t}}}
+\end_layout
+
+\begin_layout Plain Layout
+
+    {
+\backslash
+resizebox{0.3
+\backslash
+textwidth}{!}{
+\backslash
+input{figs/Arakawa/E.pdf_t}}}}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabular}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Linearised Shallow-Water Equations on Arakawa Grids
+\end_layout
+
+\begin_layout Standard
+The linearised SWE with rotation are:
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial\mathbf{u}}{\partial t} & =-2\Omega\times\mathbf{u}-g\nabla h\\
+\frac{\partial h^{\prime}}{\partial t} & +H\nabla\cdot(\mathbf{u})=0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+The linearised SWE are solved numerically on Arakawa A, B and C grids, starting
+ from initial conditions consisting of zero velocity and zero 
+\begin_inset Formula $h^{\prime}$
+\end_inset
+
+ everywhere except a positive 
+\begin_inset Formula $h^{\prime}$
+\end_inset
+
+ in one central grid-box
+\end_layout
+
+\begin_layout Itemize
+The colours show 
+\begin_inset Formula $h^{\prime}$
+\end_inset
+
+ in the grid boxes.
+ Red positive, blue negative, white zero
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+stepwise{
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tabular}{ccc}
+\end_layout
+
+\begin_layout Plain Layout
+
+A-grid & B-grid & C-grid 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+switch{
+\backslash
+includegraphics[width=0.3
+\backslash
+linewidth]{2dSWE/Agrid1.pdf}}
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\backslash
+movie*{10}{1}{
+\backslash
+includegraphics[width=0.3
+\backslash
+linewidth]{2dSWE/Agrid
+\backslash
+thesubstep.pdf}}}
+\end_layout
+
+\begin_layout Plain Layout
+
+&
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+switch{
+\backslash
+includegraphics[width=0.3
+\backslash
+linewidth]{2dSWE/Bgrid1.pdf}}
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\backslash
+movie*{10}{1}{
+\backslash
+includegraphics[width=0.3
+\backslash
+linewidth]{2dSWE/Bgrid
+\backslash
+thesubstep.pdf}}}
+\end_layout
+
+\begin_layout Plain Layout
+
+&
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+switch{
+\backslash
+includegraphics[width=0.3
+\backslash
+linewidth]{2dSWE/Cgrid1.pdf}}
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\backslash
+movie*{10}{1}{
+\backslash
+includegraphics[width=0.3
+\backslash
+linewidth]{2dSWE/Cgrid
+\backslash
+thesubstep.pdf}}}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabular}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

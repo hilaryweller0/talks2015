@@ -1,0 +1,260 @@
+%% LyX 2.0.6 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[10pt,serif]{beamer}
+\usepackage[latin9]{inputenc}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+\setlength{\parskip}{0bp}
+\setlength{\parindent}{0pt}
+\usepackage{url}
+\usepackage{bm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\ifx\hypersetup\undefined
+  \AtBeginDocument{%
+    \hypersetup{unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 1},backref=section,colorlinks=false}
+  }
+\else
+  \hypersetup{unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 1},backref=section,colorlinks=false}
+\fi
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+%% Because html converters don't know tabularnewline
+\providecommand{\tabularnewline}{\\}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+ % this default might be overridden by plain title style
+ \newcommand\makebeamertitle{\frame{\maketitle}}%
+ \AtBeginDocument{
+   \let\origtableofcontents=\tableofcontents
+   \def\tableofcontents{\@ifnextchar[{\origtableofcontents}{\gobbletableofcontents}}
+   \def\gobbletableofcontents#1{\origtableofcontents}
+ }
+ \long\def\lyxframe#1{\@lyxframe#1\@lyxframestop}%
+ \def\@lyxframe{\@ifnextchar<{\@@lyxframe}{\@@lyxframe<*>}}%
+ \def\@@lyxframe<#1>{\@ifnextchar[{\@@@lyxframe<#1>}{\@@@lyxframe<#1>[]}}
+ \def\@@@lyxframe<#1>[{\@ifnextchar<{\@@@@@lyxframe<#1>[}{\@@@@lyxframe<#1>[<*>][}}
+ \def\@@@@@lyxframe<#1>[#2]{\@ifnextchar[{\@@@@lyxframe<#1>[#2]}{\@@@@lyxframe<#1>[#2][]}}
+ \long\def\@@@@lyxframe<#1>[#2][#3]#4\@lyxframestop#5\lyxframeend{%
+   \frame<#1>[#2][#3]{\frametitle{#4}#5}}
+ \def\lyxframeend{} % In case there is a superfluous frame end
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage{animate}
+
+% hack to get natbib working with beamer
+\renewcommand{\newblock}{}
+
+% list modifications
+\setlength{\leftmargini}{0em}
+\setlength{\leftmarginii}{1em}
+
+% make $\times$, $+$, $-$ and $=$ use less space
+\newcommand{\tims}{\negthinspace \times \negthinspace}
+\newcommand{\eq}{\negthinspace = \negthinspace}
+\newcommand{\plus}{\negthinspace + \negthinspace}
+\newcommand{\minus}{\text{-}}
+\newcommand{\smallcdot}{\negthinspace \cdot \negthinspace}
+
+\newcommand{\nicefrac}[2]{\ensuremath ^{#1}\!\!/\!_{#2}}
+\usepackage { fancybox}
+
+\makeatother
+
+\begin{document}
+
+\lyxframeend{}\lyxframe{R-adaptive mesh generation}
+\begin{itemize}
+\item How to create a mesh which is equidistributed with respect to a monitor
+function. ie
+\[
+A_{i}m_{i}=\text{const}
+\]
+ for each cell $i$ with area $A_{i}$ for mesh monitor function $m_{i}$. 
+\item Define a map from old mesh point, $\bm{\xi}_{i}$, to new mesh points,
+$\bm{x}_{i}$ which is the gradient of a potential
+\[
+\bm{x}=\bm{\xi}+\nabla\phi
+\]
+This leads to an \textbf{``optimally transported mesh''}, free of
+tangling
+\item The Jacobian of the mesh transform is the change in area of the cells:
+\[
+|\nabla\bm{x}|=A_{i}/A_{\xi}
+\]
+
+\item The mesh is found by solving a Monge-Amp\'ere equation for $\phi$:
+\[
+|\nabla\left(\bm{\xi}+\nabla\phi\right)|m\left(x\right)=\text{const}
+\]
+
+\item Numerical solution techniques ...
+\end{itemize}
+
+\lyxframeend{}
+
+
+\lyxframeend{}\lyxframe{Spatial Discretisation on the Sphere}
+\begin{itemize}
+\item Finite Volume Discretisaion on an arbitrary mesh (details in publication
+in prep)
+\item Exponential maps, to map from one point on a sphere to another point
+on a sphere:\textrm{
+\[
+\mathbf{x}=\bm{\xi}+\exp_{\xi}\nabla\phi
+\]
+}
+\item Geometric interpretation of the Hessian, for cell $i$:
+\[
+|I+H_{i}\left(\phi\right)|=\frac{A_{i}}{A_{\xi}}
+\]
+where $A_{i}$ is the area of cell $i$ after the map and $A_{\xi}$
+is the area before the map.
+\end{itemize}
+
+\lyxframeend{}
+
+
+\lyxframeend{}\lyxframe{Iterative Solution}
+
+\[
+|\nabla\left(\bm{\xi}+\nabla\phi\right)|m\left(x\right)=\text{const}
+\]
+
+
+Use a linearisation of the Hessian term:
+\[
+|\nabla\left(\bm{\xi}+\nabla\phi\right)|=|I+H\left(\phi\right)|=1+\nabla^{2}\phi+O\left(\phi^{2}\right)
+\]
+and create fixed-point iterations (Poincar\'e iterations):
+\[
+1+\nabla^{2}\phi^{\left(n+1\right)}=1+\nabla^{2}\phi^{\left(n\right)}-|I+H\left(\phi^{\left(n\right)}\right)|+\frac{\text{const}^{\left(n\right)}}{m\left(x^{\left(n\right)}\right)}
+\]
+which can be easily solved to find $\phi^{\left(n+1\right)}$. This
+works well if the non-linear terms are small. To maintain stability
+for large non-linear terms, solve:
+\[
+\alpha\nabla^{2}\phi^{\left(n+1\right)}=\alpha\nabla^{2}\phi^{\left(n\right)}-|I+H\left(\phi^{\left(n\right)}\right)|+\frac{\text{const}^{\left(n\right)}}{m\left(x^{\left(n\right)}\right)}
+\]
+where $\alpha>1$. (Ie increase the size of the linear term that can
+be solved implicitly.
+
+
+\lyxframeend{}
+
+
+\lyxframeend{}\lyxframe{An Optimally Transported Mesh}
+
+Given the monitor function on the sphere: (latitude-longitude, cylindrical
+projection)
+
+\includegraphics[width=1\textwidth]{graphics/monitor}
+
+
+\lyxframeend{}
+
+
+\lyxframeend{}\lyxframe{An Optimally Transported Mesh}
+
+The optimally transported mesh is calculated iteratively:
+
+\animategraphics[width=\linewidth,controls,every=2,poster=first]{3}{graphics/meshMovie/mesh}{0}{100}
+
+This is a linear algorithm - cost proportional to number of points.
+
+
+\lyxframeend{}
+
+
+\lyxframeend{}\lyxframe{}
+
+\begin{minipage}[c]{0.2\columnwidth}%
+\textbf{Discrete Hessian}%
+\end{minipage}%
+\begin{minipage}[c]{0.78\columnwidth}%
+\includegraphics[width=1\linewidth]{graphics/discreteHessianMesh}%
+\end{minipage}
+
+\begin{minipage}[c]{0.2\columnwidth}%
+\textbf{Geometric Hessian}%
+\end{minipage}%
+\begin{minipage}[c]{0.78\columnwidth}%
+\includegraphics[width=1\linewidth]{graphics/geometricHessianMesh}%
+\end{minipage}
+
+
+\lyxframeend{}
+
+
+\lyxframeend{}\lyxframe{Convergence to the Monitor Function}
+
+Plots of cell area versus distance to the centre of the refined region 
+
+\begin{tabular}{cc}
+\textbf{Discrete Hessian} & \textbf{Geometric Hessian}\tabularnewline
+\includegraphics[width=0.49\linewidth]{graphics/discreteHessianArea} & \includegraphics[width=0.49\linewidth]{graphics/geometricHessianArea}\tabularnewline
+\end{tabular}
+
+
+\lyxframeend{}
+
+
+\lyxframeend{}\lyxframe{Mesh Spacing}
+
+Plots of cell centre to cell centre distance versus distance to the
+centre of the refined region 
+
+\begin{tabular}{cc}
+\textbf{Discrete Hessian} & \textbf{Geometric Hessian}\tabularnewline
+\includegraphics[width=0.49\linewidth]{graphics/discreteHessianDx} & \includegraphics[width=0.49\linewidth]{graphics/geometricHessianDx}\tabularnewline
+\end{tabular}
+
+
+\lyxframeend{}
+
+
+\lyxframeend{}\lyxframe{Precipitation as a Monitor Function}
+
+\inputencoding{latin1}\vspace{-10pt}
+
+
+%
+\inputencoding{latin9}{\footnotesize{
+\[
+m=\frac{p+p_{\min}}{p_{\max}+p_{min}}\ \text{where}\ p_{\min}=10^{-5}\text{kg}\text{m}^{-2}\text{s}^{-1},\ p_{\max}=8.73\times10^{-4}\text{kg}\text{m}^{-2}\text{s}^{-1}
+\]
+}}{\footnotesize \par}
+
+\animategraphics[width=\linewidth,controls,poster=first]{100}{graphics/pptMonitorMovie/pptMonitor}{0}{11}
+
+%
+{\small{Using daily average precipitation rate, 1-12 Oct 2012, from
+the NOAA-CIRES 20th Century Reanalysis version 2 (Compo et al, 2011,
+\url{http://www.esrl.noaa.gov/psd/data/gridded/data.20thC_ReanV2.html})\vfill{}
+}}{\small \par}
+
+%
+
+\lyxframeend{}
+
+
+\lyxframeend{}\lyxframe{Conclusions}
+\begin{itemize}
+\item Exponential maps used to create optimally transported meshes on the
+sphere
+\item New linearisation of the Hessian to create a semi-implicit algorithm
+\item Geometric version of the Hessian gives accurately equidistribued meshes
+\item Discrete version of the Hessian gives some extra large and some extra
+small cells
+\item Geometric Hessian gives less anisotropy
+\end{itemize}
+
+\lyxframeend{}
+\end{document}

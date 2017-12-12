@@ -1,0 +1,2579 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass report
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package none
+\inputencoding auto
+\fontencoding default
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 0
+\use_mathdots 0
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip smallskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+Fourier Analysis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+liststepwise{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Fourier analysis and Fourier series are used for:
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Analysing data (eg climate data)
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Numerical methods
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Numerical analysis of methods
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Fourier Series
+\end_layout
+
+\begin_layout Standard
+Any periodic, integrable function, 
+\begin_inset Formula $f(x)$
+\end_inset
+
+ (defined on 
+\begin_inset Formula $[-\pi,\pi]$
+\end_inset
+
+), can be expressed as a Fourier series; an infinite sum of sines and cosines:
+ 
+\begin_inset Formula 
+\begin{equation}
+f(x)=\frac{a_{0}}{2}+\sum_{k=1}^{\infty}a_{k}\cos kx+\sum_{k=1}^{\infty}b_{k}\sin kx\label{eqn:FourierSinCos}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "60col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+The first three Fourier modes of a noisy function.
+\begin_inset Newline newline
+\end_inset
+
+ 
+\begin_inset Graphics
+	filename ../../../../teaching/MTMW12/2014/notes/figs/smoothFunc.png
+	lyxscale 50
+	width 80line%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "38col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Itemize
+The 
+\begin_inset Formula $a_{k}$
+\end_inset
+
+ and 
+\begin_inset Formula $b_{k}$
+\end_inset
+
+ are the Fourier coefficients and the sines and cosines are the Fourier
+ modes.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+The more Fourier modes that included, the closer their sum will get to the
+ original function.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Frameless
+position "c"
+hor_pos "c"
+has_inner_box 1
+inner_pos "c"
+use_parbox 0
+use_makebox 0
+width "50col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align left
+The first four Fourier modes of a square wave.
+ The additional oscillations are 
+\begin_inset Quotes eld
+\end_inset
+
+
+\shape italic
+spectral ringing
+\shape default
+
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "c"
+hor_pos "c"
+has_inner_box 1
+inner_pos "c"
+use_parbox 0
+use_makebox 0
+width "45line%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../../../../teaching/MTMW12/2014/notes/figs/squareWave-Fourier_Series.png
+	lyxscale 50
+	width 100line%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Equivalently, equation (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eqn:FourierSinCos"
+
+\end_inset
+
+) can be expressed as an infinite sum of exponentials: 
+\begin_inset Formula 
+\begin{equation}
+f(x)=\frac{a_{0}}{2}+\sum_{k=1}^{\infty}a_{k}\cos kx+\sum_{k=1}^{\infty}b_{k}\sin kx=\sum_{k=-\infty}^{\infty}A_{k}e^{ikx}.\label{eqn:FourierExp}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Exercise
+\end_layout
+
+\begin_layout Standard
+Evaluate the 
+\begin_inset Formula $A_{k}$
+\end_inset
+
+s in terms of the 
+\begin_inset Formula $a_{k}$
+\end_inset
+
+s and 
+\begin_inset Formula $b_{k}$
+\end_inset
+
+s.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+optparagraph{
+\end_layout
+
+\end_inset
+
+For 
+\begin_inset Formula $k=0$
+\end_inset
+
+, 
+\begin_inset Formula $A_{0}=a_{0}/2$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+For 
+\begin_inset Formula $k\ne0$
+\end_inset
+
+, substitute 
+\begin_inset Formula $e^{ikx}=\cos kx+i\sin kx$
+\end_inset
+
+ into eqn (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eqn:FourierExp"
+
+\end_inset
+
+) and consider one value of 
+\begin_inset Formula $k$
+\end_inset
+
+:
+\begin_inset Newline newline
+\end_inset
+
+ 
+\begin_inset Formula $a_{k}\cos kx+b_{k}\sin kx=A_{k}\left(\cos kx+i\sin kx\right)+A_{-k}\left(\cos kx-i\sin kx\right)$
+\end_inset
+
+.
+\begin_inset Newline newline
+\end_inset
+
+Assume 
+\begin_inset Formula $A_{k}=c+id$
+\end_inset
+
+ and 
+\begin_inset Formula $A_{-k}=e+if$
+\end_inset
+
+ where 
+\begin_inset Formula $c,d,e,f\in\mathbb{R}$
+\end_inset
+
+.
+ Substituting in gives
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula 
+\begin{eqnarray*}
+a_{k}\cos kx+b_{k}\sin kx & = & \left(c+id\right)\left(\cos kx+i\sin kx\right)+\left(e+if\right)\left(\cos kx-i\sin kx\right)\\
+ & = & \left(c+e\right)\cos kx+\left(f-d\right)\sin kx+i\left(\left(d+f\right)\cos kx+\left(c-e\right)\sin kx\right)
+\end{eqnarray*}
+
+\end_inset
+
+Equating coefficients of 
+\begin_inset Formula $\cos kx\ $
+\end_inset
+
+, 
+\begin_inset Formula $\sin kx\ $
+\end_inset
+
+, 
+\begin_inset Formula $i\cos kx\ $
+\end_inset
+
+ and 
+\begin_inset Formula $i\sin kx\ $
+\end_inset
+
+ gives
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $a_{k}=c+e\ $
+\end_inset
+
+, 
+\begin_inset Formula $b_{k}=f-d\ $
+\end_inset
+
+, 
+\begin_inset Formula $0=d+f\ $
+\end_inset
+
+, 
+\begin_inset Formula $0=c-e$
+\end_inset
+
+ 
+\begin_inset Formula $\implies d=-f,\ c=e,\ a_{k}=2c$
+\end_inset
+
+, 
+\begin_inset Formula $b_{k}=-2d$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $\implies A_{k}=\half\left(a_{k}-ib_{k}\right)\ $
+\end_inset
+
+, 
+\begin_inset Formula $A_{-k}=\half\left(a_{k}+ib_{k}\right)$
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+\begin_inset Newpage clearpage
+\end_inset
+
+Some Animations from Wikipedia
+\end_layout
+
+\begin_layout Standard
+First 5 Fourier modes of a saw tooth wave
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+mediaMovie[autostart,loop]
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\backslash
+includegraphics[width=
+\backslash
+linewidth]{../../../../teaching/MTMW12/2014/notes/anims/Fourier/Periodic_identity_functi
+on/anim4.pdf}}
+\end_layout
+
+\begin_layout Plain Layout
+
+{animations/teaching_MTMW12_2014_notes_anims_Fourier_Periodic_identity_function.m
+p4}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "47col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+First 4 Fourier modes of the square waves
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+mediaMovie[autostart,loop]{
+\backslash
+includegraphics[width=
+\backslash
+linewidth]{../../../../teaching/MTMW12/2014/notes/anims/Fourier/Fourier_series_square_wa
+ve_circles_animation/anim59.pdf}}
+\end_layout
+
+\begin_layout Plain Layout
+
+{animations/teaching_MTMW12_2014_notes_anims_Fourier_Fourier_series_square_wave_
+circles_animation.mp4}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "47col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+First 4 Fourier modes of a saw tooth wave
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+mediaMovie[autostart,loop]{
+\backslash
+includegraphics[width=
+\backslash
+linewidth]{../../../../teaching/MTMW12/2014/notes/anims/Fourier/Fourier_series_sawtooth_
+wave_circles_animation/anim59.pdf}}
+\end_layout
+
+\begin_layout Plain Layout
+
+{animations/teaching_MTMW12_2014_notes_anims_Fourier_Fourier_series_sawtooth_wav
+e_circles_animation.mp4}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Fourier Transform
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+stepwise*{
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+The Fourier Transform transforms a function 
+\begin_inset Formula $f$
+\end_inset
+
+ which is defined over space (or time) into the frequency domain, so that
+ it is defined in terms of Fourier coefficients.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+ The Fourier transform calculates the Fourier coefficients as: 
+\begin_inset Formula 
+\[
+a_{k}=\frac{1}{\pi}\int_{-\pi}^{\pi}f(x)\cos(kx)dx~,~~b_{k}=\frac{1}{\pi}\int_{-\pi}^{\pi}f(x)\sin(kx)dx
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Discrete Fourier Transform
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+A discrete Fourier Transform converts a list of 
+\begin_inset Formula $2N+1$
+\end_inset
+
+ equally spaced samples of a real valued, periodic function, 
+\begin_inset Formula $f_{n}$
+\end_inset
+
+, to the list of the first 
+\begin_inset Formula $N+1$
+\end_inset
+
+ complex valued Fourier coefficients:
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+A_{k}=\frac{1}{N}\sum_{n=-N}^{N}f_{n}\ e^{-i\pi knx/N}.
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+The truncated Fourier series:
+\begin_inset Formula 
+\[
+f\left(x\right)\approx\sum_{k=-N}^{N}A_{k}e^{ikx}
+\]
+
+\end_inset
+
+is an approximation to the function 
+\begin_inset Formula $f$
+\end_inset
+
+ which fits the sampled points, 
+\begin_inset Formula $f_{n}$
+\end_inset
+
+, exactly.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+On a computer this is done with a 
+\series bold
+Fast Fourier Transform
+\series default
+ (or 
+\family typewriter
+fft
+\family default
+).
+ The inverse Fourier transform (sometimes called 
+\family typewriter
+ifft
+\family default
+) transforms the Fourier coefficients back to the 
+\begin_inset Formula $f$
+\end_inset
+
+ values (transforming from spectral back to real space):
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $f_{0},f_{1},f_{2},\cdots f_{2N}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\xrightarrow{\text{{\tt fft}}}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $A_{0},A_{1},\cdots A_{N}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $A_{0},A_{1},\cdots A_{N}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\xrightarrow{\text{{\tt ifft}}}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $f_{0},f_{1},f_{2},\cdots f_{2N}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Differentiation and Interpolation
+\end_layout
+
+\begin_layout Standard
+If we know the Fourier coefficients, 
+\begin_inset Formula $A_{k}$
+\end_inset
+
+, of a function 
+\begin_inset Formula $f$
+\end_inset
+
+ then we can calculate the gradient of 
+\begin_inset Formula $f$
+\end_inset
+
+ at any point, 
+\begin_inset Formula $x$
+\end_inset
+
+: If 
+\begin_inset Formula 
+\begin{equation}
+f(x)=\sum_{k=0}^{\infty}a_{k}\cos kx+\sum_{k=0}^{\infty}b_{k}\sin kx=\sum_{k=-\infty}^{\infty}A_{k}e^{ikx}
+\end{equation}
+
+\end_inset
+
+then
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+stepwise{
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{equation}
+f^{\prime}(x)=\opttext{\sum_{k=0}^{\infty}-ka_{k}\sin kx+\sum_{k=0}^{\infty}kb_{k}\cos kx=\sum_{k=-\infty}^{\infty}i~k~A_{k}e^{ikx}.}\label{eqn:FourierGrad}
+\end{equation}
+
+\end_inset
+
+and the second derivative: 
+\begin_inset Formula 
+\begin{equation}
+f^{\prime\prime}(x)=\opttext{\sum_{k=0}^{\infty}-k^{2}a_{k}\cos kx-\sum_{k=0}^{\infty}k^{2}b_{k}\sin kx=\sum_{k=-\infty}^{\infty}-k^{2}~A_{k}e^{ikx}.}\label{eqn:FourierGrad2}
+\end{equation}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+These have spectral accuracy; the order of accuracy is as high as the number
+ of points.
+ Similarly equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eqn:FourierSinCos"
+
+\end_inset
+
+ or 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eqn:FourierExp"
+
+\end_inset
+
+ can be used directly to interpolate 
+\begin_inset Formula $f$
+\end_inset
+
+ onto an undefined point, 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ Again, the order of accuracy is spectral.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Spectral Models
+\end_layout
+
+\begin_layout Itemize
+ECMWF use a spectral model.
+ 
+\end_layout
+
+\begin_layout Itemize
+The prognostic variables are transformed between physical and spectral space
+ using 
+\family typewriter
+fft
+\family default
+s and 
+\family typewriter
+ifft
+\family default
+s.
+ 
+\end_layout
+
+\begin_layout Itemize
+Gradients are calculated very accurately in spectral space
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Wave Power and Frequency
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Frameless
+position "c"
+hor_pos "c"
+has_inner_box 1
+inner_pos "c"
+use_parbox 0
+use_makebox 0
+width "55line%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+setlength{
+\backslash
+parskip}{6pt}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+setlength{
+\backslash
+parindent}{0pt}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $\sin kx$
+\end_inset
+
+ and 
+\begin_inset Formula $\cos kx$
+\end_inset
+
+ are waves:
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+setlength{
+\backslash
+tabcolsep}{4pt}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="3">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="left" valignment="top" width="0">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+wavenumber 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $k$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Number of complete waves 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+(or frequency) 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+that will fit into the interval 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $[-\pi,\pi]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+wavelength 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\lambda=\frac{2\pi}{k}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Box Frameless
+position "c"
+hor_pos "c"
+has_inner_box 1
+inner_pos "c"
+use_parbox 0
+use_makebox 0
+width "43line%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+ 
+\begin_inset Graphics
+	filename ../../../../teaching/MTMW12/2014/notes/figs/sineWaves.png
+	lyxscale 50
+	width 100line%
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+If a function, 
+\begin_inset Formula $f$
+\end_inset
+
+, has Fourier coefficients, 
+\begin_inset Formula $a_{k}$
+\end_inset
+
+ and 
+\begin_inset Formula $b_{k}$
+\end_inset
+
+, then wavenumber 
+\begin_inset Formula $k$
+\end_inset
+
+ has power 
+\begin_inset Formula $a_{k}^{2}+b_{k}^{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+A plot of wave frequency versus power is referred to as the power spectrum.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Recap Questions
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+stepwise{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+In the Fourier decomposition
+\begin_inset Formula 
+\[
+f(x)=\frac{a_{0}}{2}+\sum_{k=1}^{\infty}a_{k}\cos kx+\sum_{k=1}^{\infty}b_{k}\sin kx
+\]
+
+\end_inset
+
+what are:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+the Fourier coefficients 
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+opttext{(the $a_k$ and the $b_k$)}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+the Fourier modes 
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+opttext{(the sines and cosines)}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+the wavenumbers (or frequencies) 
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+opttext{(the $k$s)}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+the power of wavenumber 
+\begin_inset Formula $k$
+\end_inset
+
+ 
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+opttext{($a_k^2+b_k^2$)}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+How would you describe the operation:
+\begin_inset Formula 
+\[
+a_{k}=\frac{1}{\pi}\int_{-\pi}^{\pi}f(x)\cos(kx)dx~,~~b_{k}=\frac{1}{\pi}\int_{-\pi}^{\pi}f(x)\sin(kx)dx
+\]
+
+\end_inset
+
+
+\begin_inset Phantom Phantom
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+opttext{(a Fourier transform)}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Given a list of 
+\begin_inset Formula $2N+1$
+\end_inset
+
+ equally spaced samples of a real valued, periodic function, 
+\begin_inset Formula $f_{n}$
+\end_inset
+
+, how would you describe the following operation to convert this into a
+ a list of 
+\begin_inset Formula $N+1$
+\end_inset
+
+ values:
+\begin_inset Formula 
+\[
+A_{k}=\frac{1}{N}\sum_{n=-N}^{N}f_{n}\ e^{-i\pi knx/N}
+\]
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+opttext{(a discrete Fourier transform)}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+What is the wavelength of a wave described by 
+\begin_inset Formula $\sin4x$
+\end_inset
+
+ 
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+opttext{($2
+\backslash
+pi/4$)}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Analysing Power Spectra
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+liststepwise{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Frameless
+position "c"
+hor_pos "c"
+has_inner_box 1
+inner_pos "c"
+use_parbox 0
+use_makebox 0
+width "70line%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\align center
+
+\series bold
+Daily rainfall at a station in the Middle East for 21 years
+\begin_inset Newline newline
+\end_inset
+
+ 
+\begin_inset Graphics
+	filename ../../../../teaching/MTMW12/2014/notes/figs/rainSmoothed.pdf
+	width 100line%
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "c"
+hor_pos "c"
+has_inner_box 1
+inner_pos "c"
+use_parbox 0
+use_makebox 0
+width "29line%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\align left
+
+\series bold
+Truncated Fourier filtered rainfall: 
+\end_layout
+
+\begin_layout Itemize
+\align left
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+opttext{
+\end_layout
+
+\end_inset
+
+very smooth (only low wavenumbers included)
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+opttext{
+\end_layout
+
+\end_inset
+
+includes negative values -- 
+\shape italic
+
+\begin_inset Quotes eld
+\end_inset
+
+spectral ringing
+\begin_inset Quotes erd
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Box Frameless
+position "c"
+hor_pos "c"
+has_inner_box 1
+inner_pos "c"
+use_parbox 0
+use_makebox 0
+width "60line%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\align center
+
+\series bold
+Power Spectrum of Middle East Rainfall 
+\begin_inset Graphics
+	filename ../../../../teaching/MTMW12/2014/notes/figs/rainPower.pdf
+	width 100line%
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "c"
+hor_pos "c"
+has_inner_box 1
+inner_pos "c"
+use_parbox 0
+use_makebox 0
+width "38line%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+Observations
+\end_layout
+
+\begin_layout Itemize
+\align left
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+opttext{
+\end_layout
+
+\end_inset
+
+dominant frequency at one year (annual cycle)
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\align left
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+opttext{
+\end_layout
+
+\end_inset
+
+power at high frequencies (ie daily variability)
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+number per year = wavenumber
+\begin_inset Formula $\times$
+\end_inset
+
+365/total number of days
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Time Series of the Nino 3 sea surface temperature (SST)
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+liststepwise{
+\end_layout
+
+\end_inset
+
+The SST in the Nino 3 region of the equatorial Pacific is a diagnostic of
+ El Nino
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Frameless
+position "c"
+hor_pos "c"
+has_inner_box 1
+inner_pos "c"
+use_parbox 0
+use_makebox 0
+width "70line%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+ 
+\begin_inset Graphics
+	filename ../../../../teaching/MTMW12/2014/notes/figs/n3FourierModes.pdf
+	width 100line%
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "c"
+hor_pos "c"
+has_inner_box 1
+inner_pos "c"
+use_parbox 0
+use_makebox 0
+width "29line%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Itemize
+\align left
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+opttext{
+\end_layout
+
+\end_inset
+
+Annual cycle is the Fourier mode at 1 year 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\align left
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+opttext{
+\end_layout
+
+\end_inset
+
+The 
+\begin_inset Quotes eld
+\end_inset
+
+two years and slower
+\begin_inset Quotes erd
+\end_inset
+
+ filtered data is the sum of all the Fourier modes of these frequencies.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Frameless
+position "c"
+hor_pos "c"
+has_inner_box 1
+inner_pos "c"
+use_parbox 0
+use_makebox 0
+width "50line%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\align center
+
+\series bold
+Power Spectrum of Nino 3 SST
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Graphics
+	filename ../../../../teaching/MTMW12/2014/notes/figs/n3Power.pdf
+	width 100line%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "c"
+hor_pos "c"
+has_inner_box 1
+inner_pos "c"
+use_parbox 0
+use_makebox 0
+width "48line%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Itemize
+\align left
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+opttext{
+\end_layout
+
+\end_inset
+
+Dominant frequency at 1 year (annual cycle)
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\align left
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+opttext{
+\end_layout
+
+\end_inset
+
+Less power at high frequencies (SST varies slowly)
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\align left
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+opttext{
+\end_layout
+
+\end_inset
+
+Power at 1-10 years (El Nino every 3-7 years)
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Time Series of the Quasi-Biennial Oscillation (QBO)
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+liststepwise{
+\end_layout
+
+\end_inset
+
+The QBO is an oscillation of the equatorial zonal wind between easterlies
+ and westerlies in the tropical stratosphere which has a mean period of
+ 28 to 29 months:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename /home/hilary/latex/teaching/MTMW12/2011Notes/practicals/3_Fourier/moreData/qbo.pdf
+	width 100line%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Frameless
+position "c"
+hor_pos "c"
+has_inner_box 1
+inner_pos "c"
+use_parbox 0
+use_makebox 0
+width "65line%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\align center
+
+\series bold
+Power Spectrum of QBO
+\begin_inset Newline newline
+\end_inset
+
+
+\series default
+
+\begin_inset Graphics
+	filename /home/hilary/latex/teaching/MTMW12/2011Notes/practicals/3_Fourier/moreData/qboPower.pdf
+	width 100line%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "c"
+hor_pos "c"
+has_inner_box 1
+inner_pos "c"
+use_parbox 0
+use_makebox 0
+width "33line%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Itemize
+\align left
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+opttext{
+\end_layout
+
+\end_inset
+
+Dominant frequency at close to 2 years
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\align left
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+opttext{
+\end_layout
+
+\end_inset
+
+Less power at high frequencies
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\align left
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+opttext{
+\end_layout
+
+\end_inset
+
+Less power at long time-scales
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+Knowledge of Fourier analysis is necessary for analysing stability of numerical
+ methods ...
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

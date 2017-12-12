@@ -1,0 +1,2952 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass report
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package none
+\inputencoding auto
+\fontencoding default
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 0
+\use_mathdots 0
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip smallskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+Numerical Analysis of Advection Schemes 
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:advectionAnalysis"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Domain of Dependence
+\end_layout
+
+\begin_layout Standard
+If I stand outside on a windy day, what does the temperature depend on?
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+stepwise{
+\backslash
+opttext{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Solar radiation
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+opttext{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Wind direction - why?
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+opttext{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Temperature upwind
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+opttext{
+\end_layout
+
+\end_inset
+
+Altitude
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+The domain of dependence of the solution of a PDE at position 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+ and at time 
+\begin_inset Formula $t$
+\end_inset
+
+ is the set of points at a previous time that influence the solution at
+ position 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+ and at time 
+\begin_inset Formula $t$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+If the wind is blowing from the west at 10
+\begin_inset space ~
+\end_inset
+
+miles/hour, the following points are in the domain of dependence of Cambridge
+ at 10am:
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+10 miles to the west at 9am
+\end_layout
+
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+15 miles to the west at ...
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+opttext{8:30am}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+opttext{
+\end_layout
+
+\end_inset
+
+20 miles to the west at 8am
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+stepwise{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Remember the analytic solution of the 1D linear advection equation:
+\begin_inset Formula 
+\[
+\phi(x,t)=\opttext{\phi(x-ut,0)}
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+Draw the domain of dependence of 
+\begin_inset Formula $x=12$
+\end_inset
+
+m, 
+\begin_inset Formula $t=8$
+\end_inset
+
+s on the graph, assuming a wind-speed of 
+\begin_inset Formula $1.5$
+\end_inset
+
+m/s:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ifthenelse{
+\backslash
+boolean{@studentversion}
+\backslash
+and
+\backslash
+not
+\backslash
+boolean{@onlineversion}}
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+    
+\backslash
+resizebox{0.8
+\backslash
+textwidth}{!}{
+\backslash
+input{figs/dod1.pdf_t}}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+stepwise*{
+\backslash
+overlays{2}{
+\backslash
+resizebox{0.8
+\backslash
+textwidth}{!}{
+\backslash
+input{figs/dod
+\backslash
+thesubstep.pdf_t}}}}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Courant-Friedrichs-Lewy (CFL) criterion:
+\end_layout
+
+\begin_layout Standard
+The domain of dependence of the numerical solution should include the domain
+ of dependence of the original PDE.
+\end_layout
+
+\begin_layout Itemize
+The CFL criterion is necessary but not sufficient
+\end_layout
+
+\begin_layout Itemize
+For linear advection, the domain of dependence of the differential equation
+ at 
+\begin_inset Formula $(j\Delta x,n\Delta t)$
+\end_inset
+
+ is the straight line of slope 
+\begin_inset Formula $1/u$
+\end_inset
+
+ through 
+\begin_inset Formula $(j\Delta x,n\Delta t)$
+\end_inset
+
+ for 
+\begin_inset Formula $t\le n\Delta t$
+\end_inset
+
+ in the 
+\begin_inset Formula $(x,t)$
+\end_inset
+
+ plane.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Domain of Dependence of FTBS
+\end_layout
+
+\begin_layout Standard
+
+\series medium
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+stepwise{
+\end_layout
+
+\end_inset
+
+
+\series default
+
+\begin_inset Formula $\text{FTBS:}~~~~~~~~\phi_{j}^{(n+1)}=\opttext{\phi_{j}^{(n)}-c(\phi_{j}^{(n)}-\phi_{j-1}^{(n)})}$
+\end_inset
+
+
+\series medium
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph*
+
+\series medium
+\begin_inset Formula $\phi_{j}^{(n)}$
+\end_inset
+
+ depends on 
+\begin_inset Formula $\phi_{j}^{(n-1)}$
+\end_inset
+
+ and 
+\begin_inset Formula $\phi_{j-1}^{(n-1)}$
+\end_inset
+
+.
+ In turn, these depend on 
+\begin_inset Formula $\phi_{j}^{(n-2)}$
+\end_inset
+
+, 
+\begin_inset Formula $\phi_{j-1}^{(n-2)}$
+\end_inset
+
+ and 
+\begin_inset Formula $\phi_{j-2}^{(n-2)}$
+\end_inset
+
+.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+stepwise*{
+\end_layout
+
+\end_inset
+
+
+\series bold
+Exercise: 
+\series default
+Mark the dots that make up the domain of dependence of 
+\begin_inset Formula $\phi_{j}^{(n+1)}$
+\end_inset
+
+ for FTBS.
+ Draw lines corresponding to the real (physical) domain of dependence for
+ cases when 
+\begin_inset Formula $c=-1,0,1,2$
+\end_inset
+
+.
+ What can you deduce?
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ifthenelse{
+\backslash
+boolean{@studentversion}
+\backslash
+and
+\backslash
+not
+\backslash
+boolean{@onlineversion}}
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+    
+\backslash
+resizebox{0.6
+\backslash
+textwidth}{!}
+\end_layout
+
+\begin_layout Plain Layout
+
+    {
+\backslash
+includegraphics[width=
+\backslash
+linewidth]
+\end_layout
+
+\begin_layout Plain Layout
+
+    {figs/domainDependenceFTBS1.pdf}}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+    
+\backslash
+overlays{2}{
+\backslash
+resizebox{0.6
+\backslash
+textwidth}{!}
+\end_layout
+
+\begin_layout Plain Layout
+
+    {
+\backslash
+includegraphics[width=
+\backslash
+linewidth]
+\end_layout
+
+\begin_layout Plain Layout
+
+    {figs/domainDependenceFTBS
+\backslash
+thesubstep.pdf}}}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+opttext{
+\end_layout
+
+\end_inset
+
+The numerical domain of dependence contains the physical domain of dependence
+ when 
+\begin_inset Formula $0\le c\le1$
+\end_inset
+
+ so FTBS is unstable for 
+\begin_inset Formula $c>1$
+\end_inset
+
+ and 
+\begin_inset Formula $c<0$
+\end_inset
+
+.
+ But we cannot say if FTBS is ever stable.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+The Domain of Dependence of the CTCS Scheme
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+stepwise{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph*
+\begin_inset Formula 
+\[
+\text{CTCS:}~~~~~~~~~~~~\phi_{j}^{(n+1)}=\opttext{\phi_{j}^{(n-1)}-c(\phi_{j+1}^{(n)}-\phi_{j-1}^{(n)})}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Draw the domain of dependence of 
+\begin_inset Formula $\phi_{j}^{(n+1)}$
+\end_inset
+
+ for CTCS.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ifthenelse{
+\backslash
+boolean{@studentversion}
+\backslash
+and
+\backslash
+not
+\backslash
+boolean{@onlineversion}}
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+    
+\backslash
+resizebox{0.6
+\backslash
+textwidth}{!}
+\end_layout
+
+\begin_layout Plain Layout
+
+    {
+\backslash
+includegraphics[width=
+\backslash
+linewidth]
+\end_layout
+
+\begin_layout Plain Layout
+
+    {figs/domainDependenceCTCS1.pdf}}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+    
+\backslash
+overlays{2}{
+\backslash
+resizebox{0.6
+\backslash
+textwidth}{!}
+\end_layout
+
+\begin_layout Plain Layout
+
+    {
+\backslash
+includegraphics[width=
+\backslash
+linewidth]
+\end_layout
+
+\begin_layout Plain Layout
+
+    {figs/domainDependenceCTCS
+\backslash
+thesubstep.pdf}}}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+For what values of 
+\begin_inset Formula $c$
+\end_inset
+
+ will CTCS be unstable? 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+opttext{$c<-1$ and $c>1$}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+Except at the initial time, the solution is found on two sets of points
+ that are not coupled.
+ The solution can oscillate between two unrelated solutions.
+ This is a manifestation of the computational mode of CTCS.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Von-Neumann Stability Analysis for Wave Equations
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+liststepwise{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+The solution of a PDE in one spatial dimension can be expressed as a sum
+ of Fourier modes:
+\begin_inset Formula 
+\begin{equation}
+\phi=\sum_{k=-\infty}^{\infty}A_{k}e^{ikx}
+\end{equation}
+
+\end_inset
+
+each with wavenumber 
+\begin_inset Formula $k$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+Consider the stability of a solution for individual wavenumbers
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+For a uniform grid, 
+\begin_inset Formula $x=j\Delta x$
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+Substitute 
+\begin_inset Formula $\phi_{j}^{(n)}=A^{n}e^{ikj\Delta x}$
+\end_inset
+
+ into the equation for a linear numerical scheme.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+Rearrange to give an equation for the amplification factor, 
+\begin_inset Formula $A(k,\Delta x,\Delta t)$
+\end_inset
+
+, which tells us the following about the scheme:
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+liststepwise{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\arraystretch}{1.1}
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="3">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="0">
+<column alignment="left" valignment="top" width="0">
+<column alignment="left" valignment="top" width="0">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $|A|<1$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\forall\ k,\ \Delta x$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+opttext{
+\end_layout
+
+\end_inset
+
+stable and damping
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $|A|=1$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\forall\ k,\ \Delta x$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+opttext{
+\end_layout
+
+\end_inset
+
+neutrally stable
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $|A|>1$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+for any 
+\begin_inset Formula $k,\ \Delta x$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+opttext{
+\end_layout
+
+\end_inset
+
+unstable (amplifying)
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Where 
+\begin_inset Formula $|A|^{2}=AA^{*}$
+\end_inset
+
+ (
+\begin_inset Formula $A$
+\end_inset
+
+ multiplied by its complex conjugate).
+\end_layout
+
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+For linear advection 
+\begin_inset Formula $A$
+\end_inset
+
+ should be complex since the solution changes location every time-step
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Von-Neumann Stability Analysis of FTBS
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+stepwise{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+FTBS for linear advection is: 
+\begin_inset Formula 
+\begin{equation}
+\phi_{j}^{(n+1)}=\phi_{j}^{(n)}-c\bigl(\phi_{j}^{(n)}-\phi_{j-1}^{(n)}\bigr)
+\end{equation}
+
+\end_inset
+
+Substitute in 
+\begin_inset Formula $\phi_{j}^{(n)}=A^{n}e^{ikj\Delta x}$
+\end_inset
+
+ :
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\opttext{A^{n+1}e^{ikj\Delta x}=A^{n}e^{ikj\Delta x}-cA^{n}(e^{ikj\Delta x}-e^{ik(j-1)\Delta x})}
+\end{equation}
+
+\end_inset
+
+Cancel powers of 
+\begin_inset Formula $A^{n}e^{ikj\Delta x}$
+\end_inset
+
+ and rearrange to find 
+\begin_inset Formula $A$
+\end_inset
+
+ in terms of 
+\begin_inset Formula $c$
+\end_inset
+
+ and 
+\begin_inset Formula $k\Delta x$
+\end_inset
+
+: 
+\begin_inset Formula 
+\begin{equation}
+\opttext{A=1-c(1-e^{-ik\Delta x})}
+\end{equation}
+
+\end_inset
+
+We need to find the magnitude of 
+\begin_inset Formula $A$
+\end_inset
+
+ so we need to write it down in real and imaginary form.
+ So substitute 
+\begin_inset Formula $e^{-ik\Delta x}=\cos k\Delta x-i\sin k\Delta x$
+\end_inset
+
+: 
+\begin_inset Formula 
+\begin{equation}
+\opttext{A=1-c(1-\cos k\Delta x)-ic\sin k\Delta x}
+\end{equation}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+and calculate 
+\begin_inset Formula $|A|^{2}=AA^{*}$
+\end_inset
+
+ (
+\begin_inset Formula $A$
+\end_inset
+
+ multiplied by its complex conjugate):
+\begin_inset Formula 
+\begin{align*}
+|A|^{2} & =1-2c(1-\cos k\Delta x)+c^{2}(1-2\cos k\Delta x+\cos^{2}k\Delta x)+c^{2}\sin^{2}k\Delta x\\
+\implies|A|^{2} & =1-2c(1-c)(1-\cos k\Delta x)
+\end{align*}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+We need to find for what value of 
+\begin_inset Formula $\Delta t$
+\end_inset
+
+ or 
+\begin_inset Formula $c$
+\end_inset
+
+ is 
+\begin_inset Formula $|A|\le1$
+\end_inset
+
+ in order to find when FTBS is stable: 
+\begin_inset Formula 
+\begin{align*}
+|A|\le1 & \iff|A|^{2}-1\le0\\
+ & \iff-2c(1-c)(1-\cos k\Delta x)\le0\\
+ & \iff c(1-c)(1-\cos k\Delta x)\ge0\\
+\end{align*}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+So we know that FTBS is stable only when 
+\begin_inset Formula $c(1-c)(1-\cos k\Delta x)\ge0$
+\end_inset
+
+ and that this conditions must hold regardless of the value of 
+\begin_inset Formula $k\Delta x$
+\end_inset
+
+.
+ Let us plot the curve for some values of 
+\begin_inset Formula $k\Delta x$
+\end_inset
+
+:
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+liststepwise*{
+\end_layout
+
+\end_inset
+
+
+\series bold
+Exercise: 
+\series default
+Sketch 
+\begin_inset Formula $c(1-c)(1-\cos k\Delta x)$
+\end_inset
+
+ for 
+\begin_inset Formula $k\Delta x=\pm\pi$
+\end_inset
+
+, 
+\begin_inset Formula $k\Delta x=\pm\pi/2$
+\end_inset
+
+, 
+\begin_inset Formula $k\Delta x=\pm\pi/4$
+\end_inset
+
+, 
+\begin_inset Formula $k\Delta x=0$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ifthenelse{
+\backslash
+boolean{@onlineversion}}%
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+    
+\backslash
+overlays{5}{
+\backslash
+resizebox{0.6
+\backslash
+textwidth}{!}%
+\end_layout
+
+\begin_layout Plain Layout
+
+    {
+\backslash
+includegraphics[width=
+\backslash
+linewidth]
+\end_layout
+
+\begin_layout Plain Layout
+
+    {python/FTBSstability/FTBSstability
+\backslash
+thesubstep.pdf}}}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+    
+\backslash
+ifthenelse{
+\backslash
+boolean{@studentversion}}%
+\end_layout
+
+\begin_layout Plain Layout
+
+    {%
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+includegraphics[width=0.6
+\backslash
+linewidth]{python/FTBSstability/FTBSstability1.pdf}%
+\end_layout
+
+\begin_layout Plain Layout
+
+    }%
+\end_layout
+
+\begin_layout Plain Layout
+
+    {
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+includegraphics[width=0.6
+\backslash
+linewidth]{python/FTBSstability/FTBSstability5.pdf}%
+\end_layout
+
+\begin_layout Plain Layout
+
+    }
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $k\Delta x$
+\end_inset
+
+ is set by the initial conditions.
+ So stability should not depend on 
+\begin_inset Formula $k\Delta x$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+So FTBS is stable when...
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+opttext{
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $0\le c\le1$
+\end_inset
+
+.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+We have proved that FTBS is unstable if 
+\begin_inset Formula $u<0$
+\end_inset
+
+ or if 
+\begin_inset Formula $\frac{u\Delta t}{\Delta x}>1$
+\end_inset
+
+.
+ We will now define:
+\begin_inset Newline newline
+\end_inset
+
+ 
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="3">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="0">
+<column alignment="left" valignment="top" width="0">
+<column alignment="left" valignment="top" width="0">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Upwind scheme 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+FTBS 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+when 
+\begin_inset Formula $u\ge0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+FTFS 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+when 
+\begin_inset Formula $u<0$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\size small
+The upwind scheme is first order accurate in space and time, conditionally
+ stable and damping.
+
+\series default
+\size default
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\color blue
+Question:
+\color inherit
+ For what values of 
+\begin_inset Formula $\Delta t$
+\end_inset
+
+ is the upwind scheme stable? 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+opttext{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $\Delta t\le\Delta x/|u|$
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\color blue
+Question:
+\color inherit
+ How does this compare with the conclusion from the domain of dependence?
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Von Neumann Stability Analysis of CTCS
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+liststepwise{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The amplification factor, 
+\begin_inset Formula $A$
+\end_inset
+
+, is found by substituting 
+\begin_inset Formula $\phi_{j}^{(n)}=\opttext{A^{n}e^{ikj\Delta x}}$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+into the equation for CTCS: 
+\begin_inset Formula 
+\[
+\phi_{j}^{(n+1)}=\opttext{\phi_{j}^{(n-1)}-c\bigl(\phi_{j+1}^{(n)}-\phi_{j-1}^{(n)}\bigr).}
+\]
+
+\end_inset
+
+This gives: 
+\begin_inset Formula 
+\begin{align*}
+\  & \opttext{A^{n+1}e^{ikj\Delta x}-A^{n-1}e^{ikj\Delta x}+c(A^{n}e^{ik(j+1)\Delta x}-A^{n}e^{ik(j-1)\Delta x})=0} & \  & \ \\
+\  & \opttext{A^{2}+(2ic\sin k\Delta x)A-1=0} & \  & \ \\
+\implies & A=\opttext{-ic\sin k\Delta x\pm\sqrt{1-c^{2}\sin^{2}k\Delta x}} & \  & \ 
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+There are two cases to consider:
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+setlength{
+\backslash
+tabcolsep}{2pt}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\renewcommand{\arraystretch}{1.5}
+\end_inset
+
+ 
+\begin_inset Tabular
+<lyxtabular version="3" rows="6" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="0">
+<column alignment="left" valignment="top" width="0">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+(i) 
+\begin_inset Formula $|c|\le1$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\implies c^{2}\sin^{2}k\Delta x\le1$
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\step{\implies|A|^{2}=}\opttext{1-c^{2}\sin^{2}k\Delta x+c^{2}\sin^{2}k\Delta x=1}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\step{\implies}$
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+opttext{
+\end_layout
+
+\end_inset
+
+The solution is stable and not damping
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+(ii) 
+\begin_inset Formula $|c|>1$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\implies c^{2}\sin^{2}k\Delta x>1$
+\end_inset
+
+ for some 
+\begin_inset Formula $k\Delta x$
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\step{\implies|A|^{2}=}\opttext{(c\sin k\Delta x\pm\sqrt{c^{2}\sin^{2}k\Delta x-1})^{2}}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\step{\implies}$
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+opttext{
+\end_layout
+
+\end_inset
+
+ At least one of the roots has 
+\begin_inset Formula $|A|>1$
+\end_inset
+
+.
+ The solution is unstable
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+So CTCS is conditionally stable: it is stable for ...
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+opttext{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $|c|\le1$
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+Regardless of 
+\begin_inset Formula $c$
+\end_inset
+
+, there are always two possible values of 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ This means that there will always be two possible solutions; a realistic
+ solution (the physical mode) and the un-realistic, oscilating solution;
+ the spurious computational mode
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Exercises: Analysis of Advection Schemes
+\end_layout
+
+\begin_layout Enumerate
+Write down the following schemes and derive expressions for their amplification
+ factors:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+FTCS 
+\end_layout
+
+\begin_layout Enumerate
+BTCS 
+\end_layout
+
+\begin_layout Enumerate
+CTBS 
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Which of the above schemes suffer from a spurious computational mode?
+\end_layout
+
+\begin_layout Enumerate
+Sketch of the domain of dependence for these schemes 
+\end_layout
+
+\begin_layout Enumerate
+For FTCS and BTCS
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Find for what Courant numbers the schemes are stable.
+\end_layout
+
+\begin_layout Enumerate
+Are the schemes damping, amplifying or neutral?
+\end_layout
+
+\begin_layout Enumerate
+Write down an expressions for the phase speeds of the numerical waves (not
+ covered)
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Determine if mass is conserved by CTCS (not covered)
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+optpage{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Answers
+\end_layout
+
+\begin_layout Enumerate
+Expressions for the amplification factors for the following advection schemes:
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+FTCS: 
+\begin_inset Formula $\phi_{j}^{(n+1)}=\phi_{j}^{(n)}-\frac{c}{2}\left(\phi_{j+1}^{(n)}-\phi_{j-1}^{(n)}\right)$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Substitute in 
+\begin_inset Formula $\phi_{j}^{(n)}=A^{n}e^{ikj\Delta x}$
+\end_inset
+
+ and cancel powers of 
+\begin_inset Formula $A^{n}e^{ikj\Delta x}$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align*}
+A= & 1-\frac{c}{2}(e^{ik\Delta x}-e^{-ik\Delta x})\\
+= & 1-ic\sin k\Delta x
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+BTCS: 
+\begin_inset Formula $\phi_{j}^{(n+1)}=\phi_{j}^{(n)}-\frac{c}{2}\left(\phi_{j+1}^{(n+1)}-\phi_{j-1}^{(n+1)}\right)$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Substitute in 
+\begin_inset Formula $\phi_{j}^{(n)}=A^{n}e^{ikj\Delta x}$
+\end_inset
+
+ and cancel powers of 
+\begin_inset Formula $A^{n}e^{ikj\Delta x}$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align*}
+A= & 1-\frac{c}{2}A(e^{ik\Delta x}-e^{-ik\Delta x})\\
+\Rightarrow A= & \frac{1}{1+ic\sin k\Delta x}\\
+= & \frac{1-ic\sin k\Delta x}{1+c^{2}\sin^{2}k\Delta x}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+CTBS: 
+\begin_inset Formula $\phi_{j}^{(n+1)}=\phi_{j}^{(n-1)}-2c\left(\phi_{j}^{(n)}-\phi_{j-1}^{(n)}\right)$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Substitute in 
+\begin_inset Formula $\phi_{j}^{(n)}=A^{n}e^{ikj\Delta x}$
+\end_inset
+
+ and cancel powers of 
+\begin_inset Formula $A^{n}e^{ikj\Delta x}$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align*}
+A= & \frac{1}{A}-2c(1-e^{-ik\Delta x})\\
+\Rightarrow & A^{2}+2c(1-\cos k\Delta x+i\sin k\Delta x)A-1=0\\
+\Rightarrow A= & -2c(1-\cos k\Delta x+i\sin k\Delta x)\pm\sqrt{c^{2}(1-\cos k\Delta x+i\sin k\Delta x)^{2}+1}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+CTBS will suffer from a spurious computational mode because there are two
+ possible solutions for 
+\begin_inset Formula $A$
+\end_inset
+
+ whereas there is only one possible solution for the first order linear
+ advection PDE.
+\end_layout
+
+\begin_layout Enumerate
+Domain of dependence for:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+(a) FTCS
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+(b) BTCS
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+(c) CTBS
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename figs/domainDependenceFTCS.pdf
+	lyxscale 25
+	width 30line%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename figs/domainDependenceBTCS.pdf
+	lyxscale 25
+	width 30line%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename figs/domainDependenceCTBS.pdf
+	lyxscale 25
+	width 30line%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+For FTCS:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Find for what Courant numbers the scheme is stable: 
+\begin_inset Formula 
+\begin{align*}
+A= & 1-ic\sin k\Delta x\\
+\Rightarrow|A|^{2}= & 1+c^{2}\sin^{2}k\Delta x
+\end{align*}
+
+\end_inset
+
+which is 
+\begin_inset Formula $>1$
+\end_inset
+
+ for all 
+\begin_inset Formula $|c|>0$
+\end_inset
+
+ and so FTCS is unconditioanlly unstable
+\end_layout
+
+\begin_layout Enumerate
+FTCS is amplifying since 
+\begin_inset Formula $A>1$
+\end_inset
+
+ for all 
+\begin_inset Formula $|c|>0$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+The phase speeds of the numerical waves is
+\begin_inset Formula 
+\[
+u_{c}=\frac{\tan^{-1}\left(c\sin k\Delta x\right)}{k\Delta t}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For BTCS:
+\end_layout
+
+\begin_layout Enumerate
+Find for what Courant numbers the scheme is stable: 
+\begin_inset Formula 
+\begin{align*}
+A= & \frac{1}{1+ic\sin k\Delta x}\\
+\Rightarrow|A|^{2}= & \frac{1}{1+c^{2}\sin^{2}k\Delta x}\le1\forall|c|>0
+\end{align*}
+
+\end_inset
+
+so BTCS is unconditioanlly stable
+\end_layout
+
+\begin_layout Enumerate
+BTCS is damping since 
+\begin_inset Formula $A<1$
+\end_inset
+
+ for all 
+\begin_inset Formula $|c|>0$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+The phase speeds of the numerical waves is
+\begin_inset Formula 
+\[
+u_{c}=\frac{\tan^{-1}\left(c\sin k\Delta x\right)}{k\Delta t}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Determine if mass is conserved by CTCS:
+\begin_inset Formula 
+\[
+\text{CTCS: }\ \ \phi_{j}^{(n+1)}=\phi_{j}^{(n-1)}-c\bigl(\phi_{j+1}^{(n)}-\phi_{j-1}^{(n)}\bigr).
+\]
+
+\end_inset
+
+From this we can calculate 
+\begin_inset Formula $M^{(n+1)}$
+\end_inset
+
+ as a function of 
+\begin_inset Formula $M^{(n-1)}$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align*}
+M^{(n+1)} & =\sum_{j=1}^{n_{x}}\phi_{j}^{(n+1)}=\sum_{j=1}^{n_{x}}\phi_{j}^{(n-1)}-c\bigl(\phi_{j+1}^{(n)}-\phi_{j-1}^{(n)}\bigr)=M^{(n-1)}-c\left(\sum_{j=1}^{n_{x}}\phi_{j+1}^{(n)}-\sum_{j=1}^{n_{x}}\phi_{j-1}^{(n)}\right)\\
+ & =M^{(n-1)}-c\left(\sum_{j=2}^{n_{x}+1}\phi_{j}^{(n)}-\sum_{j=0}^{n_{x}-1}\phi_{j}^{(n)}\right)=M^{(n-1)}-c\left(\phi_{n_{x}}^{(n)}+\phi_{n_{x}+1}^{(n)}-\phi_{0}^{(n)}-\phi_{1}^{(n)}\right)=M^{(n-1)}
+\end{align*}
+
+\end_inset
+
+due to the periodic boundaries since 
+\begin_inset Formula $\phi_{n_{x}}^{(n)}=\phi_{0}^{(n)}$
+\end_inset
+
+ and 
+\begin_inset Formula $\phi_{n_{x}+1}^{(n)}=\phi_{1}^{(n)}$
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula $M^{(n+1)}=M^{(n-1)}$
+\end_inset
+
+ which means that mass is conserved.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

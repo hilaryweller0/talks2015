@@ -1,0 +1,198 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+\usepackage{color}
+\newcommand{\nicefrac}[2]{\ensuremath ^{#1}\!\!/\!_{#2}}
+\usepackage { fancybox}
+
+\renewcommand{\floatpagefraction}{0.95}
+\renewcommand{\textfraction}{0}
+\renewcommand{\topfraction}{1}
+\renewcommand{\bottomfraction}{1}
+
+\RequirePackage{tweaklist}
+\renewcommand{\itemhook}
+{
+    \setlength{\topsep}{3pt}
+    \setlength{\parskip}{0pt}
+    \setlength{\parsep}{0pt}
+    \setlength{\partopsep}{0pt}
+    \setlength{\itemsep}{0pt}
+    \setlength{\labelwidth}{10pt}
+    \setlength{\leftmargin}{\labelwidth}
+}
+
+\renewcommand{\enumhook}
+{
+    \setlength{\topsep}{3pt}
+    \setlength{\parskip}{0pt}
+    \setlength{\parsep}{0pt}
+    \setlength{\partopsep}{0pt}
+    \setlength{\itemsep}{3pt}
+    \setlength{\labelwidth}{10pt}
+    \setlength{\leftmargin}{\labelwidth}
+}
+
+\renewcommand{\descriptionlabel}[1]{\parbox{\leftmargin}{\raggedleft #1.~}}
+\end_preamble
+\use_default_options false
+\maintain_unincluded_children false
+\language british
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman times
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics pdftex
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize a4paper
+\use_geometry true
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine natbib_authoryear
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 2cm
+\topmargin 2cm
+\rightmargin 2cm
+\bottommargin 2cm
+\secnumdepth 1
+\tocdepth 1
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle empty
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Practical: More Linear Advection
+\end_layout
+
+\begin_layout Standard
+In the first practical and in the numerical analysis, we identified a number
+ of problems and shortfalls of FTBS and CTCS and this has motivated the
+ presentation of some alternative advection schemes:
+\end_layout
+
+\begin_layout Enumerate
+Semi-Lagrangian (using linear or cubic Lagrange interpolation)
+\end_layout
+
+\begin_layout Enumerate
+Artificial diffusion (using 
+\begin_inset Formula $\nabla^{2}$
+\end_inset
+
+ or 
+\begin_inset Formula $\nabla^{4}$
+\end_inset
+
+ diffusion) 
+\end_layout
+
+\begin_layout Enumerate
+A TVD scheme
+\end_layout
+
+\begin_layout Standard
+Write a python function in 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+mySchemes.py
+\end_layout
+
+\end_inset
+
+ to solve the linear advection using one of the new schemes.
+ Is your chosen scheme better in any aspect that FTBS and CTCS? For example,
+ you could consider:
+\end_layout
+
+\begin_layout Enumerate
+Accuracy measured as a root mean square error norm
+\end_layout
+
+\begin_layout Enumerate
+Order of accuracy
+\end_layout
+
+\begin_layout Enumerate
+Boundedness
+\end_layout
+
+\begin_layout Enumerate
+Total variation
+\end_layout
+
+\begin_layout Enumerate
+Conservation of mean and standard deviation
+\end_layout
+
+\begin_layout Enumerate
+Stability constraints - what is the longest stable time-step that can be
+ taken?
+\end_layout
+
+\begin_layout Enumerate
+Behaviour in the presence of varying resolution
+\end_layout
+
+\begin_layout Standard
+Share code with your neighbours to study the behaviour of different schemes.
+ 
+\end_layout
+
+\begin_layout Standard
+You will have the opportunity to present the results of your work to the
+ whole group.
+ So in collaboration with your colleagues, make some figures and some slides
+ which answer the above questions.
+\end_layout
+
+\end_body
+\end_document

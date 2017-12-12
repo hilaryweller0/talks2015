@@ -1,0 +1,1153 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass report
+\begin_preamble
+\usepackage{color}
+\newcommand{\nicefrac}[2]{\ensuremath ^{#1}\!\!/\!_{#2}}
+\usepackage { fancybox}
+
+\renewcommand{\floatpagefraction}{0.95}
+\renewcommand{\textfraction}{0}
+\renewcommand{\topfraction}{1}
+\renewcommand{\bottomfraction}{1}
+
+\RequirePackage{tweaklist}
+\renewcommand{\itemhook}
+{
+    \setlength{\topsep}{3pt}
+    \setlength{\parskip}{0pt}
+    \setlength{\parsep}{0pt}
+    \setlength{\partopsep}{0pt}
+    \setlength{\itemsep}{0pt}
+    \setlength{\labelwidth}{10pt}
+    \setlength{\leftmargin}{\labelwidth}
+}
+
+\renewcommand{\enumhook}
+{
+    \setlength{\topsep}{3pt}
+    \setlength{\parskip}{0pt}
+    \setlength{\parsep}{0pt}
+    \setlength{\partopsep}{0pt}
+    \setlength{\itemsep}{3pt}
+    \setlength{\labelwidth}{10pt}
+    \setlength{\leftmargin}{\labelwidth}
+}
+
+\renewcommand{\descriptionlabel}[1]{\parbox{\leftmargin}{\raggedleft #1.~}}
+\end_preamble
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman times
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics pdftex
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize a4paper
+\use_geometry true
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine natbib_authoryear
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 2cm
+\topmargin 2cm
+\rightmargin 2cm
+\bottommargin 2cm
+\secnumdepth 1
+\tocdepth 1
+\paragraph_separation skip
+\defskip smallskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle empty
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Practical: Shallow-Water Equations (SWE)
+\end_layout
+
+\begin_layout Standard
+In this practical you will develop existing code for solving the SWE in
+ 2D or the Arakawa A- and C-grids.
+ You will add a mountain and non-linear terms in order to see the influence
+ on the fluid dynamics and on numerical artifacts of the solution.
+ Given time or collaboration, you may be able to compare different numerical
+ methods.
+\end_layout
+
+\begin_layout Standard
+Code to solve the linearised shallow-water equations:
+\begin_inset Formula 
+\begin{eqnarray}
+\frac{\partial\mathbf{u}}{\partial t} & +2\bm{\Omega}\times\mathbf{u} & =-g\nabla\left(h+h_{0}\right)\\
+\frac{\partial h}{\partial t} & +\nabla\cdot\left(\left(H-h_{0}\right)\mathbf{u}\right) & =0
+\end{eqnarray}
+
+\end_inset
+
+using the Arakawa A and C-grids are in the files 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+practicals/SWE/*.py
+\end_layout
+
+\end_inset
+
+ .
+ The (horizontal) velocity is 
+\begin_inset Formula $\mathbf{u}=(u,v,0)^{T}$
+\end_inset
+
+, 
+\begin_inset Formula $\bm{\Omega}=(0,0,2f)^{T}$
+\end_inset
+
+ is the rotation of the planar geometry, where 
+\begin_inset Formula $f=\beta y$
+\end_inset
+
+ is the Coriolis parameter, 
+\begin_inset Formula $g$
+\end_inset
+
+ is gravity, 
+\begin_inset Formula $h$
+\end_inset
+
+ is the depth anomaly in comparison to the mean depth, 
+\begin_inset Formula $H$
+\end_inset
+
+ and 
+\begin_inset Formula $h_{0}$
+\end_inset
+
+ is the height of the bottom topography.
+ The boundary conditions in the 
+\begin_inset Formula $x$
+\end_inset
+
+ direction are periodic and in the 
+\begin_inset Formula $y$
+\end_inset
+
+ direction the boundary conditions are 
+\begin_inset Formula $v=0$
+\end_inset
+
+ and 
+\begin_inset Formula $\partial h/\partial y$
+\end_inset
+
+=0.
+ The code is set up to solve a test case with a geostrophically balanced
+ jet described by: 
+\begin_inset Formula 
+\begin{eqnarray*}
+u(\hat{y}) & = & \begin{cases}
+u_{m}\left(1-3\hat{y}^{2}+3\hat{y}^{4}-\hat{y}^{6}\right) & \text{for }-1\le\hat{y}\le1\\
+0 & \text{otherwise}
+\end{cases}\\
+v & = & 0\\
+h\left(\hat{y}\right) & = & \begin{cases}
+16\ w\beta u_{m}y_{c}/(35g) & \textnormal{for }\hat{y}\le-1\\
+-w\beta u_{m}/g\begin{array}[t]{l}
+\bigl\{ y_{c}\left(\hat{y}-\hat{y}^{3}+3\hat{y}^{5}/5-\hat{y}^{7}/7\right)\\
++w\left(-1/8+\hat{y}^{2}/2-3\hat{y}^{4}/4+\hat{y}^{6}/2-\hat{y}^{8}/8\right)\bigr\}
+\end{array} & \textnormal{for }-1\le\hat{y}\le1\\
+-16\ w\beta u_{m}y_{c}/(35g) & \textnormal{for }\hat{y}\ge1
+\end{cases}
+\end{eqnarray*}
+
+\end_inset
+
+where 
+\begin_inset Formula $\hat{y}=(y-y_{c})/w$
+\end_inset
+
+, 
+\begin_inset Formula $y_{c}$
+\end_inset
+
+ is the 
+\begin_inset Formula $y$
+\end_inset
+
+ position of the jet centre, 
+\begin_inset Formula $w$
+\end_inset
+
+ is the jet half width, 
+\begin_inset Formula $u_{m}$
+\end_inset
+
+ is the maximum jet velocity and 
+\begin_inset Formula $h_{0}$
+\end_inset
+
+ is the minimum height.
+ The default parameters are given in table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:SWEparameters"
+
+\end_inset
+
+ and also in the code.
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+renewcommand{
+\backslash
+arraystretch}{1.2}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="14" columns="4">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Parameter
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+value
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+units
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Fluid parameters:
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Variation of Coriolis with latitute
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\beta$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $2\times10^{-11}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\text{m}^{-1}\text{s}^{-1}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Gravity
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $g$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\text{m}\text{s}^{-2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Mean fluid depth
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+H
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+m
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Geometry and grid parameters:
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Domain size in 
+\begin_inset Formula $x$
+\end_inset
+
+ direction
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $x_{max}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1.2\times10^{7}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+m
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Domain size in 
+\begin_inset Formula $y$
+\end_inset
+
+ direction
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $y_{max}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1.2\times10^{7}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+m
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Grid spacing in 
+\begin_inset Formula $x$
+\end_inset
+
+ direction
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\Delta x$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $x_{max}/39$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+m
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Grid spacing in 
+\begin_inset Formula $y$
+\end_inset
+
+ direction
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\Delta y$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $y_{max}/39$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+m
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Jet parameters:
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Jet centre
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $y_{c}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $6\times10^{6}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+m
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Jet width
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $w$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $3\times10^{6}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+m
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Maximum jet velocity
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $u_{m}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+20
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\text{m}\text{s}^{-1}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Default parameter values for the geostrophically balanced jet
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:SWEparameters"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Some students should make developments to the A-grid code and others to
+ the C-grid code.
+ Discuss with your colleagues to decide you does which.
+ If you have previously developed a C-grid code, then develop an A-grid
+ code now.
+ Or for an alternative challenge, write B, D or E grid codes.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Run the A- and C-grid versions of the shallow-water code.
+ The errors for this case can easily be calculated by comparing the initial
+ and final conditions since the initial conditions are the analytic solution.
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Calculate and plot the errors after running for 1 day.
+\end_layout
+
+\begin_layout Enumerate
+Why are the C-grid results are more accurate than the A-grid results? 
+\end_layout
+
+\begin_layout Enumerate
+Can more accurate results be obtained for lower computational cost by independen
+tly varying 
+\begin_inset Formula $n_{x}$
+\end_inset
+
+, 
+\begin_inset Formula $n_{y}$
+\end_inset
+
+, and 
+\begin_inset Formula $\Delta t$
+\end_inset
+
+?
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+In the code in 
+\begin_inset Flex Flex:URL
+status open
+
+\begin_layout Plain Layout
+
+practicals/SWE/*.py
+\end_layout
+
+\end_inset
+
+, the bottom topography has not been fully implemented.
+ Add a mountain defined by: 
+\begin_inset Formula 
+\[
+h_{0}=\begin{cases}
+h_{0\max}(1-\sqrt{(x-x_{c})^{2}+(y-y_{c})^{2}}/r_{m}) & \text{ for }\sqrt{(x-x_{c})^{2}+(y-y_{c})^{2}}<r_{m}\\
+0 & \text{ otherwise}
+\end{cases}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $(x_{c},y_{c})$
+\end_inset
+
+ is the mountain centre which is in the middle of the domain, 
+\begin_inset Formula $r_{m}=1.5\times10^{6}\text{m}$
+\end_inset
+
+ is the mountain radius and 
+\begin_inset Formula $h_{0\max}=500\text{m}$
+\end_inset
+
+ is the mountain peak height.
+ You will need to add the definition of the mountain to function 
+\begin_inset Flex Flex:URL
+status collapsed
+
+\begin_layout Plain Layout
+
+createMountain
+\end_layout
+
+\end_inset
+
+ in file 
+\begin_inset Flex Flex:URL
+status open
+
+\begin_layout Plain Layout
+
+practicals/SWE/initialAndPlot.py
+\end_layout
+
+\end_inset
+
+ and include the influence of the orography in the correct terms of the
+ SWE in functions 
+\begin_inset Flex Flex:URL
+status collapsed
+
+\begin_layout Plain Layout
+
+SWECgrid
+\end_layout
+
+\end_inset
+
+ or 
+\begin_inset Flex Flex:URL
+status collapsed
+
+\begin_layout Plain Layout
+
+SWEAgrid
+\end_layout
+
+\end_inset
+
+ in file 
+\begin_inset Flex Flex:URL
+status open
+
+\begin_layout Plain Layout
+
+practicals/SWE/ACgrids.py
+\end_layout
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Plot the results for both schemes after 6 days.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Can you explain the influence of the mountain on the flow?
+\end_layout
+
+\begin_layout Enumerate
+Can you explain the problems with the A-grid results?
+\end_layout
+
+\begin_layout Enumerate
+Is it beneficial to have isotropic resolution (
+\begin_inset Formula $\Delta x=\Delta y$
+\end_inset
+
+) or anisotropic when a mountain is present?
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+For what values of the advective and gravity wave Courant number is the
+ code stable? Modify the parameters so that the advective Courant number
+ is smaller than the gravity wave Courant number.
+ Which Courant number(s) control stability?
+\end_layout
+
+\begin_layout Enumerate
+Design and write down a discretisation (on the A- or C-grid) for the non-linear
+ SWE in the form:
+\begin_inset Formula 
+\begin{eqnarray}
+\frac{\partial\mathbf{u}}{\partial t} & +\mathbf{u}\cdot\nabla\mathbf{u}+2\bm{\Omega}\times\mathbf{u} & =-g\nabla\left(h+h_{0}\right)\\
+\frac{\partial h}{\partial t} & +\nabla\cdot\left(h\mathbf{u}\right) & =0
+\end{eqnarray}
+
+\end_inset
+
+where 
+\begin_inset Formula $h$
+\end_inset
+
+ is now the total fluid height.
+ Write a new function to solve these equations.
+ Re-run the test cases with and without the mountain using the non-linear
+ equation solver.
+ (Use the original parameter values from table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:SWEparameters"
+
+\end_inset
+
+.)
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+
+\series bold
+Additional questions to consider
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Write a functions to calculate the vorticity and divergence of the solution
+ and the change from the initial conditions.
+ What kind of waves are revealed by these diagnostics.
+ Do these waves behave differently when solving the linearised or non-linear
+ equations.
+\end_layout
+
+\begin_layout Enumerate
+For what values of the advective and gravity wave Courant number is the
+ non-linear code stable? How and why has this changed from the linear equation
+ solver.
+\end_layout
+
+\begin_layout Enumerate
+What additional problems are encountered when solving the non-linear equations.
+ How could this be dealt with?
+\end_layout
+
+\end_body
+\end_document

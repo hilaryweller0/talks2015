@@ -1,0 +1,602 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass report
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package none
+\inputencoding auto
+\fontencoding default
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 0
+\use_mathdots 0
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset Newpage cleardoublepage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Accuracy of Advection Schemes
+\end_layout
+
+\begin_layout Standard
+The 1d linear advection equation
+\begin_inset Formula 
+\[
+\frac{\partial\phi}{\partial t}+u\frac{\partial\phi}{\partial x}=0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Accuracy of FTBS
+\end_layout
+
+\begin_layout Standard
+FTBS for solving the linear advection equation (for constant 
+\begin_inset Formula $\Delta x$
+\end_inset
+
+):
+\begin_inset Formula 
+\[
+\frac{\phi_{j}^{(n+1)}-\phi_{j}^{(n)}}{\Delta t}+u\frac{\phi_{j}^{(n)}-\phi_{j-1}^{(n)}}{\Delta x}=0
+\]
+
+\end_inset
+
+Advection of an initial profile once around the domain (periodic boundaries,
+ 
+\begin_inset Formula $c=0.2$
+\end_inset
+
+, 100 space intervals, 500 time steps):
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\backslash
+mediaMovie[autostart,loop]
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\backslash
+includegraphics[width=
+\backslash
+textwidth]{/home/hilary/latex/teaching/MTMW12/2014/notes/anims/FTBS/FTBS_50.pdf}}
+\end_layout
+
+\begin_layout Plain Layout
+
+{animations/latex_teaching_MTMW12_2014_notes_anims_FTBS.mp4}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph*
+Questions
+\end_layout
+
+\begin_layout Itemize
+Why is it so inaccurate?
+\end_layout
+
+\begin_layout Itemize
+Why is it so diffusive?
+\end_layout
+
+\begin_layout Paragraph*
+Answers
+\end_layout
+
+\begin_layout Itemize
+Use Taylor series to find the approximation for 
+\begin_inset Formula $\partial\phi/\partial x=\phi^{\prime}$
+\end_inset
+
+ which is used in FTBS.
+ 
+\end_layout
+
+\begin_layout Itemize
+What order accurate is it?
+\end_layout
+
+\begin_layout Itemize
+What is the entire leading error term?
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+stepwise{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Write down the Taylor series approximation for 
+\begin_inset Formula $\phi_{j-1}$
+\end_inset
+
+ about 
+\begin_inset Formula $\phi_{j}$
+\end_inset
+
+ and rearrange to find 
+\begin_inset Formula $\phi_{j}^{\prime}$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align*}
+\phi_{j-1} & \approx\opttext{\phi_{j}-\Delta x\phi_{j}^{\prime}+\frac{\Delta x^{2}}{2!}\phi_{j}^{\prime\prime}}\\
+\Rightarrow\phi_{j}^{\prime} & =\opttext{\frac{\phi_{j}-\phi_{j-1}}{\Delta x}+\frac{\Delta x}{2}\phi_{j}^{\prime\prime}.}
+\end{align*}
+
+\end_inset
+
+
+\begin_inset VSpace 2cm
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $\phi_{j}^{\prime\prime}$
+\end_inset
+
+ is unknown so the leading error term is 
+\begin_inset Formula $\frac{\Delta x}{2}\phi_{j}^{\prime\prime}$
+\end_inset
+
+ so FTBS is first order accurate.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+The error is proportional to 
+\begin_inset Formula $\phi^{\prime\prime}=\partial^{2}\phi/\partial x^{2}$
+\end_inset
+
+ which is the spatial term from the diffusion equation.
+ Adding this error to the advection equation makes the equation diffusive.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Accuracy of CTCS
+\end_layout
+
+\begin_layout Standard
+CTCS for solving the linear advection equation (for constant 
+\begin_inset Formula $\Delta x$
+\end_inset
+
+):
+\begin_inset Formula 
+\[
+\frac{\phi_{j}^{(n+1)}-\phi_{j}^{(n-1)}}{2\Delta t}+u\frac{\phi_{j+}^{(n)}-\phi_{j-1}^{(n)}}{2\Delta x}=0
+\]
+
+\end_inset
+
+Advection of an initial profile once around the domain (periodic boundaries,
+ 
+\begin_inset Formula $c=0.2$
+\end_inset
+
+, 100 space intervals, 500 time steps):
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+mediaMovie[autostart,loop]
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\backslash
+includegraphics[width=
+\backslash
+textwidth]{/home/hilary/latex/teaching/MTMW12/2014/notes/anims/FTBS_CTCS/FTBS_CT
+CS_50.pdf}}
+\end_layout
+
+\begin_layout Plain Layout
+
+{animations/latex_teaching_MTMW12_2014_notes_anims_FTBS_CTCS.mp4}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph*
+Questions
+\end_layout
+
+\begin_layout Itemize
+Is CTCS more accurate than FTBS?
+\end_layout
+
+\begin_layout Itemize
+Why does it generate so many oscillations?
+\end_layout
+
+\begin_layout Paragraph*
+Answers?
+\end_layout
+
+\begin_layout Itemize
+Use Taylor series to find the approximation for 
+\begin_inset Formula $\partial\phi/\partial x=\phi^{\prime}$
+\end_inset
+
+ which is used in CTCS.
+ 
+\end_layout
+
+\begin_layout Itemize
+What order accurate is it?
+\end_layout
+
+\begin_layout Itemize
+What is the entire leading error term?
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Write down the Taylor series approximations for 
+\begin_inset Formula $\phi_{j-1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\phi_{j+1}$
+\end_inset
+
+ about 
+\begin_inset Formula $\phi_{j}$
+\end_inset
+
+, eliminate 
+\begin_inset Formula $\phi_{j}^{\prime\prime}$
+\end_inset
+
+ and rearrange to find 
+\begin_inset Formula $\phi_{j}^{\prime}$
+\end_inset
+
+:
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+stepwise{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\phi_{j-1} & \approx\opttext{\phi_{j}-\Delta x\phi_{j}^{\prime}+\frac{\Delta x^{2}}{2!}\phi_{j}^{\prime\prime}-\frac{\Delta x^{3}}{3!}\phi_{j}^{\prime\prime\prime}}\\
+\phi_{j+1} & \approx\opttext{\phi_{j}+\Delta x\phi_{j}^{\prime}+\frac{\Delta x^{2}}{2!}\phi_{j}^{\prime\prime}+\frac{\Delta x^{3}}{3!}\phi_{j}^{\prime\prime\prime}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .\\
+\implies\phi_{j+1}-\phi_{j-1} & \approx\opttext{2\Delta x\phi_{j}^{\prime}+\frac{\Delta x^{3}}{3}\phi_{j}^{\prime\prime\prime}}\\
+\implies\phi_{j}^{\prime} & \approx\opttext{\frac{\phi_{j+1}-\phi_{j-1}}{2\Delta x}-\frac{\Delta x^{2}}{3!}\phi_{j}^{\prime\prime\prime}}
+\end{align*}
+
+\end_inset
+
+
+\begin_inset VSpace 0.1cm
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $\phi_{j}^{\prime\prime\prime}$
+\end_inset
+
+ is unknown so the leading error term is 
+\begin_inset Formula $\frac{\Delta x^{2}}{3!}\phi_{j}^{\prime\prime\prime}$
+\end_inset
+
+ so CTCS is second order accurate.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+The error is proportional to 
+\begin_inset Formula $\phi^{\prime\prime\prime}=\partial^{3}\phi/\partial x^{3}$
+\end_inset
+
+ which is not diffusive.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+So why the oscillations?
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Godunov's theorem
+\end_layout
+
+\begin_layout Standard
+Linear numerical schemes for solving partial differential equations, having
+ the property of not generating new extrema (monotone scheme), can be at
+ most first-order accurate.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Stability Analysis
+\end_layout
+
+\begin_layout Standard
+In order to predict the stability of different schemes, we will need Fourier
+ analysis ...
+\end_layout
+
+\end_body
+\end_document

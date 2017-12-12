@@ -1,0 +1,73 @@
+%% LyX 2.0.8.1 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[twoside,10pt]{report}
+\usepackage{mathptmx}
+\renewcommand{\familydefault}{\rmdefault}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{listings}
+\usepackage[paperwidth=15cm,paperheight=12cm]{geometry}
+\geometry{verbose,tmargin=0.5cm,bmargin=0.5cm,lmargin=1cm,rmargin=1cm,headheight=0.5cm,footskip=10pt}
+\pagestyle{plain}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+\setlength{\parskip}{3pt}
+\setlength{\parindent}{0pt}
+\usepackage{color}
+\usepackage{array}
+\usepackage{float}
+\usepackage{url}
+\usepackage{bm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{esint}
+\usepackage[unicode=true,
+ bookmarks=false,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=false]
+ {hyperref}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+%% Because html converters don't know tabularnewline
+\providecommand{\tabularnewline}{\\}
+%% A simple dot to overcome graphicx limitations
+\newcommand{\lyxdot}{.}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\input{studentVersion}
+\input{preamble}
+
+\makeatother
+
+\begin{document}
+\input{title.tex}
+
+\input{reading.tex}
+
+\tableofcontents{}\input{NSeqns.tex}
+
+\input{advection.tex}
+
+\input{practicals/usingComputers.tex}
+
+\input{practicals/linearAdvect.tex}
+
+\input{advectionAccuracy.tex}
+
+\input{Fourier.tex}
+
+\input{advectionAnalysis.tex}
+
+\input{otherAdvectionSchemes.tex}
+
+\input{practicals/moreLinearAdvect.tex}
+
+\input{waveEqns.tex}
+
+\input{practicals/SWE.tex}
+
+\input{semiImplicit.tex}
+\end{document}

@@ -1,0 +1,13 @@
+Terrain-following Versus Cut-Cells
+
+Too long:
+
+A finite volume model is described which has the same numerical formulation for cut-cells and terrain following layers over orography. A high-order upwind advection scheme is used which maintains accuracy on all meshes and a novel formulation giving curl-free pressure gradients is used. As a consequence, there is no horizontal pressure gradient error when using terrain following layers. This non-hydrostatic, compressible, semi-implicit model is written using OpenFOAM.
+
+This enables some clean comparisons between cut-cells and terrain-following layers on some standard test cases. We confirm previous results which demonstrate the accuracy gains from using cut-cells for simple test cases in which the flow does not interact with the orography: horizontal advection over orography and maintaining stationary, stably stratified flow. However for test cases in which the flow interacts with the orography, such as gravity wave generation and a new test case with terrain following advection, the terrain following layers give better accuracy. We find that cut-cells can excite the computational mode of the Lorenz grid. 
+
+This work highlights the benefits of maintaining sufficient generality in both code and numerics so that both cut-cells and terrain following layers can be used where appropriate. 
+
+75 word abstract
+
+A finite volume model is described with the same numerics for cut-cells and terrain-following layers. The model has curl-free pressure gradients which eliminate the horizontal pressure gradient error. Some clean comparisons between cut-cells and terrain-following layers are made and, on tests in which the flow interacts with the orography, the terrain-following layers give better accuracy whereas the cut-cells can excite the computational mode of the Lorenz grid.

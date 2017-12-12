@@ -1,0 +1,123 @@
+\cleardoublepage{}
+
+
+\section{Accuracy of Advection Schemes}
+
+The 1d linear advection equation
+\[
+\frac{\partial\phi}{\partial t}+u\frac{\partial\phi}{\partial x}=0
+\]
+
+
+
+\subsection{Accuracy of FTBS}
+
+FTBS for solving the linear advection equation (for constant $\Delta x$):
+\[
+\frac{\phi_{j}^{(n+1)}-\phi_{j}^{(n)}}{\Delta t}+u\frac{\phi_{j}^{(n)}-\phi_{j-1}^{(n)}}{\Delta x}=0
+\]
+Advection of an initial profile once around the domain (periodic boundaries,
+$c=0.2$, 100 space intervals, 500 time steps):\\
+{\mediaMovie[autostart,loop]
+{\includegraphics[width=\textwidth]{/home/hilary/latex/teaching/MTMW12/2014/notes/anims/FTBS/FTBS_50.pdf}}
+{animations/latex_teaching_MTMW12_2014_notes_anims_FTBS.mp4}}
+
+
+\paragraph*{Questions}
+\begin{itemize}
+\item Why is it so inaccurate?
+\item Why is it so diffusive?
+\end{itemize}
+
+\paragraph*{Answers}
+\begin{itemize}
+\item Use Taylor series to find the approximation for $\partial\phi/\partial x=\phi^{\prime}$
+which is used in FTBS. 
+\item What order accurate is it?
+\item What is the entire leading error term?
+\end{itemize}
+\stepwise{
+
+Write down the Taylor series approximation for $\phi_{j-1}$ about
+$\phi_{j}$ and rearrange to find $\phi_{j}^{\prime}$:
+\begin{align*}
+\phi_{j-1} & \approx\opttext{\phi_{j}-\Delta x\phi_{j}^{\prime}+\frac{\Delta x^{2}}{2!}\phi_{j}^{\prime\prime}}\\
+\Rightarrow\phi_{j}^{\prime} & =\opttext{\frac{\phi_{j}-\phi_{j-1}}{\Delta x}+\frac{\Delta x}{2}\phi_{j}^{\prime\prime}.}
+\end{align*}
+\vspace{2cm}
+
+\begin{itemize}
+\item \step{$\phi_{j}^{\prime\prime}$ is unknown so the leading error
+term is $\frac{\Delta x}{2}\phi_{j}^{\prime\prime}$ so FTBS is first
+order accurate.}
+\item \step{The error is proportional to $\phi^{\prime\prime}=\partial^{2}\phi/\partial x^{2}$
+which is the spatial term from the diffusion equation. Adding this
+error to the advection equation makes the equation diffusive.}
+\end{itemize}
+}
+
+\clearpage{}
+
+
+\subsection{Accuracy of CTCS}
+
+CTCS for solving the linear advection equation (for constant $\Delta x$):
+\[
+\frac{\phi_{j}^{(n+1)}-\phi_{j}^{(n-1)}}{2\Delta t}+u\frac{\phi_{j+}^{(n)}-\phi_{j-1}^{(n)}}{2\Delta x}=0
+\]
+Advection of an initial profile once around the domain (periodic boundaries,
+$c=0.2$, 100 space intervals, 500 time steps):\\
+\mediaMovie[autostart,loop]
+{\includegraphics[width=\textwidth]{/home/hilary/latex/teaching/MTMW12/2014/notes/anims/FTBS_CTCS/FTBS_CTCS_50.pdf}}
+{animations/latex_teaching_MTMW12_2014_notes_anims_FTBS_CTCS.mp4}
+
+
+\paragraph*{Questions}
+\begin{itemize}
+\item Is CTCS more accurate than FTBS?
+\item Why does it generate so many oscillations?
+\end{itemize}
+
+\paragraph*{Answers?}
+\begin{itemize}
+\item Use Taylor series to find the approximation for $\partial\phi/\partial x=\phi^{\prime}$
+which is used in CTCS. 
+\item What order accurate is it?
+\item What is the entire leading error term?
+\end{itemize}
+\clearpage{}
+
+Write down the Taylor series approximations for $\phi_{j-1}$ and
+$\phi_{j+1}$ about $\phi_{j}$, eliminate $\phi_{j}^{\prime\prime}$
+and rearrange to find $\phi_{j}^{\prime}$:\stepwise{
+
+\begin{align*}
+\phi_{j-1} & \approx\opttext{\phi_{j}-\Delta x\phi_{j}^{\prime}+\frac{\Delta x^{2}}{2!}\phi_{j}^{\prime\prime}-\frac{\Delta x^{3}}{3!}\phi_{j}^{\prime\prime\prime}}\\
+\phi_{j+1} & \approx\opttext{\phi_{j}+\Delta x\phi_{j}^{\prime}+\frac{\Delta x^{2}}{2!}\phi_{j}^{\prime\prime}+\frac{\Delta x^{3}}{3!}\phi_{j}^{\prime\prime\prime}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .\\
+\implies\phi_{j+1}-\phi_{j-1} & \approx\opttext{2\Delta x\phi_{j}^{\prime}+\frac{\Delta x^{3}}{3}\phi_{j}^{\prime\prime\prime}}\\
+\implies\phi_{j}^{\prime} & \approx\opttext{\frac{\phi_{j+1}-\phi_{j-1}}{2\Delta x}-\frac{\Delta x^{2}}{3!}\phi_{j}^{\prime\prime\prime}}
+\end{align*}
+\vspace{0.1cm}
+
+\begin{itemize}
+\item \step{$\phi_{j}^{\prime\prime\prime}$ is unknown so the leading
+error term is $\frac{\Delta x^{2}}{3!}\phi_{j}^{\prime\prime\prime}$
+so CTCS is second order accurate.}
+\item \step{The error is proportional to $\phi^{\prime\prime\prime}=\partial^{3}\phi/\partial x^{3}$
+which is not diffusive.}
+\item \step{So why the oscillations?}
+\end{itemize}
+}\pause
+
+
+\subsubsection*{Godunov's theorem}
+
+Linear numerical schemes for solving partial differential equations,
+having the property of not generating new extrema (monotone scheme),
+can be at most first-order accurate.\pause
+
+
+\subsection*{Stability Analysis}
+
+In order to predict the stability of different schemes, we will need
+Fourier analysis ...

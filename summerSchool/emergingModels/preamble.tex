@@ -1,0 +1,157 @@
+\usepackage{listings}
+\lstset{language=Python, basicstyle=\small\ttfamily,
+               showstringspaces=false,tabsize=4,
+               keepspaces=true,columns=fixed,belowskip=0pt,aboveskip=0pt}
+\usepackage{courier}
+
+\usepackage{amsmath,mathtools,amsfonts,amssymb,bm}
+
+\RequirePackage{tabulary}
+\RequirePackage{multirow}
+\RequirePackage{multicol}
+\RequirePackage[normalem]{ulem}
+\renewcommand\arraystretch{1}
+\RequirePackage{subfig}
+\RequirePackage{rotating}
+
+% some shorthands
+\newcommand{\de}{\ensuremath{^\circ}}
+\newcommand{\ie}{\ensuremath{i.e.}}
+\newcommand{\eg}{\ensuremath{eg.}}
+\newcommand{\dof}{d.o.f.}
+\newcommand{\dofs}{d.o.f.s}
+\newcommand{\dprod} {\,{\scriptscriptstyle \stackrel{\bullet}{{}}}\,}
+\renewcommand{\vec}[1] {\ensuremath{\mathbf #1}}
+\newcommand{\gvec}[1] {\ensuremath{\mbox{\boldmath$\bf#1$}}}
+\newcommand{\eqn}[1]{\mbox{$#1$}}
+\newcommand{\half}{{\ensuremath{^1\negthickspace/\negthinspace_2}}}
+
+% make $\times$, $+$, $-$ and $=$ use less space
+\newcommand{\tims}{\negthinspace \times \negthinspace}
+\newcommand{\eq}{\negthinspace = \negthinspace}
+\newcommand{\plus}{\negthinspace + \negthinspace}
+\newcommand{\minus}{\negthinspace - \negthinspace}
+
+% referencing of equation numbers
+\newcommand{\eqnRef}[1]{equation (\ref{#1})}
+\newcommand{\EqnRef}[1]{Equation (\ref{#1})}
+
+% redefine normalize with different display skips
+\renewcommand\normalsize{%
+   \@setfontsize\normalsize\@xpt\@xiipt
+   \abovedisplayskip 6\p@ \@plus2\p@ \@minus5\p@
+   \abovedisplayshortskip \z@ \@plus3\p@
+   \belowdisplayshortskip 6\p@ \@plus3\p@ \@minus3\p@
+   \belowdisplayskip \abovedisplayskip
+   \let\@listi\@listI}
+
+% space around figures
+\setlength{\belowcaptionskip}{-10pt}
+
+% correct way of changing the enumi so that you refer to it properly
+%\renewcommand{\theenumi}{\roman{enumi}}
+\renewcommand{\labelenumi}{\theenumi.}
+
+%%% modifications to make report style more compact
+\makeatletter
+
+%\renewcommand\chaptername{Lecture}
+\everymath{\displaystyle}
+
+\def\@makechapterhead#1{
+  \cleardoublepage
+%  \thispagestyle{empty}
+  \vspace*{-30pt}%
+  {\parindent \z@ \raggedright \normalfont
+    \ifnum \c@secnumdepth >\m@ne
+        \Large\bfseries \@chapapp\space \thechapter
+        :\space
+        %\vskip 20\p@
+    \fi
+    \interlinepenalty\@M
+    \Large \bfseries #1\par\nobreak
+    %\vskip 6\p@
+  }}
+\def\@makeschapterhead#1{%
+  \vspace*{-30\p@}%
+  {\parindent \z@ \raggedright \normalfont
+    \Large \bfseries  #1\par\nobreak
+    \vskip 6\p@
+  }}
+
+%\usepackage{fancyhdr}
+%\pagestyle{fancy}
+%%\renewcommand{\chaptermark}[1]{\chead[]%{\footnotesize\thechapter\space#1}}
+%\lhead[]{}
+%\rhead{\footnotesize\thepage}
+%\cfoot[]{}
+%\renewcommand{\headrulewidth}{0pt}
+%\renewcommand{\footrulewidth}{0pt}
+
+
+
+\def\@part[#1]#2
+{
+    \refstepcounter{part}
+    {
+        \parindent \z@ \raggedright \interlinepenalty \@M
+        \normalfont \Large\bfseries
+        \partname\nobreakspace\thepart : \nobreakspace #2 %\markboth{}{}\par
+    }
+    \nobreak \vskip 1.3ex \@afterheading
+}
+\renewcommand\section%
+{%
+    \@startsection {section}{1}{\z@}{0.01ex \@plus 0.01ex \@minus 0.5ex}%
+   {0.001ex \@plus .001ex \@minus 0.5ex}{\large\bfseries\raggedright}%
+}
+\renewcommand\subsection%
+{%
+    \@startsection {subsection}{2}{\z@}{0.01ex \@plus 0.01ex \@minus 0.5ex}%
+   {0.001ex \@plus.001ex \@minus 0.5ex}{\normalfont\bfseries\raggedright}%
+}
+\renewcommand\subsubsection%
+{%
+    \@startsection {subsubsection}{3}{\z@}{0.01ex \@plus 0.01ex \@minus .5ex}%
+   {0.001ex \@plus .001ex \@minus 0.5ex}{\normalfont\bfseries\raggedright}%
+}
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+                                    {0.02ex \@plus0.01ex \@minus.02ex}%
+                                    {0.01em}%
+                                    {\normalfont\normalsize\bfseries}}
+
+
+\makeatother
+
+\RequirePackage{tweaklist}
+\renewcommand{\itemhook}
+{
+    \setlength{\topsep}{6pt}
+    \setlength{\parskip}{0pt}
+    \setlength{\parsep}{0pt}
+    \setlength{\partopsep}{0pt}
+    \setlength{\itemsep}{3pt}
+    \setlength{\labelwidth}{10pt}
+    \setlength{\leftmargin}{\labelwidth}
+}
+
+\renewcommand{\enumhook}
+{
+    \setlength{\topsep}{6pt}
+    \setlength{\parskip}{0pt}
+    \setlength{\parsep}{0pt}
+    \setlength{\partopsep}{0pt}
+    \setlength{\itemsep}{3pt}
+    \setlength{\labelwidth}{10pt}
+    \setlength{\leftmargin}{\labelwidth}
+}
+
+\renewcommand{\descriptionlabel}[1]{\parbox{\leftmargin}{\raggedleft #1.~}}
+
+% animations
+%\RequirePackage{animate}
+\let\stepMovie\movie
+\let\movie=\undefined
+\RequirePackage{multimedia}
+\let\mediaMovie\movie
+

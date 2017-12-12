@@ -1,0 +1,944 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass report
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package none
+\inputencoding auto
+\fontencoding default
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 0
+\use_mathdots 0
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+Numerical Methods for Advection on non-uniform grids
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:advect"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In one spatial dimension, 
+\begin_inset Formula $x$
+\end_inset
+
+, with constant wind, 
+\begin_inset Formula $u$
+\end_inset
+
+, no diffusion and no sources or sinks, the linear advection equation (eqn
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eqn:3dAdvect"
+
+\end_inset
+
+) for 
+\begin_inset Formula $\phi$
+\end_inset
+
+ reduces to:
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+stepwise{
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{equation}
+\frac{\partial\phi}{\partial t}+\opttext{u\frac{\partial\phi}{\partial x}=0}\qquad\text{or}\qquad\phi_{t}+\opttext{u\phi_{x}=0}\label{eqn:1dAdvect}
+\end{equation}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+This equation has an analytic solution.
+ If the initial condition is 
+\begin_inset Formula $\phi(x,0)$
+\end_inset
+
+ then the solution at time 
+\begin_inset Formula $t$
+\end_inset
+
+ is 
+\begin_inset Formula $\phi(x,t)=\phi(x-ut,0)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Paragraph*
+Exercise:
+\end_layout
+
+\begin_layout Standard
+Check that this is the analytic solution.
+\begin_inset Newline newline
+\end_inset
+
+ (Hint: define 
+\begin_inset Formula $X=x-ut$
+\end_inset
+
+, calculate 
+\begin_inset Formula $\frac{\partial X}{\partial x}$
+\end_inset
+
+ and 
+\begin_inset Formula $\frac{\partial X}{\partial t}$
+\end_inset
+
+ and use the chain rule, 
+\begin_inset Formula $\frac{\partial\phi}{\partial x}=\frac{\partial\phi}{\partial X}\frac{\partial X}{\partial x}$
+\end_inset
+
+)
+\begin_inset Newline newline
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+optparagraph
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $\frac{\partial X}{\partial x}=1$
+\end_inset
+
+ and 
+\begin_inset Formula $\frac{\partial X}{\partial t}=-u$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+ 
+\begin_inset Formula $\implies\frac{\partial\phi}{\partial x}=\frac{\partial\phi}{\partial X}\frac{\partial X}{\partial x}=\frac{\partial\phi}{\partial X}$
+\end_inset
+
+ and 
+\begin_inset Formula $\frac{\partial\phi}{\partial t}=\frac{\partial\phi}{\partial X}\frac{\partial X}{\partial t}=-u\frac{\partial\phi}{\partial X}$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+ 
+\begin_inset Formula $\implies\frac{\partial\phi}{\partial t}+u\frac{\partial\phi}{\partial x}=-u\frac{\partial\phi}{\partial X}+u\frac{\partial\phi}{\partial X}=0$
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Forward in Time, Backward in Space (FTBS)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Frameless
+position "c"
+hor_pos "c"
+has_inner_box 1
+inner_pos "c"
+use_parbox 0
+use_makebox 0
+width "48col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+To solve 
+\begin_inset Formula ${\displaystyle \frac{\partial\phi}{\partial t}+u\frac{\partial\phi}{\partial x}=0}$
+\end_inset
+
+ numerically:
+\end_layout
+
+\begin_layout Itemize
+divide space into 
+\begin_inset Formula $N$
+\end_inset
+
+ UN-equal intervals of size 
+\begin_inset Formula $\Delta x_{j}$
+\end_inset
+
+ for 
+\begin_inset Formula $j=1,2,...,N$
+\end_inset
+
+ 
+\begin_inset Newline newline
+\end_inset
+
+(so that 
+\begin_inset Formula $x_{j}=\sum_{k=1,j}\Delta x_{k}$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Itemize
+Divide time into time steps 
+\begin_inset Formula $\Delta t$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+(so that 
+\begin_inset Formula $t_{n}=n\Delta t,~n=0,1,2,...$
+\end_inset
+
+.)
+\end_layout
+
+\begin_layout Itemize
+Define 
+\begin_inset Formula $\phi_{j}^{(n)}=\phi(x_{j},t_{n})$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Plain Layout
+The forward in time, backward in space scheme is:
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "c"
+hor_pos "c"
+has_inner_box 1
+inner_pos "c"
+use_parbox 0
+use_makebox 0
+width "48col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset External
+	template XFig
+	filename figs/fx.fig
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\text{FTBS:}~~~~~~~~~~~~\frac{\phi_{j}^{(n+1)}-\phi_{j}^{(n)}}{\Delta t}+u\frac{\phi_{j}^{(n)}-\phi_{j-1}^{(n)}}{\Delta x_{j}}=0\label{eqn:FTBS}
+\end{equation}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause 
+\end_layout
+
+\end_inset
+
+This can be re-arranged to get 
+\begin_inset Formula $\phi_{j}^{(n+1)}$
+\end_inset
+
+ on the LHS and all other terms on the RHS so that we can calculate 
+\begin_inset Formula $\phi$
+\end_inset
+
+ at the new time step at all locations based on values at previous time
+ steps.
+ Also in this equation, remove 
+\begin_inset Formula $u$
+\end_inset
+
+, 
+\begin_inset Formula $\Delta t$
+\end_inset
+
+ and 
+\begin_inset Formula $\Delta x$
+\end_inset
+
+ by substituting in the Courant number, 
+\begin_inset Formula $c_{j}=\frac{u\Delta t}{\Delta x_{j}}$
+\end_inset
+
+:
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+stepwise{
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{equation}
+\phi_{j}^{(n+1)}=\opttext{\phi_{j}^{(n)}-c_{j}\bigl(\phi_{j}^{(n)}-\phi_{j-1}^{(n)}\bigr)}
+\end{equation}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Centred in Time, Centred in Space (CTCS)
+\end_layout
+
+\begin_layout Paragraph*
+\begin_inset Formula 
+\begin{equation}
+\text{CTCS:}~~~~~~~~~~~~\frac{\phi_{j}^{(n+1)}-\phi_{j}^{(n-1)}}{2\Delta t}+u\frac{\phi_{j+1}^{(n)}-\phi_{j-1}^{(n)}}{\Delta x_{j}+\Delta x_{j+1}}=0\label{eqn:CTCS}
+\end{equation}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause 
+\end_layout
+
+\end_inset
+
+Exercise:
+\end_layout
+
+\begin_layout Standard
+Re-arrange to get 
+\begin_inset Formula $\phi_{j}^{(n+1)}$
+\end_inset
+
+ on the LHS and all other terms on the RHS.
+ Also remove 
+\begin_inset Formula $u$
+\end_inset
+
+, 
+\begin_inset Formula $\Delta t$
+\end_inset
+
+ and 
+\begin_inset Formula $\Delta x$
+\end_inset
+
+ by substituting in the Courant number, 
+\begin_inset Formula $c_{j}=2u\Delta t/\left(\Delta x_{j}+\Delta x_{j+1}\right)$
+\end_inset
+
+:
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+stepwise{
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{equation}
+\phi_{j}^{(n+1)}=\opttext{\phi_{j}^{(n-1)}-c_{j}\bigl(\phi_{j+1}^{(n)}-\phi_{j-1}^{(n)}\bigr)}
+\end{equation}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+pause 
+\end_layout
+
+\end_inset
+
+This is a three-time-level formula (it involves values of 
+\begin_inset Formula $\phi$
+\end_inset
+
+ at times 
+\begin_inset Formula $t_{n-1}$
+\end_inset
+
+, 
+\begin_inset Formula $t_{n}$
+\end_inset
+
+ and 
+\begin_inset Formula $t_{n+1}$
+\end_inset
+
+.
+ To start the simulation, values of 
+\begin_inset Formula $\phi$
+\end_inset
+
+ are needed at times 
+\begin_inset Formula $t_{0}$
+\end_inset
+
+ and 
+\begin_inset Formula $t_{1}$
+\end_inset
+
+.
+ However, only 
+\begin_inset Formula $\phi(x,t_{0})$
+\end_inset
+
+ is available.
+ So another scheme (such as FTCS) must be used to obtain 
+\begin_inset Formula $\phi^{(1)}=\phi(x,t_{1})$
+\end_inset
+
+:
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+stepwise{
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{equation}
+\text{FTCS:~~~}\opttext{\phi_{j}^{(n+1)}=\phi_{j}^{(n)}-\frac{c_{j}}{2}\bigl(\phi_{j+1}^{(n)}-\phi_{j-1}^{(n)}\bigr)}\label{eqn:FTCS}
+\end{equation}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Implicit and Explicit Time-Stepping
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+liststepwise{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+FTBS, CTCS and FTCS are 
+\shape italic
+explicit
+\shape default
+ schemes -- the value at the new time level depends only on values from
+ previous time levels.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+We can also define 
+\shape italic
+implicit
+\shape default
+, or 
+\shape italic
+backwards in time
+\shape default
+ schemes in which the value at the new time level depends on values at the
+ new time level.
+ For example, assuming uniform 
+\begin_inset Formula $\Delta x$
+\end_inset
+
+:
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{equation}
+\text{BTBS:}~~~~~~~~~~~~\frac{\phi_{j}^{(n+1)}-\phi_{j}^{(n)}}{\Delta t}+u\frac{\phi_{j}^{(n+1)}-\phi_{j-1}^{(n+1)}}{\Delta x}=0\label{eqn:BTBS}
+\end{equation}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{equation}
+\text{BTCS:}~~~~~~~~~~~~\opttext{\frac{\phi_{j}^{(n+1)}-\phi_{j}^{(n)}}{\Delta t}+u\frac{\phi_{j+1}^{(n+1)}-\phi_{j-1}^{(n+1)}}{2\Delta x}=0}\label{eqn:BTCS}
+\end{equation}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Trapezoidal in time (or Crank-Nicholson), centred in space:
+\begin_inset Formula 
+\begin{equation}
+\text{CNCS:}~~~~~~~~~~~~\frac{\phi_{j}^{(n+1)}-\phi_{j}^{(n)}}{\Delta t}+\frac{u}{2}\left(\frac{\phi_{j+1}^{(n)}-\phi_{j-1}^{(n)}}{2\Delta x}+\frac{\phi_{j+1}^{(n+1)}-\phi_{j-1}^{(n+1)}}{2\Delta x}\right)=0\label{eqn:CNCS}
+\end{equation}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+How do we solve these equations with unknowns on the RHS?
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Why do we want implicit schemes?
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Backward in Time, Centred in Space (BTCS) - solution technique
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\text{BTCS:}~~~~~~~~~~~~\phi_{j}^{(n+1)}=\phi_{j}^{(n)}-\frac{c_{j}}{2}\left(\phi_{j+1}^{(n+1)}-\phi_{j-1}^{(n+1)}\right)\label{eqn:BTCS-2}
+\end{equation}
+
+\end_inset
+
+Where 
+\begin_inset Formula $c_{j}=2u\Delta t/\left(\Delta x_{j}+\Delta x_{j+1}\right)$
+\end_inset
+
+.
+ How can this be re-arranged to find 
+\begin_inset Formula $\phi_{j}^{(n+1)}$
+\end_inset
+
+ ? Write a set of simultaneous equations, one for each location, 
+\begin_inset Formula $j$
+\end_inset
+
+:
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause 
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{eqnarray*}
+-\frac{c_{1}}{2}\phi_{0}^{(n+1)}+\phi_{1}^{(n+1)}+\frac{c_{1}}{2}\phi_{2}^{(n+1)} & = & \phi_{1}^{(n)}\\
+-\frac{c_{2}}{2}\phi_{1}^{(n+1)}+\phi_{2}^{(n+1)}+\frac{c_{2}}{2}\phi_{3}^{(n+1)} & = & \phi_{2}^{(n)}\\
+\vdots & \vdots & \vdots\\
+-\frac{c_{j}}{2}\phi_{j-1}^{(n+1)}+\phi_{j}^{(n+1)}+\frac{c_{j}}{2}\phi_{j+1}^{(n+1)} & = & \phi_{j}^{(n)}\\
+\vdots & \vdots & \vdots\\
+-\frac{c_{N}}{2}\phi_{N-2}^{(n+1)}+\phi_{N-1}^{(n+1)}+\frac{c_{N}}{2}\phi_{N}^{(n+1)} & = & \phi_{N-1}^{(n)}
+\end{eqnarray*}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause 
+\end_layout
+
+\end_inset
+
+This can be written as a matrix equation for vectors 
+\begin_inset Formula $\bm{\Phi}^{(n)}$
+\end_inset
+
+ and 
+\begin_inset Formula $\bm{\Phi}^{(n+1)}$
+\end_inset
+
+ where
+\begin_inset Newline newline
+\end_inset
+
+ 
+\begin_inset Formula $\bm{\Phi}^{(n)}=\left(\begin{array}{cccccc}
+\phi_{0}^{(n)} & \phi_{1}^{(n)} & \cdots & \phi_{j}^{(n)} & \cdots & \phi_{N}^{(n)}\end{array}\right)^{T}$
+\end_inset
+
+ so that 
+\begin_inset Formula $M\bm{\Phi}^{(n+1)}=\bm{\Phi}^{(n)}.$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Problems (difficult, optional)
+\end_layout
+
+\begin_layout Enumerate
+What should we do about boundary values, 
+\begin_inset Formula $\phi_{0}$
+\end_inset
+
+ and 
+\begin_inset Formula $\phi_{N}$
+\end_inset
+
+?
+\end_layout
+
+\begin_layout Enumerate
+Write out matrix 
+\begin_inset Formula $M$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+How can this be used to write a code which uses BTCS?
+\end_layout
+
+\end_body
+\end_document

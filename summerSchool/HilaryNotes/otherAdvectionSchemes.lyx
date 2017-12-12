@@ -1,0 +1,1539 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass report
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package none
+\inputencoding auto
+\fontencoding default
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 0
+\use_mathdots 0
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+Alternative Advection Schemes
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+liststepwise{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Conclusions from practicals and lectures on advection so far:
+\end_layout
+
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+opttext{
+\end_layout
+
+\end_inset
+
+First-order in space schemes are very diffusive
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+opttext{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Second-order in space, linear schemes lead to grid-scale oscillations
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+opttext{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Explicit Eulerian schemes have time-step restrictions 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+opttext{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Changes in resolution can make errors larger
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace vfill
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Some possible solutions to these problems
+\end_layout
+
+\begin_layout Enumerate
+Semi-Lagrangian advection
+\end_layout
+
+\begin_layout Enumerate
+Artificial diffusion to remove spurious oscillations 
+\end_layout
+
+\begin_layout Enumerate
+Total variation diminishing (TVD) schemes
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Semi-Lagrangian Advection
+\series medium
+\size normal
+ (used by the UK Met Office and ECMWF)
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+liststepwise{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+CFL criterion
+\series default
+: The domain of dependence of the numerical solution must contain the domain
+ of dependence of the original PDE.
+\end_layout
+
+\begin_layout Itemize
+So to allow long time-steps, construct the numerical domain of dependence
+ to contain the physical domain of dependence.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Recall the linear advection equation: 
+\begin_inset Formula ${\textstyle \frac{\partial\phi}{\partial t}+u\frac{\partial\phi}{\partial x}=0}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+and its analytic solution: 
+\begin_inset Formula $\phi(x,t)=\phi(x-ut,0)$
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+raisebox{-0.15
+\backslash
+linewidth}[0pt][0pt]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename /home/hilary/latex/meetings/2013/SS/HilaryNotes/figs/SL.pdf
+	width 40line%
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Semi-Lagrangian advection is defined from this:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $\phi(x_{j},t_{n+1})=\phi(x_{j}-u\Delta t,t_{n})=\phi(x_{jd},t_{n})$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $x_{jd}=x_{j}-u\Delta t$
+\end_inset
+
+ is the departure point of point 
+\begin_inset Formula $x_{j}$
+\end_inset
+
+.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+So interpolate 
+\begin_inset Formula $\phi$
+\end_inset
+
+ from known points onto 
+\begin_inset Formula $x_{jd}$
+\end_inset
+
+.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+First find 
+\begin_inset Formula $k$
+\end_inset
+
+ such that 
+\begin_inset Formula $x_{k}\le x_{jd}\le x_{k+1}$
+\end_inset
+
+: (Use 
+\begin_inset Formula $\text{int}(x)$
+\end_inset
+
+ meaning the integer part of 
+\begin_inset Formula $x$
+\end_inset
+
+) 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $k=\opttext{\text{int}((x_{j}-u\Delta t)/\Delta x)=\text{int}(j-c)}$
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Interpolate from 
+\begin_inset Formula $x_{k-1}$
+\end_inset
+
+, 
+\begin_inset Formula $x_{k}$
+\end_inset
+
+, 
+\begin_inset Formula $x_{k+1}$
+\end_inset
+
+, 
+\begin_inset Formula $x_{k+2}$
+\end_inset
+
+, ...
+ onto 
+\begin_inset Formula $x_{jd}$
+\end_inset
+
+ 
+\begin_inset Newline newline
+\end_inset
+
+(for example using cubic-Lagrange interpolation)
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+The time step is no-longer restricted by the Courant number but for stability,
+ a sufficiently small time step must be used so that trajectories do not
+ cross.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\series bold
+Exercise:
+\series default
+ Find 
+\begin_inset Formula $\beta=\frac{x_{jd}-x_{k}}{\Delta x}$
+\end_inset
+
+ as a function of only 
+\begin_inset Formula $j$
+\end_inset
+
+, 
+\begin_inset Formula $k$
+\end_inset
+
+ and 
+\begin_inset Formula $c$
+\end_inset
+
+ given 
+\begin_inset Formula $x_{j}=j\Delta x$
+\end_inset
+
+ and 
+\begin_inset Formula $c=u\Delta t/\Delta x$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+opttext{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $\beta=j-k-c$
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Problem
+\series default
+: The advected quantity is not conserved
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Artificial Diffusion to Remove Spurious Oscillations
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+liststepwise{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Numerical schemes are designed not to produce spurious oscillations.
+ However, once a forecasting model is put together, often spurious oscillations
+ are still generated.
+ These can be removed by adding an artificial diffusion term to the equations.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+For example, the linear advection equation with diffusion: 
+\begin_inset Formula 
+\begin{equation}
+\frac{\partial\phi}{\partial t}+\vec{u}\dprod\nabla\phi-K\nabla^{2}\phi=0
+\end{equation}
+
+\end_inset
+
+or in one dimension:
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{equation}
+\step{\frac{\partial\phi}{\partial t}+}\opttext{u\frac{\partial\phi}{\partial x}-K\frac{\partial^{2}\phi}{\partial x^{2}}=0}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+This is dampens spurious oscillations and real features 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+It is only (but frequently) used as a last resort.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+More scale-selective filtering can be achieved using 
+\begin_inset Formula $\nabla^{4}$
+\end_inset
+
+ rather than 
+\begin_inset Formula $\nabla^{2}$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{equation}
+\frac{\partial\phi}{\partial t}+\vec{u}\dprod\nabla\phi+K\nabla^{4}\phi=0
+\end{equation}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\series bold
+Information for Practical: 
+\series default
+The following advection-diffusion scheme is stable for 
+\begin_inset Formula $c^{2}+4d\le1$
+\end_inset
+
+ where 
+\begin_inset Formula $d=K\Delta t/\Delta x^{2}$
+\end_inset
+
+: 
+\begin_inset Formula 
+\begin{equation}
+\phi_{j}^{(n+1)}-\phi_{j}^{(n-1)}+c(\phi_{j+1}^{(n)}-\phi_{j-1}^{(n)})-2d(\phi_{j+1}^{(n-1)}-2\phi_{j}^{(n-1)}+\phi_{j-1}^{(n-1)})=0.
+\end{equation}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Total Variation Diminishing (TVD) schemes
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+liststepwise*{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+Linear, second-order advection schemes produce unbounded, unrealistic, grid-scal
+e oscillations.
+ These can be measured by the total variation: 
+\begin_inset Formula 
+\[
+TV={\textstyle \sum_{j}|\phi_{j+1}-\phi_{j}|}
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Exercise:
+\series default
+ Calculate the total variation of these functions:
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+renewcommand
+\backslash
+arraystretch{-0.5}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="3">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0">
+<column alignment="left" valignment="top" width="0">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename python/TV/TV1.pdf
+	lyxscale 40
+	width 30text%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename python/TV/TV2.pdf
+	lyxscale 40
+	width 30text%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename python/TV/TV3.pdf
+	lyxscale 40
+	width 30text%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename python/TV/TV4.pdf
+	lyxscale 40
+	width 30text%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename python/TV/TV5.pdf
+	lyxscale 40
+	width 30text%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename python/TV/TV6.pdf
+	lyxscale 40
+	width 30text%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+opttext{(a) 8, (b) 8, (c) 12, (d) 8, (e) 12, (f) 6}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+A total variation diminishing (TVD) scheme has 
+\begin_inset Formula $TV^{(n+1)}\le TV^{(n)}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\series bold
+Question:
+\series default
+ Why is total variation used rather than boundedness to measure the generation
+ of spurious oscillations? ...
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+opttext{Because spurious oscillations can be generated within the bounds
+ of the original function.
+ Eg see function (e) above.}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+liststepwise*{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+First-order upwind is the only 
+\shape italic
+linear
+\shape default
+ TVD scheme (Godunov's theorem).
+ Other TVD schemes are non-linear...
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+To define a TVD scheme, start with the discretised linear advection equation:
+ 
+\begin_inset Formula 
+\begin{equation}
+\frac{\phi_{j}^{(n+1)}-\phi_{j}^{(n)}}{\Delta t}=-u\frac{\phi_{j+\half}-\phi_{j-\half}}{\Delta x}.
+\end{equation}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Each 
+\begin_inset Formula $\phi_{j\pm\half}$
+\end_inset
+
+, is calculated as a weighted average of a high order flux (
+\begin_inset Formula $\phi_{H}$
+\end_inset
+
+) and a low order flux (
+\begin_inset Formula $\phi_{L}$
+\end_inset
+
+): 
+\begin_inset Formula 
+\[
+\phi_{j+\half}=\Psi_{j+\half}~\phi_{H}+(1-\Psi_{j+\half})~\phi_{L}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ is a limiter function.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Use as much of 
+\begin_inset Formula $\phi_{H}$
+\end_inset
+
+ as possible without introducing oscillations
+\end_layout
+
+\begin_layout Itemize
+So 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ should be close to one where the solution is smooth so that the solution
+ is close to second-order accurate and 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ close to zero where the solution changes rapidly so as to use the upwind
+ flux which guarantees boundedness.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+The scheme is now non-linear since 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ depends on 
+\begin_inset Formula $\phi$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Itemize
+We can use:
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+--
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Centred in space as the high-order flux:
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\phi_{H}=\half(\phi_{j}+\phi_{j+1})$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+--
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+First-order upwind as the low-order flux:
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\phi_{L}=\begin{cases}
+\phi_{j} & \text{if }u\ge0\\
+\phi_{j1} & \text{{otherwise}}
+\end{cases}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+So what should 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ be?
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Limiter functions
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+liststepwise*{
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The limiter function, 
+\begin_inset Formula $\Psi$
+\end_inset
+
+, is based on the ratio of the upwind gradient to the local gradient: 
+\begin_inset Formula 
+\[
+r_{j+\half}=\frac{\phi_{j}-\phi_{j-1}}{\phi_{j+1}-\phi_{j}}
+\]
+
+\end_inset
+
+for 
+\begin_inset Formula $u>0$
+\end_inset
+
+.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+An Example: the Van Leer Limiter
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\Psi(r)=\left(r+|r|\right)/\left(1+|r|\right)
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+A lot of algebra will show you that this scheme is TVD.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+There are many other limiter functions that give TVD schemes.
+\end_layout
+
+\begin_layout Standard
+See, eg 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+https://en.wikipedia.org/wiki/Flux_limiter
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

@@ -1,0 +1,22 @@
+zip Weller_summerSchool.zip\
+    practicals/linearAdvectCode/diagnostics.py \
+    practicals/linearAdvectCode/initialConditions.py \
+    practicals/SWE/*.py \
+    WellerSSnotes_2_lec.pdf WellerSSnotes_2_student.pdf \
+    feedback_2_student.pdf corrections.pdf
+
+scp Weller_summerSchool.zip sws02hs@oak.reading.ac.uk:public_html/teaching
+
+zip summerSchool_forJames.zip \
+    practicals/linearAdvectCode/*.py \
+    practicals/SWE/*.py \
+    practicals/SWE_Hilary/*.py \
+    WellerSSnotes_2_lec.pdf WellerSSnotes_2_student.pdf
+
+scp summerSchool_forJames.zip sws02hs@oak.reading.ac.uk:public_html/teaching
+
+zip Weller_code.zip \
+    practicals/linearAdvectCode/diagnostics.py \
+    practicals/linearAdvectCode/initialConditions.py \
+    practicals/SWE/*.py
+

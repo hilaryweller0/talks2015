@@ -1,0 +1,248 @@
+
+\chapter{The Navier Stokes Equations}
+
+The Navier-Stokes Equations for a compressible, rotating atmosphere
+
+{\global\long\def\arraystretch{0.8}
+
+
+\begin{tabular}{ll}
+\multicolumn{2}{l}{\textbf{The Lagrangian derivative:} $\frac{D\Psi}{Dt}=\frac{\partial\Psi}{\partial t}+\mathbf{u}\cdot\nabla\Psi$}\tabularnewline
+ & \tabularnewline
+Momentum  & $\frac{D\mathbf{u}}{Dt}=\text{-}2\bm{\Omega}\times\mathbf{u}-\frac{\nabla p}{\rho}+\mathbf{g}+\mu_{u}\left(\nabla^{2}\mathbf{u}+\frac{1}{3}\nabla(\nabla\cdot\mathbf{u})\right)$ \tabularnewline
+ & \tabularnewline
+Continuity  & $\frac{D\rho}{Dt}+\rho\nabla\cdot\mathbf{u}=0$\tabularnewline
+ & \tabularnewline
+Energy  & $\frac{D\theta}{Dt}=Q+\mu_{\theta}\nabla^{2}\theta$\tabularnewline
+ & \tabularnewline
+\multicolumn{2}{l}{An equation of state, eg perfect gas law, $p=\rho RT$}\tabularnewline
+\end{tabular}}{\global\long\def\arraystretch{1}
+
+
+\noindent \begin{flushleft}
+\begin{tabular}{llll}
+$\mathbf{u}$  & Wind vector  & $\vec{g}$  & Gravity vector (downwards)\tabularnewline
+$t$  & Time  & $\theta$  & Potential temperature, $T\left(p_{0}/p\right)^{\kappa}$\tabularnewline
+$\bm{\Omega}$  & Rotation rate of planet & $\kappa$ & heat capacity ratio $\approx1.4$\tabularnewline
+$\rho$  & Density of air & $Q$ & Source of heat\tabularnewline
+$p$  & Atmospheric pressure & $\mu_{u}$, $\mu_{\theta}$  & Diffusion coefficients\tabularnewline
+\end{tabular}
+\par\end{flushleft}
+
+}\pause 
+\begin{itemize}
+\item What does $\mathbf{u}$ mean?\pause 
+\item What does $\nabla\cdot\mathbf{u}$ mean?\pause 
+\item What does $\nabla p$ mean?\pause 
+\item What does $\mathbf{u}\cdot\nabla\Psi$ mean?
+\end{itemize}
+
+\section{The Potential Temperature Equation}
+
+\begin{center}
+\begin{tabular}{ccccccccc}
+$\frac{D\theta}{Dt}$ & $=$ & $\frac{\partial\theta}{\partial t}$ & $+$ & $\mathbf{u}\cdot\nabla\theta$ & $=$ & $Q$ & $+$ & $\mu_{\theta}\nabla^{2}\theta$\tabularnewline
+Lagrangian &  & Rate of change &  & Advection &  & Heat &  & Diffusion\tabularnewline
+derivative &  & at fixed point &  & of $\theta$ &  & source &  & of $\theta$\tabularnewline
+\end{tabular}
+\par\end{center}
+
+\pause%
+\begin{minipage}[c]{0.35\columnwidth}%
+\begin{flushleft}
+$\theta$ will be created and destroyed by the heat source, $Q$ ,
+it will be moved around by the wind field, $\mathbf{u}$, and $\theta$
+will be diffused by a diffusion coefficient, $\mu_{\theta}$
+\par\end{flushleft}%
+\end{minipage}%
+\begin{minipage}[c]{0.6\columnwidth}%
+\mediaMovie[autostart,loop]
+{\includegraphics[width=\linewidth]{/home/hilary/OpenFOAM/hilary-2.3.0/run/teachingAnims/advection/movie/T1.jpg}}
+{animations/teachingAnims_advection_movie_T.mp4}%
+\end{minipage}
+
+
+\section{Advection of Pollution\label{sec:Advection-of-Pollution}}
+
+
+\subsection{Pure Linear Advection}
+
+Advection of concentration $\phi$ without diffusion or sources or
+sinks:
+\begin{equation}
+\frac{D\phi}{Dt}=\frac{\partial\phi}{\partial t}+\mathbf{u}\cdot\nabla\phi=0\label{eqn:3dAdvect}
+\end{equation}
+Changes of $\phi$ are produced by the component of the wind in the
+same direction as gradients of $\phi$. In order to understand why
+the $\mathbf{u}\cdot\nabla\phi$ term leads to changes in $\phi$,
+consider a region of polluted atmosphere where the pollutant has the
+concentration contours shown below:
+
+\noindent %
+\begin{minipage}[c]{0.5\linewidth}%
+ \vspace{1cm}
+ \includegraphics[width=1\linewidth]{/home/hilary/latex/teaching/MTMW12/2014/notes/figs/contours} %
+\end{minipage}\hfill{}%
+\begin{minipage}[c]{0.43\linewidth}%
+\textbf{Exercise}: Draw on the figure the directions of the gradients
+of $\phi$ and thus mark with a $+$, $-$ or $0$ locations where
+$\mathbf{u}\cdot\nabla\phi$ is positive, negative and zero. Thus
+deduce where $\phi$ is increasing, decreasing or staying the same
+based on equation \ref{eqn:3dAdvect}. Hence overlay contours of $\phi$
+at a later time. %
+\end{minipage}
+
+\clearpage{}
+
+
+\subsection{Advection/Diffusion with Sources and Sinks\label{sub:AdvDiff}}
+
+\begin{center}
+\begin{tabular}{ccccccccc}
+$\frac{D\Psi}{Dt}$ & $=$ & $\frac{\partial\Psi}{\partial t}$ & $+$ & $\mathbf{u}\cdot\nabla\Psi$ & $=$ & $S$ & $+$ & $\mu_{\Psi}\nabla^{2}\Psi$\tabularnewline
+Lagrangian &  & Rate of change &  & Advection &  & Sources &  & Diffusion\tabularnewline
+derivative &  & at fixed point &  & of $\Psi$ &  & and sinks &  & of $\Psi$\tabularnewline
+\end{tabular}
+\par\end{center}
+
+\mediaMovie[autostart]{\includegraphics[width=0.8\textwidth]{/home/hilary/Videos/pollutionPlumes/pollutionPlumes-still.png}}{animations/Videos_pollutionPlumes_pollutionPlumes.avi}
+
+
+\section{The Momentum Equation\label{sec:momEqn}}
+
+\begin{center}
+\begin{tabular}{ccccccccc}
+$\frac{D\mathbf{u}}{Dt}$ & $=$ & $\text{-}2\bm{\Omega}\times\mathbf{u}$ & - & $\frac{\nabla p}{\rho}$ & + & $\mathbf{g}$ & $+$ & $\mu_{u}\left(\nabla^{2}\mathbf{u}+\frac{1}{3}\nabla(\nabla\cdot\mathbf{u})\right)$\tabularnewline
+Lagrangian &  & Coriolis &  & Pressure & \multicolumn{3}{c}{Gravitational} & Diffusion\tabularnewline
+derivative &  &  &  & gradient & \multicolumn{3}{c}{acceleration} & \tabularnewline
+\end{tabular}
+\par\end{center}
+
+
+\subsection{Coriolis}
+
+Inertial Oscillations governed by part of the momentum equation:
+
+\begin{minipage}[c]{0.35\columnwidth}%
+\[
+\frac{\partial\mathbf{u}}{\partial t}=\text{-}2\bm{\Omega}\times\mathbf{u}
+\]
+
+\begin{itemize}
+\item \begin{flushleft}
+A drifting buoy set in motion by strong westerly winds in the Baltic
+Sea in July 1969. 
+\par\end{flushleft}
+\item \begin{flushleft}
+Once the wind subsides, the upper ocean follows inertia circles
+\par\end{flushleft}
+\end{itemize}
+\includegraphics[width=1\linewidth]{figs/copyright_persson_broman}%
+\end{minipage}\hfill{}%
+\begin{minipage}[c]{0.6\columnwidth}%
+\includegraphics[width=1\linewidth]{figs/inertia_circle}%
+\end{minipage}
+
+
+\subsection{The Pressure Gradient Force}
+
+\begin{minipage}[c]{0.48\columnwidth}%
+If the pressure gradient force is the only large term in the momentum
+equation, then together with the continuity equation and perfect gas
+law, we get equations for acoustic waves:
+\begin{eqnarray*}
+\frac{\partial\mathbf{u}}{\partial t}+\frac{1}{\rho_{0}}\nabla p & = & 0\\
+\frac{\partial p}{\partial t}+\rho_{0}c^{2}\nabla\cdot\mathbf{u} & = & 0
+\end{eqnarray*}
+where $\rho_{0}$ is a reference density and $c$ is the speed of
+sound.%
+\end{minipage}\hfill{}%
+\begin{minipage}[c]{0.48\columnwidth}%
+\mediaMovie[autostart,loop]
+{\includegraphics[width=\textwidth]{/home/hilary/latex/teaching/MPECDT/PDEsNumerics/notes/anims/Spherical_wave2-0.jpg}}
+{animations/latex_teaching_MPECDT_PDEsNumerics_notes_anims_Spherical_wave2.avi}%
+\end{minipage}
+
+\clearpage{}
+
+
+\subsection*{Pressure Gradients lead to very fast acceleration - Acoustic Waves}
+
+\mediaMovie[autostart=true,loop]{\includegraphics[width=0.8\textwidth]{/home/hilary/Videos/pressureWaves/bombBlast.jpg}}{animations/Videos_pressureWaves_bombBlast.avi}
+
+\clearpage{}
+
+
+\subsection*{Geostrophic Balance: Pressure Gradients versus Coriolis}
+
+\includegraphics[height=0.8\textheight]{figs/synnopticChart}
+
+\clearpage{}
+
+
+\subsection*{Geostrophic turbulence: pressure gradients, Coriolis and the (non-linear)
+advection of velocity by velocity}
+
+\mediaMovie[autostart]{\includegraphics[width=0.8\textwidth]{/home/hilary/Videos/geoTurbulence/geoTurbulence.jpg}}{animations/Videos_geoTurbulence_geoTurbulence.avi}
+
+
+\subsection{Gravitational Acceleration: A simulation of a dam break}
+
+\noindent \mediaMovie[autostart]{\includegraphics[width=0.8\textwidth]{/home/hilary/Videos/damBreak/damBreak.jpg}}{animations/Videos_damBreak_damBreak.avi}
+
+
+\subsection*{Gravitational Acceleration: Explosive Comulonimbus}
+
+\noindent \mediaMovie[autostart]{\includegraphics[width=0.8\textwidth]{/home/hilary/Videos/convectivePlumes/explosiveComulonumbus.jpg}}{animations/Videos_convectivePlumes_explosiveComulonumbus.avi}
+
+\clearpage{}
+
+
+\subsection{Diffusion}
+
+\begin{minipage}[t]{0.47\columnwidth}%
+Diffusion of quantity $\phi$ with diffusion coefficient $\mu_{\phi}$
+in arbitrary spatial dimensions
+\[
+\frac{\partial\phi}{\partial t}=\mu_{\phi}\nabla^{2}\phi
+\]
+
+
+And in 1d:
+\[
+\frac{\partial\phi}{\partial t}=\mu_{\phi}\frac{\partial^{2}\phi}{\partial x^{2}}
+\]
+
+
+\begin{flushleft}
+The second derivative of $\phi$ is high at troughs and low in peaks
+of $\phi$. Therefore diffusion tends to remove peaks and troughs
+and make a profile more smooth:
+\par\end{flushleft}
+
+
+\subsubsection*{Discussion Questions:}
+\begin{itemize}
+\item Which equations have a diffusion coefficient?
+\item What causes diffusion?
+\item Is diffusion a large term of the equations of atmospheric motion?\end{itemize}
+%
+\end{minipage}\hfill{}%
+\begin{minipage}[t]{0.49\columnwidth}%
+\centering \textbf{Diffusion of a noisy profile}\\
+ (zero gradient boundary conditions) \mediaMovie[autostart,loop]
+{\includegraphics[width=\textwidth]{/home/hilary/latex/teaching/MTMW12/2014/notes/pythonExamples/diffusion/FTCSdiffusion0.pdf}}
+{animations/latex_teaching_MTMW12_2014_notes_pythonExamples_diffusion_FTCSdiffusion.avi}%
+\end{minipage}
+
+\clearpage{}
+
+
+\subsection{The Complete Navier Stokes Equations}
+
+With moisture, phase changes, radiation, ... from NUGAM (courtesy
+of Pier Luigi)
+
+\mediaMovie[autostart,loop]
+{\includegraphics[width=\textwidth]{/home/hilary/Videos/NUGAM/NUGAM_Sun_1yr_web.jpg}}
+{animations/Videos_NUGAM_NUGAM_Sun_1yr_web.avi}

@@ -1,0 +1,407 @@
+
+\chapter{Numerical Analysis of Advection Schemes \label{chap:advectionAnalysis}}
+
+
+\section{Domain of Dependence}
+
+If I stand outside on a windy day, what does the temperature depend
+on?
+
+\stepwise{\opttext{
+\begin{itemize}
+\item Solar radiation\opttext{
+\item Wind direction - why?}\opttext{
+
+\begin{itemize}
+\item Temperature upwind
+\end{itemize}
+\item }\opttext{Altitude}
+\end{itemize}
+}\step{The domain of dependence of the solution of a PDE at position
+$\mathbf{x}$ and at time $t$ is the set of points at a previous
+time that influence the solution at position $\mathbf{x}$ and at
+time $t$. }
+
+\step{If the wind is blowing from the west at 10~miles/hour, the
+following points are in the domain of dependence of Cambridge at 10am:}\step{
+\begin{itemize}
+\item 10 miles to the west at 9am
+\item \step{15 miles to the west at ... }\opttext{8:30am}\step{
+\item \opttext{20 miles to the west at 8am}}
+\end{itemize}
+}}
+
+\clearpage{}
+
+\stepwise{
+
+Remember the analytic solution of the 1D linear advection equation:
+\[
+\phi(x,t)=\opttext{\phi(x-ut,0)}
+\]
+}Draw the domain of dependence of $x=12$m, $t=8$s on the graph,
+assuming a wind-speed of $1.5$m/s:
+
+\ifthenelse{\boolean{@studentversion}\and\not\boolean{@onlineversion}}
+{
+    \resizebox{0.8\textwidth}{!}{\input{figs/dod1.pdf_t}}
+}
+{
+\stepwise*{\overlays{2}{\resizebox{0.8\textwidth}{!}{\input{figs/dod\thesubstep.pdf_t}}}}
+}
+
+\clearpage{}
+
+
+\subsection{Courant-Friedrichs-Lewy (CFL) criterion:}
+
+The domain of dependence of the numerical solution should include
+the domain of dependence of the original PDE.
+\begin{itemize}
+\item The CFL criterion is necessary but not sufficient
+\item For linear advection, the domain of dependence of the differential
+equation at $(j\Delta x,n\Delta t)$ is the straight line of slope
+$1/u$ through $(j\Delta x,n\Delta t)$ for $t\le n\Delta t$ in the
+$(x,t)$ plane. \pause
+\end{itemize}
+
+\subsection{Domain of Dependence of FTBS}
+
+\stepwise{$\text{FTBS:}~~~~~~~~\phi_{j}^{(n+1)}=\opttext{\phi_{j}^{(n)}-c(\phi_{j}^{(n)}-\phi_{j-1}^{(n)})}$}
+
+
+\paragraph*{\textmd{$\phi_{j}^{(n)}$ depends on $\phi_{j}^{(n-1)}$ and $\phi_{j-1}^{(n-1)}$.
+In turn, these depend on $\phi_{j}^{(n-2)}$, $\phi_{j-1}^{(n-2)}$
+and $\phi_{j-2}^{(n-2)}$.\pause}}
+
+\stepwise*{\textbf{Exercise: }Mark the dots that make up the domain
+of dependence of $\phi_{j}^{(n+1)}$ for FTBS. Draw lines corresponding
+to the real (physical) domain of dependence for cases when $c=-1,0,1,2$.
+What can you deduce?\\
+\ifthenelse{\boolean{@studentversion}\and\not\boolean{@onlineversion}}
+{
+    \resizebox{0.6\textwidth}{!}
+    {\includegraphics[width=\linewidth]
+    {figs/domainDependenceFTBS1.pdf}}
+}
+{
+    \overlays{2}{\resizebox{0.6\textwidth}{!}
+    {\includegraphics[width=\linewidth]
+    {figs/domainDependenceFTBS\thesubstep.pdf}}}
+}
+
+\opttext{The numerical domain of dependence contains the physical
+domain of dependence when $0\le c\le1$ so FTBS is unstable for $c>1$
+and $c<0$. But we cannot say if FTBS is ever stable.}}\clearpage{}
+
+
+\subsection{The Domain of Dependence of the CTCS Scheme}
+
+\stepwise{
+
+
+\paragraph*{
+\[
+\text{CTCS:}~~~~~~~~~~~~\phi_{j}^{(n+1)}=\opttext{\phi_{j}^{(n-1)}-c(\phi_{j+1}^{(n)}-\phi_{j-1}^{(n)})}
+\]
+}
+
+Draw the domain of dependence of $\phi_{j}^{(n+1)}$ for CTCS.
+
+\ifthenelse{\boolean{@studentversion}\and\not\boolean{@onlineversion}}
+{
+    \resizebox{0.6\textwidth}{!}
+    {\includegraphics[width=\linewidth]
+    {figs/domainDependenceCTCS1.pdf}}
+}
+{
+    \overlays{2}{\resizebox{0.6\textwidth}{!}
+    {\includegraphics[width=\linewidth]
+    {figs/domainDependenceCTCS\thesubstep.pdf}}}
+}
+
+\step{For what values of $c$ will CTCS be unstable? }\opttext{$c<-1$ and $c>1$}
+
+\step{Except at the initial time, the solution is found on two sets
+of points that are not coupled. The solution can oscillate between
+two unrelated solutions. This is a manifestation of the computational
+mode of CTCS.}}
+
+\clearpage{}
+
+
+\section{Von-Neumann Stability Analysis for Wave Equations}
+
+\liststepwise{
+\begin{itemize}
+\item The solution of a PDE in one spatial dimension can be expressed as
+a sum of Fourier modes:
+\begin{equation}
+\phi=\sum_{k=-\infty}^{\infty}A_{k}e^{ikx}
+\end{equation}
+each with wavenumber $k$. 
+\item \step{Consider the stability of a solution for individual wavenumbers}
+\item \step{For a uniform grid, $x=j\Delta x$}
+\item \step{Substitute $\phi_{j}^{(n)}=A^{n}e^{ikj\Delta x}$ into the
+equation for a linear numerical scheme.}
+\item \step{Rearrange to give an equation for the amplification factor,
+$A(k,\Delta x,\Delta t)$, which tells us the following about the
+scheme:}
+\end{itemize}
+}\liststepwise{
+
+\global\long\def\arraystretch{1.1}
+\begin{tabular}{lll}
+$|A|<1$  & $\forall\ k,\ \Delta x$ & \opttext{stable and damping}\tabularnewline
+$|A|=1$  & $\forall\ k,\ \Delta x$ & \opttext{neutrally stable}\tabularnewline
+$|A|>1$  & for any $k,\ \Delta x$ & \opttext{unstable (amplifying)}\tabularnewline
+\end{tabular}
+
+Where $|A|^{2}=AA^{*}$ ($A$ multiplied by its complex conjugate).
+\begin{itemize}
+\item \step{For linear advection $A$ should be complex since the solution
+changes location every time-step}
+\end{itemize}
+}\clearpage{}
+
+
+\subsection{Von-Neumann Stability Analysis of FTBS}
+
+\stepwise{
+
+FTBS for linear advection is: 
+\begin{equation}
+\phi_{j}^{(n+1)}=\phi_{j}^{(n)}-c\bigl(\phi_{j}^{(n)}-\phi_{j-1}^{(n)}\bigr)
+\end{equation}
+Substitute in $\phi_{j}^{(n)}=A^{n}e^{ikj\Delta x}$ :
+
+\begin{equation}
+\opttext{A^{n+1}e^{ikj\Delta x}=A^{n}e^{ikj\Delta x}-cA^{n}(e^{ikj\Delta x}-e^{ik(j-1)\Delta x})}
+\end{equation}
+Cancel powers of $A^{n}e^{ikj\Delta x}$ and rearrange to find $A$
+in terms of $c$ and $k\Delta x$: 
+\begin{equation}
+\opttext{A=1-c(1-e^{-ik\Delta x})}
+\end{equation}
+We need to find the magnitude of $A$ so we need to write it down
+in real and imaginary form. So substitute $e^{-ik\Delta x}=\cos k\Delta x-i\sin k\Delta x$:
+\begin{equation}
+\opttext{A=1-c(1-\cos k\Delta x)-ic\sin k\Delta x}
+\end{equation}
+\step{and calculate $|A|^{2}=AA^{*}$ ($A$ multiplied by its complex
+conjugate):
+\begin{align*}
+|A|^{2} & =1-2c(1-\cos k\Delta x)+c^{2}(1-2\cos k\Delta x+\cos^{2}k\Delta x)+c^{2}\sin^{2}k\Delta x\\
+\implies|A|^{2} & =1-2c(1-c)(1-\cos k\Delta x)
+\end{align*}
+}\step{We need to find for what value of $\Delta t$ or $c$ is $|A|\le1$
+in order to find when FTBS is stable: 
+\begin{align*}
+|A|\le1 & \iff|A|^{2}-1\le0\\
+ & \iff-2c(1-c)(1-\cos k\Delta x)\le0\\
+ & \iff c(1-c)(1-\cos k\Delta x)\ge0\\
+\end{align*}
+}\step{So we know that FTBS is stable only when $c(1-c)(1-\cos k\Delta x)\ge0$
+and that this conditions must hold regardless of the value of $k\Delta x$.
+Let us plot the curve for some values of $k\Delta x$:}}
+
+\clearpage{}\liststepwise*{\textbf{Exercise: }Sketch $c(1-c)(1-\cos k\Delta x)$
+for $k\Delta x=\pm\pi$, $k\Delta x=\pm\pi/2$, $k\Delta x=\pm\pi/4$,
+$k\Delta x=0$
+
+\ifthenelse{\boolean{@onlineversion}}%
+{
+    \overlays{5}{\resizebox{0.6\textwidth}{!}%
+    {\includegraphics[width=\linewidth]
+    {python/FTBSstability/FTBSstability\thesubstep.pdf}}}
+}
+{
+    \ifthenelse{\boolean{@studentversion}}%
+    {%
+\includegraphics[width=0.6\linewidth]{python/FTBSstability/FTBSstability1.pdf}%
+    }%
+    {
+\includegraphics[width=0.6\linewidth]{python/FTBSstability/FTBSstability5.pdf}%
+    }
+}
+
+\step{$k\Delta x$ is set by the initial conditions. So stability
+should not depend on $k\Delta x$.
+
+So FTBS is stable when...}\opttext{ $0\le c\le1$.}
+
+\step{We have proved that FTBS is unstable if $u<0$ or if $\frac{u\Delta t}{\Delta x}>1$.
+We will now define:\\
+ %
+\begin{tabular}{lll}
+\textbf{Upwind scheme } & FTBS  & when $u\ge0$\tabularnewline
+ & FTFS  & when $u<0$ \tabularnewline
+\end{tabular}
+
+\textbf{\small{}The upwind scheme is first order accurate in space
+and time, conditionally stable and damping.} }\step{
+
+\textcolor{blue}{Question:} For what values of $\Delta t$ is the
+upwind scheme stable? }\opttext{$\Delta t\le\Delta x/|u|$}
+
+\step{
+
+\textcolor{blue}{Question:} How does this compare with the conclusion
+from the domain of dependence?}}
+
+\clearpage{}
+
+
+\subsection{Von Neumann Stability Analysis of CTCS}
+
+\liststepwise{
+
+The amplification factor, $A$, is found by substituting $\phi_{j}^{(n)}=\opttext{A^{n}e^{ikj\Delta x}}$\\
+into the equation for CTCS: 
+\[
+\phi_{j}^{(n+1)}=\opttext{\phi_{j}^{(n-1)}-c\bigl(\phi_{j+1}^{(n)}-\phi_{j-1}^{(n)}\bigr).}
+\]
+This gives: 
+\begin{align*}
+\  & \opttext{A^{n+1}e^{ikj\Delta x}-A^{n-1}e^{ikj\Delta x}+c(A^{n}e^{ik(j+1)\Delta x}-A^{n}e^{ik(j-1)\Delta x})=0} & \  & \ \\
+\  & \opttext{A^{2}+(2ic\sin k\Delta x)A-1=0} & \  & \ \\
+\implies & A=\opttext{-ic\sin k\Delta x\pm\sqrt{1-c^{2}\sin^{2}k\Delta x}} & \  & \ 
+\end{align*}
+
+
+\step{There are two cases to consider:}
+
+{\setlength{\tabcolsep}{2pt} \global\long\def\arraystretch{1.5}
+ %
+\begin{tabular}{ll}
+\step{(i) $|c|\le1$  & $\implies c^{2}\sin^{2}k\Delta x\le1$ }\tabularnewline
+ & $\step{\implies|A|^{2}=}\opttext{1-c^{2}\sin^{2}k\Delta x+c^{2}\sin^{2}k\Delta x=1}$\tabularnewline
+ & $\step{\implies}$ \opttext{The solution is stable and not damping}\tabularnewline
+\step{(ii) $|c|>1$  & $\implies c^{2}\sin^{2}k\Delta x>1$ for some $k\Delta x$}\tabularnewline
+ & $\step{\implies|A|^{2}=}\opttext{(c\sin k\Delta x\pm\sqrt{c^{2}\sin^{2}k\Delta x-1})^{2}}$\tabularnewline
+ & $\step{\implies}$\opttext{ At least one of the roots has $|A|>1$.
+The solution is unstable}\tabularnewline
+\end{tabular}}
+
+\step{So CTCS is conditionally stable: it is stable for ... }\opttext{$|c|\le1$}
+
+\step{Regardless of $c$, there are always two possible values of
+$A$. This means that there will always be two possible solutions;
+a realistic solution (the physical mode) and the un-realistic, oscilating
+solution; the spurious computational mode}
+
+}\clearpage{}
+
+
+\section{Exercises: Analysis of Advection Schemes}
+\begin{enumerate}
+\item Write down the following schemes and derive expressions for their
+amplification factors:
+
+\begin{enumerate}
+\item FTCS 
+\item BTCS 
+\item CTBS 
+\end{enumerate}
+\item Which of the above schemes suffer from a spurious computational mode?
+\item Sketch of the domain of dependence for these schemes 
+\item For FTCS and BTCS
+
+\begin{enumerate}
+\item Find for what Courant numbers the schemes are stable.
+\item Are the schemes damping, amplifying or neutral?
+\item Write down an expressions for the phase speeds of the numerical waves
+(not covered)
+\end{enumerate}
+\item Determine if mass is conserved by CTCS (not covered)
+\end{enumerate}
+\optpage{
+
+
+\section*{Answers}
+\begin{enumerate}
+\item Expressions for the amplification factors for the following advection
+schemes: 
+
+\begin{enumerate}
+\item FTCS: $\phi_{j}^{(n+1)}=\phi_{j}^{(n)}-\frac{c}{2}\left(\phi_{j+1}^{(n)}-\phi_{j-1}^{(n)}\right)$\\
+Substitute in $\phi_{j}^{(n)}=A^{n}e^{ikj\Delta x}$ and cancel powers
+of $A^{n}e^{ikj\Delta x}$:
+\begin{align*}
+A= & 1-\frac{c}{2}(e^{ik\Delta x}-e^{-ik\Delta x})\\
+= & 1-ic\sin k\Delta x
+\end{align*}
+
+\item BTCS: $\phi_{j}^{(n+1)}=\phi_{j}^{(n)}-\frac{c}{2}\left(\phi_{j+1}^{(n+1)}-\phi_{j-1}^{(n+1)}\right)$\\
+Substitute in $\phi_{j}^{(n)}=A^{n}e^{ikj\Delta x}$ and cancel powers
+of $A^{n}e^{ikj\Delta x}$:
+\begin{align*}
+A= & 1-\frac{c}{2}A(e^{ik\Delta x}-e^{-ik\Delta x})\\
+\Rightarrow A= & \frac{1}{1+ic\sin k\Delta x}\\
+= & \frac{1-ic\sin k\Delta x}{1+c^{2}\sin^{2}k\Delta x}
+\end{align*}
+
+\item CTBS: $\phi_{j}^{(n+1)}=\phi_{j}^{(n-1)}-2c\left(\phi_{j}^{(n)}-\phi_{j-1}^{(n)}\right)$\\
+Substitute in $\phi_{j}^{(n)}=A^{n}e^{ikj\Delta x}$ and cancel powers
+of $A^{n}e^{ikj\Delta x}$:
+\begin{align*}
+A= & \frac{1}{A}-2c(1-e^{-ik\Delta x})\\
+\Rightarrow & A^{2}+2c(1-\cos k\Delta x+i\sin k\Delta x)A-1=0\\
+\Rightarrow A= & -2c(1-\cos k\Delta x+i\sin k\Delta x)\pm\sqrt{c^{2}(1-\cos k\Delta x+i\sin k\Delta x)^{2}+1}
+\end{align*}
+
+\end{enumerate}
+\item CTBS will suffer from a spurious computational mode because there
+are two possible solutions for $A$ whereas there is only one possible
+solution for the first order linear advection PDE.
+\item Domain of dependence for:\\
+\begin{tabular}{ccc}
+(a) FTCS & (b) BTCS & (c) CTBS\tabularnewline
+\includegraphics[width=0.3\linewidth]{figs/domainDependenceFTCS} & \includegraphics[width=0.3\linewidth]{figs/domainDependenceBTCS} & \includegraphics[width=0.3\linewidth]{figs/domainDependenceCTBS}\tabularnewline
+\end{tabular}
+\item For FTCS:
+
+\begin{enumerate}
+\item Find for what Courant numbers the scheme is stable: 
+\begin{align*}
+A= & 1-ic\sin k\Delta x\\
+\Rightarrow|A|^{2}= & 1+c^{2}\sin^{2}k\Delta x
+\end{align*}
+which is $>1$ for all $|c|>0$ and so FTCS is unconditioanlly unstable
+\item FTCS is amplifying since $A>1$ for all $|c|>0$
+\item The phase speeds of the numerical waves is
+\[
+u_{c}=\frac{\tan^{-1}\left(c\sin k\Delta x\right)}{k\Delta t}
+\]
+
+\end{enumerate}
+
+For BTCS:
+\begin{enumerate}
+\item Find for what Courant numbers the scheme is stable: 
+\begin{align*}
+A= & \frac{1}{1+ic\sin k\Delta x}\\
+\Rightarrow|A|^{2}= & \frac{1}{1+c^{2}\sin^{2}k\Delta x}\le1\forall|c|>0
+\end{align*}
+so BTCS is unconditioanlly stable
+\item BTCS is damping since $A<1$ for all $|c|>0$
+\item The phase speeds of the numerical waves is
+\[
+u_{c}=\frac{\tan^{-1}\left(c\sin k\Delta x\right)}{k\Delta t}
+\]
+
+\end{enumerate}
+\item Determine if mass is conserved by CTCS:
+\[
+\text{CTCS: }\ \ \phi_{j}^{(n+1)}=\phi_{j}^{(n-1)}-c\bigl(\phi_{j+1}^{(n)}-\phi_{j-1}^{(n)}\bigr).
+\]
+From this we can calculate $M^{(n+1)}$ as a function of $M^{(n-1)}$:
+\begin{align*}
+M^{(n+1)} & =\sum_{j=1}^{n_{x}}\phi_{j}^{(n+1)}=\sum_{j=1}^{n_{x}}\phi_{j}^{(n-1)}-c\bigl(\phi_{j+1}^{(n)}-\phi_{j-1}^{(n)}\bigr)=M^{(n-1)}-c\left(\sum_{j=1}^{n_{x}}\phi_{j+1}^{(n)}-\sum_{j=1}^{n_{x}}\phi_{j-1}^{(n)}\right)\\
+ & =M^{(n-1)}-c\left(\sum_{j=2}^{n_{x}+1}\phi_{j}^{(n)}-\sum_{j=0}^{n_{x}-1}\phi_{j}^{(n)}\right)=M^{(n-1)}-c\left(\phi_{n_{x}}^{(n)}+\phi_{n_{x}+1}^{(n)}-\phi_{0}^{(n)}-\phi_{1}^{(n)}\right)=M^{(n-1)}
+\end{align*}
+due to the periodic boundaries since $\phi_{n_{x}}^{(n)}=\phi_{0}^{(n)}$
+and $\phi_{n_{x}+1}^{(n)}=\phi_{1}^{(n)}$. Therefore $M^{(n+1)}=M^{(n-1)}$
+which means that mass is conserved.
+\end{enumerate}
+}

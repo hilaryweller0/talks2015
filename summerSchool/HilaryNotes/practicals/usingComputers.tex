@@ -1,0 +1,67 @@
+%
+\cleardoublepage{}
+
+%
+
+\section{{\large{}Using the Computers for the Practicals}}
+\begin{enumerate}
+\item Once you have logged in to a workstation, open a terminal window.
+\item Create and move to a directory for storing everything related to the
+notes and practicals for this week:\\
+\texttt{mkdir -p climateModelling/numerics}\\
+\texttt{cd climateModelling/numerics}
+\item Copy the pack of files from my website and unpack\\
+\texttt{\footnotesize{}wget http://www.met.reading.ac.uk/\textasciitilde{}sws02hs/teaching/Weller\_summerSchool.zip}\texttt{}~\\
+\texttt{unzip Weller\_summerSchool.zip}
+\item Create your own sub-directory for the first practical and copy files
+to it\\
+\texttt{mkdir prac1}~\\
+\texttt{cp practicals/linearAdvectCode/{*} prac1}
+\item \textbf{Very important: tabs versus spaces.} If you mix tabs and spaces
+in python, it will behave in unexpected ways. The python code that
+I am giving you has spaces not tabs. So you must setup your text editor
+(I recommend gedit or nedit) to put in 4 spaces instead of a tab.
+In \texttt{gedit} go to \texttt{Edit -> Preferences -> Editor} and
+choose \texttt{Insert spaces instead of tabs} and set the tab width
+to 4. You can also enable automatic indentation.
+\item Create a test directory to write your first python program:\\
+\texttt{mkdir testPython}~\\
+\texttt{cd testPython}~\\
+\texttt{gedit helloWorld.py \&}\\
+(The \texttt{\&} makes the command run in the background). \\
+Insert the following python code into your new file:\\
+\begin{lstlisting}[language=Python]
+import numpy as np
+r = 4
+print 'Area of circle of radius', r, ' is ', np.pi*r**2
+\end{lstlisting}
+Then save the file
+\item Run this code interactively (using python 2.7):\\
+\texttt{python}\\
+and in python type:\\
+\texttt{execfile(\textquotedbl{}helloWorld.py\textquotedbl{})}
+\item To leave python, type \texttt{exit()}
+\item Some essential unix commands:
+
+
+\begin{tabular}{ll}
+\texttt{mkdir dirName}  & Make directory named ``dirName'' \tabularnewline
+\texttt{cd dirName}  & Change directory to directory named ``dirName''\tabularnewline
+\texttt{cd ..} & Move back one directory\tabularnewline
+\texttt{cp file1 file2}  & Copy file named ``file1'' to location ``file2''\tabularnewline
+\texttt{cp -r dir1 dir2}  & Copy the entire directory ``dir1'' to location ``dir2''\tabularnewline
+\texttt{ls}  & List contents of the current directory \tabularnewline
+\texttt{pwd}  & Print working directory \tabularnewline
+\texttt{mv file1 file2}  & Move file (or directory) ``file1'' to file or directory named ``file2'' \tabularnewline
+\texttt{rm file1}  & Remove (delete) ``file1'' \tabularnewline
+\texttt{rm -r dir1}  & Remove (delete) directory structure ``dir1'' \tabularnewline
+\texttt{man command}  & Print the manual page for ``command''\tabularnewline
+\texttt{more file1}  & Write out the contents of ``file1'' one page at a time\tabularnewline
+ & (get another page by pressing space) \tabularnewline
+\end{tabular}
+
+\item You can use \texttt{evince} to view pdf files. Eg:
+
+
+\texttt{evince WellerSSnotes\_2\_lec.pdf \&}\end{enumerate}
+

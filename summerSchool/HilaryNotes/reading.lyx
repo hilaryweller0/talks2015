@@ -1,0 +1,490 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass report
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package none
+\inputencoding auto
+\fontencoding default
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 0
+\use_mathdots 0
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+
+\series bold
+\size large
+Reading and Resources
+\end_layout
+
+\begin_layout Subsection*
+
+\series bold
+Python:
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Quotes eld
+\end_inset
+
+A Hands-On Introduction to Using Python in the Atmospheric and Oceanic Sciences
+\begin_inset Quotes erd
+\end_inset
+
+ by Johnny Wei-Bing Lin.
+ Download for free or buy cheaply from 
+\begin_inset Flex Flex:URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.johnny-lin.com/pyintro
+\end_layout
+
+\end_inset
+
+ .
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Quotes eld
+\end_inset
+
+Think Python.
+ How to Think Like a Computer Scientist
+\begin_inset Quotes erd
+\end_inset
+
+ by Allen B.
+ Downey .
+ Download from free from 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.greenteapress.com/thinkpython/thinkpython.html
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Quotes eld
+\end_inset
+
+Numerical Methods in Engineering with Python
+\begin_inset Quotes erd
+\end_inset
+
+ by Jaan Kiusalaas 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Flex Flex:URL
+status collapsed
+
+\begin_layout Plain Layout
+
+www.southampton.ac.uk/sesg3020/textbook/SciPyIntro.pdf
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Flex Flex:URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.python.org
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Flex Flex:URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://docs.python.org/tutorial/
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Flex Flex:URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://matplotlib.sourceforge.net/users/index.html
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Flex Flex:URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://matplotlib.sourceforge.net/users/pyplottutorial.html
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Flex Flex:URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://software-carpentry.org/
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Flex Flex:URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.diveintopython.net/
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Flex Flex:URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://learnpythonthehardway.org/
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Flex Flex:URL
+status open
+
+\begin_layout Plain Layout
+
+http://www.ibiblio.org/g2swap/byteofpython/read/
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Quotes eld
+\end_inset
+
+Making Use of Phython
+\begin_inset Quotes erd
+\end_inset
+
+ by Rashi Gupta 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Quotes eld
+\end_inset
+
+Python Essential Reference
+\begin_inset Quotes erd
+\end_inset
+
+ by David M.
+ Beazley (Addison Wesley) 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Quotes eld
+\end_inset
+
+Learning Python
+\begin_inset Quotes erd
+\end_inset
+
+ Mark Lutz (O'Reilly Media) 
+\end_layout
+
+\begin_layout Subsection*
+
+\series bold
+Numerical Methods:
+\series default
+ 
+\end_layout
+
+\begin_layout Itemize
+Wikipedia 
+\begin_inset Flex Flex:URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://en.wikipedia.org
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Itemize
+Durran, D.
+ R.
+ Numerical methods for fluid dynamics (Springer).
+ 
+\end_layout
+
+\begin_layout Itemize
+LeVeque, R.
+ Numerical Methods for Conservation Laws (Springer)
+\end_layout
+
+\begin_layout Itemize
+Ortega, J.M.
+ and Poole, W.G.
+ An Introduction to Numerical Methods for Differential Equations.
+ 1981 (Pitman Publishing Inc)
+\end_layout
+
+\begin_layout Itemize
+Ferziger, J.
+ H.
+ and Peric, M.
+ Computational Methods for Fluid Dynamics (Springer).
+ 
+\end_layout
+
+\begin_layout Itemize
+Numerical Recipes: The Art of Scientific Computing, Third Edition (2007),
+ (Cambridge University Press).
+ 
+\begin_inset Flex Flex:URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.nr.com/
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Itemize
+Lloyd N.
+ Trefethen.
+ Finite Difference and Spectral Methods for Ordinary and Partial Differential
+ Equations.
+ 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+https://people.maths.ox.ac.uk/trefethen/pdetext.html
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+
+\series bold
+Website:
+\end_layout
+
+\begin_layout Standard
+These notes and the code examples can be downloaded from
+\begin_inset Newline newline
+\end_inset
+
+ 
+\begin_inset Flex Flex:URL
+status open
+
+\begin_layout Plain Layout
+
+http://www.met.reading.ac.uk/~sws02hs/teaching/Weller_summerSchool.zi
+\family typewriter
+\size footnotesize
+p
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+
+\series bold
+\size large
+Highly Recommended
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+color{red}
+\end_layout
+
+\end_inset
+
+ Install Python on your own computer.
+ It is free.
+ See, eg
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex Flex:URL
+status open
+
+\begin_layout Plain Layout
+
+http://code.google.com/p/pythonxy/
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+
+\series bold
+\size large
+Competition
+\end_layout
+
+\begin_layout Itemize
+The notes are being continually updated and so may contain mistakes.
+ A Cadburys miniature for each mistake that you spot.
+\end_layout
+
+\end_body
+\end_document

@@ -1,0 +1,156 @@
+\clearpage{}
+
+
+\section{Practical: Shallow-Water Equations (SWE)}
+
+In this practical you will develop existing code for solving the SWE
+in 2D or the Arakawa A- and C-grids. You will add a mountain and non-linear
+terms in order to see the influence on the fluid dynamics and on numerical
+artifacts of the solution. Given time or collaboration, you may be
+able to compare different numerical methods.
+
+Code to solve the linearised shallow-water equations:
+\begin{eqnarray}
+\frac{\partial\mathbf{u}}{\partial t} & +2\bm{\Omega}\times\mathbf{u} & =-g\nabla\left(h+h_{0}\right)\\
+\frac{\partial h}{\partial t} & +\nabla\cdot\left(\left(H-h_{0}\right)\mathbf{u}\right) & =0
+\end{eqnarray}
+using the Arakawa A and C-grids are in the files \url{practicals/SWE/*.py}
+. The (horizontal) velocity is $\mathbf{u}=(u,v,0)^{T}$, $\bm{\Omega}=(0,0,2f)^{T}$
+is the rotation of the planar geometry, where $f=\beta y$ is the
+Coriolis parameter, $g$ is gravity, $h$ is the depth anomaly in
+comparison to the mean depth, $H$ and $h_{0}$ is the height of the
+bottom topography. The boundary conditions in the $x$ direction are
+periodic and in the $y$ direction the boundary conditions are $v=0$
+and $\partial h/\partial y$=0. The code is set up to solve a test
+case with a geostrophically balanced jet described by: 
+\begin{eqnarray*}
+u(\hat{y}) & = & \begin{cases}
+u_{m}\left(1-3\hat{y}^{2}+3\hat{y}^{4}-\hat{y}^{6}\right) & \text{for }-1\le\hat{y}\le1\\
+0 & \text{otherwise}
+\end{cases}\\
+v & = & 0\\
+h\left(\hat{y}\right) & = & \begin{cases}
+16\ w\beta u_{m}y_{c}/(35g) & \textnormal{for }\hat{y}\le-1\\
+-w\beta u_{m}/g\begin{array}[t]{l}
+\bigl\{ y_{c}\left(\hat{y}-\hat{y}^{3}+3\hat{y}^{5}/5-\hat{y}^{7}/7\right)\\
++w\left(-1/8+\hat{y}^{2}/2-3\hat{y}^{4}/4+\hat{y}^{6}/2-\hat{y}^{8}/8\right)\bigr\}
+\end{array} & \textnormal{for }-1\le\hat{y}\le1\\
+-16\ w\beta u_{m}y_{c}/(35g) & \textnormal{for }\hat{y}\ge1
+\end{cases}
+\end{eqnarray*}
+where $\hat{y}=(y-y_{c})/w$, $y_{c}$ is the $y$ position of the
+jet centre, $w$ is the jet half width, $u_{m}$ is the maximum jet
+velocity and $h_{0}$ is the minimum height. The default parameters
+are given in table \ref{tab:SWEparameters} and also in the code.
+
+\noindent \begin{center}
+\begin{table}
+\renewcommand{\arraystretch}{1.2}
+
+\noindent \begin{centering}
+\begin{tabular}{|l|c|c|c|}
+\hline 
+\textbf{Parameter} &  & value & units\tabularnewline
+\hline 
+\hline 
+\textbf{Fluid parameters:} &  &  & \tabularnewline
+\hline 
+Variation of Coriolis with latitute & $\beta$ & $2\times10^{-11}$ & $\text{m}^{-1}\text{s}^{-1}$\tabularnewline
+\hline 
+Gravity & $g$ & 10 & $\text{m}\text{s}^{-2}$\tabularnewline
+\hline 
+Mean fluid depth & H & 3000 & m\tabularnewline
+\hline 
+\textbf{Geometry and grid parameters:} &  &  & \tabularnewline
+\hline 
+Domain size in $x$ direction & $x_{max}$ & $1.2\times10^{7}$ & m\tabularnewline
+\hline 
+Domain size in $y$ direction & $y_{max}$ & $1.2\times10^{7}$ & m\tabularnewline
+\hline 
+Grid spacing in $x$ direction & $\Delta x$ & $x_{max}/39$ & m\tabularnewline
+\hline 
+Grid spacing in $y$ direction & $\Delta y$ & $y_{max}/39$ & m\tabularnewline
+\hline 
+\textbf{Jet parameters:} &  &  & \tabularnewline
+\hline 
+Jet centre & $y_{c}$ & $6\times10^{6}$ & m\tabularnewline
+\hline 
+Jet width & $w$ & $3\times10^{6}$ & m\tabularnewline
+\hline 
+Maximum jet velocity & $u_{m}$ & 20 & $\text{m}\text{s}^{-1}$\tabularnewline
+\hline 
+\end{tabular}
+\par\end{centering}
+
+\caption{Default parameter values for the geostrophically balanced jet\label{tab:SWEparameters}}
+\end{table}
+
+\par\end{center}
+
+Some students should make developments to the A-grid code and others
+to the C-grid code. Discuss with your colleagues to decide you does
+which. If you have previously developed a C-grid code, then develop
+an A-grid code now. Or for an alternative challenge, write B, D or
+E grid codes. 
+\begin{enumerate}
+\item Run the A- and C-grid versions of the shallow-water code. The errors
+for this case can easily be calculated by comparing the initial and
+final conditions since the initial conditions are the analytic solution.
+
+\begin{enumerate}
+\item Calculate and plot the errors after running for 1 day.
+\item Why are the C-grid results are more accurate than the A-grid results? 
+\item Can more accurate results be obtained for lower computational cost
+by independently varying $n_{x}$, $n_{y}$, and $\Delta t$?
+\end{enumerate}
+\item In the code in \url{practicals/SWE/*.py}, the bottom topography has
+not been fully implemented. Add a mountain defined by: 
+\[
+h_{0}=\begin{cases}
+h_{0\max}(1-\sqrt{(x-x_{c})^{2}+(y-y_{c})^{2}}/r_{m}) & \text{ for }\sqrt{(x-x_{c})^{2}+(y-y_{c})^{2}}<r_{m}\\
+0 & \text{ otherwise}
+\end{cases}
+\]
+where $(x_{c},y_{c})$ is the mountain centre which is in the middle
+of the domain, $r_{m}=1.5\times10^{6}\text{m}$ is the mountain radius
+and $h_{0\max}=500\text{m}$ is the mountain peak height. You will
+need to add the definition of the mountain to function \url{createMountain}
+in file \url{practicals/SWE/initialAndPlot.py} and include the influence
+of the orography in the correct terms of the SWE in functions \url{SWECgrid}
+or \url{SWEAgrid} in file \url{practicals/SWE/ACgrids.py}. 
+
+\begin{enumerate}
+\item Plot the results for both schemes after 6 days. 
+\item Can you explain the influence of the mountain on the flow?
+\item Can you explain the problems with the A-grid results?
+\item Is it beneficial to have isotropic resolution ($\Delta x=\Delta y$)
+or anisotropic when a mountain is present?
+\end{enumerate}
+\item For what values of the advective and gravity wave Courant number is
+the code stable? Modify the parameters so that the advective Courant
+number is smaller than the gravity wave Courant number. Which Courant
+number(s) control stability?
+\item Design and write down a discretisation (on the A- or C-grid) for the
+non-linear SWE in the form:
+\begin{eqnarray}
+\frac{\partial\mathbf{u}}{\partial t} & +\mathbf{u}\cdot\nabla\mathbf{u}+2\bm{\Omega}\times\mathbf{u} & =-g\nabla\left(h+h_{0}\right)\\
+\frac{\partial h}{\partial t} & +\nabla\cdot\left(h\mathbf{u}\right) & =0
+\end{eqnarray}
+where $h$ is now the total fluid height. Write a new function to
+solve these equations. Re-run the test cases with and without the
+mountain using the non-linear equation solver. (Use the original parameter
+values from table \ref{tab:SWEparameters}.)
+
+
+\textbf{Additional questions to consider}
+
+\item Write a functions to calculate the vorticity and divergence of the
+solution and the change from the initial conditions. What kind of
+waves are revealed by these diagnostics. Do these waves behave differently
+when solving the linearised or non-linear equations.
+\item For what values of the advective and gravity wave Courant number is
+the non-linear code stable? How and why has this changed from the
+linear equation solver.
+\item What additional problems are encountered when solving the non-linear
+equations. How could this be dealt with?\end{enumerate}
+

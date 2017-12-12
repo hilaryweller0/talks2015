@@ -1,0 +1,34 @@
+%
+\clearpage{}
+
+
+\section{Practical: More Linear Advection}
+
+In the first practical and in the numerical analysis, we identified
+a number of problems and shortfalls of FTBS and CTCS and this has
+motivated the presentation of some alternative advection schemes:
+\begin{enumerate}
+\item Semi-Lagrangian (using linear or cubic Lagrange interpolation)
+\item Artificial diffusion (using $\nabla^{2}$ or $\nabla^{4}$ diffusion) 
+\item A TVD scheme
+\end{enumerate}
+Write a python function in \url{mySchemes.py} to solve the linear
+advection using one of the new schemes. Is your chosen scheme better
+in any aspect that FTBS and CTCS? For example, you could consider:
+\begin{enumerate}
+\item Accuracy measured as a root mean square error norm
+\item Order of accuracy
+\item Boundedness
+\item Total variation
+\item Conservation of mean and standard deviation
+\item Stability constraints - what is the longest stable time-step that
+can be taken?
+\item Behaviour in the presence of varying resolution
+\end{enumerate}
+Share code with your neighbours to study the behaviour of different
+schemes. 
+
+You will have the opportunity to present the results of your work
+to the whole group. So in collaboration with your colleagues, make
+some figures and some slides which answer the above questions.%
+

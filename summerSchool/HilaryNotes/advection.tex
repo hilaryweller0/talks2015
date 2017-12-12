@@ -1,0 +1,146 @@
+
+\chapter{Numerical Methods for Advection on non-uniform grids\label{chap:advect}}
+
+In one spatial dimension, $x$, with constant wind, $u$, no diffusion
+and no sources or sinks, the linear advection equation (eqn \ref{eqn:3dAdvect})
+for $\phi$ reduces to:\stepwise{ 
+\begin{equation}
+\frac{\partial\phi}{\partial t}+\opttext{u\frac{\partial\phi}{\partial x}=0}\qquad\text{or}\qquad\phi_{t}+\opttext{u\phi_{x}=0}\label{eqn:1dAdvect}
+\end{equation}
+}This equation has an analytic solution. If the initial condition
+is $\phi(x,0)$ then the solution at time $t$ is $\phi(x,t)=\phi(x-ut,0)$.
+
+
+\paragraph*{Exercise:}
+
+Check that this is the analytic solution.\\
+ (Hint: define $X=x-ut$, calculate $\frac{\partial X}{\partial x}$
+and $\frac{\partial X}{\partial t}$ and use the chain rule, $\frac{\partial\phi}{\partial x}=\frac{\partial\phi}{\partial X}\frac{\partial X}{\partial x}$)\\
+ \optparagraph{ $\frac{\partial X}{\partial x}=1$ and $\frac{\partial X}{\partial t}=-u$\\
+ $\implies\frac{\partial\phi}{\partial x}=\frac{\partial\phi}{\partial X}\frac{\partial X}{\partial x}=\frac{\partial\phi}{\partial X}$
+and $\frac{\partial\phi}{\partial t}=\frac{\partial\phi}{\partial X}\frac{\partial X}{\partial t}=-u\frac{\partial\phi}{\partial X}$\\
+ $\implies\frac{\partial\phi}{\partial t}+u\frac{\partial\phi}{\partial x}=-u\frac{\partial\phi}{\partial X}+u\frac{\partial\phi}{\partial X}=0$
+}
+
+\clearpage{}
+
+
+\section{Forward in Time, Backward in Space (FTBS)}
+
+\begin{minipage}[c]{0.48\columnwidth}%
+To solve ${\displaystyle \frac{\partial\phi}{\partial t}+u\frac{\partial\phi}{\partial x}=0}$
+numerically:
+\begin{itemize}
+\item divide space into $N$ UN-equal intervals of size $\Delta x_{j}$
+for $j=1,2,...,N$ \\
+(so that $x_{j}=\sum_{k=1,j}\Delta x_{k}$).
+\item Divide time into time steps $\Delta t$\\
+(so that $t_{n}=n\Delta t,~n=0,1,2,...$.)
+\item Define $\phi_{j}^{(n)}=\phi(x_{j},t_{n})$.
+\end{itemize}
+The forward in time, backward in space scheme is:%
+\end{minipage}\hfill{}%
+\begin{minipage}[c]{0.48\columnwidth}%
+\resizebox{1\textwidth}{!}{\input{figs/fx.pdftex_t}}%
+\end{minipage}\pause
+
+\begin{equation}
+\text{FTBS:}~~~~~~~~~~~~\frac{\phi_{j}^{(n+1)}-\phi_{j}^{(n)}}{\Delta t}+u\frac{\phi_{j}^{(n)}-\phi_{j-1}^{(n)}}{\Delta x_{j}}=0\label{eqn:FTBS}
+\end{equation}
+\pause This can be re-arranged to get $\phi_{j}^{(n+1)}$ on the
+LHS and all other terms on the RHS so that we can calculate $\phi$
+at the new time step at all locations based on values at previous
+time steps. Also in this equation, remove $u$, $\Delta t$ and $\Delta x$
+by substituting in the Courant number, $c_{j}=\frac{u\Delta t}{\Delta x_{j}}$:\stepwise{
+\begin{equation}
+\phi_{j}^{(n+1)}=\opttext{\phi_{j}^{(n)}-c_{j}\bigl(\phi_{j}^{(n)}-\phi_{j-1}^{(n)}\bigr)}
+\end{equation}
+}
+
+\clearpage{}
+
+
+\section{Centred in Time, Centred in Space (CTCS)}
+
+
+\paragraph*{
+\begin{equation}
+\text{CTCS:}~~~~~~~~~~~~\frac{\phi_{j}^{(n+1)}-\phi_{j}^{(n-1)}}{2\Delta t}+u\frac{\phi_{j+1}^{(n)}-\phi_{j-1}^{(n)}}{\Delta x_{j}+\Delta x_{j+1}}=0\label{eqn:CTCS}
+\end{equation}
+\pause Exercise:}
+
+Re-arrange to get $\phi_{j}^{(n+1)}$ on the LHS and all other terms
+on the RHS. Also remove $u$, $\Delta t$ and $\Delta x$ by substituting
+in the Courant number, $c_{j}=2u\Delta t/\left(\Delta x_{j}+\Delta x_{j+1}\right)$:\stepwise{
+\begin{equation}
+\phi_{j}^{(n+1)}=\opttext{\phi_{j}^{(n-1)}-c_{j}\bigl(\phi_{j+1}^{(n)}-\phi_{j-1}^{(n)}\bigr)}
+\end{equation}
+}\pause This is a three-time-level formula (it involves values of
+$\phi$ at times $t_{n-1}$, $t_{n}$ and $t_{n+1}$. To start the
+simulation, values of $\phi$ are needed at times $t_{0}$ and $t_{1}$.
+However, only $\phi(x,t_{0})$ is available. So another scheme (such
+as FTCS) must be used to obtain $\phi^{(1)}=\phi(x,t_{1})$:\stepwise{
+\begin{equation}
+\text{FTCS:~~~}\opttext{\phi_{j}^{(n+1)}=\phi_{j}^{(n)}-\frac{c_{j}}{2}\bigl(\phi_{j+1}^{(n)}-\phi_{j-1}^{(n)}\bigr)}\label{eqn:FTCS}
+\end{equation}
+}
+
+\clearpage{}
+
+
+\section{Implicit and Explicit Time-Stepping}
+
+\liststepwise{
+\begin{itemize}
+\item FTBS, CTCS and FTCS are \textit{explicit} schemes -- the value at
+the new time level depends only on values from previous time levels.\step{
+\item We can also define \textit{implicit}, or \textit{backwards in time}
+schemes in which the value at the new time level depends on values
+at the new time level. For example, assuming uniform $\Delta x$:}\step{
+\begin{equation}
+\text{BTBS:}~~~~~~~~~~~~\frac{\phi_{j}^{(n+1)}-\phi_{j}^{(n)}}{\Delta t}+u\frac{\phi_{j}^{(n+1)}-\phi_{j-1}^{(n+1)}}{\Delta x}=0\label{eqn:BTBS}
+\end{equation}
+}\step{
+\begin{equation}
+\text{BTCS:}~~~~~~~~~~~~\opttext{\frac{\phi_{j}^{(n+1)}-\phi_{j}^{(n)}}{\Delta t}+u\frac{\phi_{j+1}^{(n+1)}-\phi_{j-1}^{(n+1)}}{2\Delta x}=0}\label{eqn:BTCS}
+\end{equation}
+}\step{
+\item Trapezoidal in time (or Crank-Nicholson), centred in space:
+\begin{equation}
+\text{CNCS:}~~~~~~~~~~~~\frac{\phi_{j}^{(n+1)}-\phi_{j}^{(n)}}{\Delta t}+\frac{u}{2}\left(\frac{\phi_{j+1}^{(n)}-\phi_{j-1}^{(n)}}{2\Delta x}+\frac{\phi_{j+1}^{(n+1)}-\phi_{j-1}^{(n+1)}}{2\Delta x}\right)=0\label{eqn:CNCS}
+\end{equation}
+}\step{
+\item How do we solve these equations with unknowns on the RHS?}\step{
+\item Why do we want implicit schemes?}
+\end{itemize}
+}\clearpage{}
+
+
+\section{Backward in Time, Centred in Space (BTCS) - solution technique}
+
+\begin{equation}
+\text{BTCS:}~~~~~~~~~~~~\phi_{j}^{(n+1)}=\phi_{j}^{(n)}-\frac{c_{j}}{2}\left(\phi_{j+1}^{(n+1)}-\phi_{j-1}^{(n+1)}\right)\label{eqn:BTCS-2}
+\end{equation}
+Where $c_{j}=2u\Delta t/\left(\Delta x_{j}+\Delta x_{j+1}\right)$.
+How can this be re-arranged to find $\phi_{j}^{(n+1)}$ ? Write a
+set of simultaneous equations, one for each location, $j$:\pause 
+\begin{eqnarray*}
+-\frac{c_{1}}{2}\phi_{0}^{(n+1)}+\phi_{1}^{(n+1)}+\frac{c_{1}}{2}\phi_{2}^{(n+1)} & = & \phi_{1}^{(n)}\\
+-\frac{c_{2}}{2}\phi_{1}^{(n+1)}+\phi_{2}^{(n+1)}+\frac{c_{2}}{2}\phi_{3}^{(n+1)} & = & \phi_{2}^{(n)}\\
+\vdots & \vdots & \vdots\\
+-\frac{c_{j}}{2}\phi_{j-1}^{(n+1)}+\phi_{j}^{(n+1)}+\frac{c_{j}}{2}\phi_{j+1}^{(n+1)} & = & \phi_{j}^{(n)}\\
+\vdots & \vdots & \vdots\\
+-\frac{c_{N}}{2}\phi_{N-2}^{(n+1)}+\phi_{N-1}^{(n+1)}+\frac{c_{N}}{2}\phi_{N}^{(n+1)} & = & \phi_{N-1}^{(n)}
+\end{eqnarray*}
+\pause This can be written as a matrix equation for vectors $\bm{\Phi}^{(n)}$
+and $\bm{\Phi}^{(n+1)}$ where\\
+ $\bm{\Phi}^{(n)}=\left(\begin{array}{cccccc}
+\phi_{0}^{(n)} & \phi_{1}^{(n)} & \cdots & \phi_{j}^{(n)} & \cdots & \phi_{N}^{(n)}\end{array}\right)^{T}$ so that $M\bm{\Phi}^{(n+1)}=\bm{\Phi}^{(n)}.$
+
+
+\subsubsection*{Problems (difficult, optional)}
+\begin{enumerate}
+\item What should we do about boundary values, $\phi_{0}$ and $\phi_{N}$?
+\item Write out matrix $M$
+\item How can this be used to write a code which uses BTCS?\end{enumerate}
+
